@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author bansal
+ * @author gaganbansal
  */
 public class accounts {
 
