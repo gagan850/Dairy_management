@@ -114,8 +114,6 @@ static{
             jMenuItem2 = new javax.swing.JMenuItem();
             setting = new javax.swing.JMenu();
             entries = new javax.swing.JMenuItem();
-            alarm = new javax.swing.JMenu();
-            jMenuItem5 = new javax.swing.JMenuItem();
             multiple = new javax.swing.JMenu();
             sale_fat_miltiple = new javax.swing.JMenuItem();
             jMenuItem6 = new javax.swing.JMenuItem();
@@ -467,20 +465,6 @@ static{
         setting.add(entries);
 
         menuBar.add(setting);
-
-        alarm.setMnemonic('a');
-        alarm.setText("Alarm");
-        alarm.setVisible(false);
-
-        jMenuItem5.setText("Sale Miss");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        alarm.add(jMenuItem5);
-
-        menuBar.add(alarm);
 
         multiple.setMnemonic('u');
         multiple.setText("Multiple");
@@ -896,18 +880,6 @@ a.setIconifiable(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_add_balanceActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-  try{Alarm.SaleMiss.SaleMiss c1=new Alarm.SaleMiss.SaleMiss(d);
-  c1.setSize(800, 500);
-  c1.setVisible(true);
-  }catch(Exception e){e.printStackTrace();
-
-  }
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -929,7 +901,6 @@ a.setIconifiable(true);
     private javax.swing.JMenu addMenu;
     private javax.swing.JMenuItem add_balance;
     private javax.swing.JMenuItem add_order_account;
-    private javax.swing.JMenu alarm;
     private javax.swing.JMenuItem arrange_accounts;
     private static javax.swing.JLabel back_ground;
     private javax.swing.JMenuItem change_rate;
@@ -944,7 +915,6 @@ a.setIconifiable(true);
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

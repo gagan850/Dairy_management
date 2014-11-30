@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+package Dao;
 
 import Transactions.Sale.Sale;
 import java.sql.Connection;
@@ -445,7 +445,7 @@ public class sale_transactions {
 
     }
 
-    public static ArrayList<Integer> getTransactionBalance_aname_gname_date_given1(ArrayList<Beans.accounts> acc, java.sql.Date current, java.sql.Date tdate)
+    public static ArrayList<Integer> getTransactionBalance_aname_gname_date_given1(ArrayList<Dao.accounts> acc, java.sql.Date current, java.sql.Date tdate)
             throws SQLException {
         Connection connection = null;
         ArrayList<Integer> balan = new ArrayList<Integer>();
@@ -453,9 +453,9 @@ public class sale_transactions {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            Iterator<Beans.accounts> iterator = acc.iterator();
+            Iterator<Dao.accounts> iterator = acc.iterator();
             while (iterator.hasNext()) {
-                Beans.accounts account = iterator.next();
+                Dao.accounts account = iterator.next();
                 String query = "select NVL(NVL((select sum(ammount) from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=?),0),0) balance from dual";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(constants.Constant.INTEGER_ONE, account.getAid());

@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PurchaseFat {
     
     
-     public PurchaseFat(int gid,String start_date,String end_date,ArrayList<Beans.accounts> accs) {
+     public PurchaseFat(int gid,String start_date,String end_date,ArrayList<Dao.accounts> accs) {
 
         
            try {

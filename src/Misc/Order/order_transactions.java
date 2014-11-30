@@ -60,9 +60,9 @@ JDesktopPane pane=null;  /**
     
      public void fillAList(){
       try{  alist.clear();
-         Beans.order_account acc=new Beans.order_account();
-        ArrayList<Beans.order_account> al=acc.returnAccounts();
-         Iterator<Beans.order_account> iterator=al.iterator();
+         Dao.order_account acc=new Dao.order_account();
+        ArrayList<Dao.order_account> al=acc.returnAccounts();
+         Iterator<Dao.order_account> iterator=al.iterator();
          while(iterator.hasNext()){
              alist.add(iterator.next().getAname());
          }
@@ -260,10 +260,10 @@ JDesktopPane pane=null;  /**
     try {
         
             int rows=table.getRowCount();
-            ArrayList<Beans.order_transactions> entries=new ArrayList<Beans.order_transactions>();
+            ArrayList<Dao.order_transactions> entries=new ArrayList<Dao.order_transactions>();
             
         for(int i=0;i<rows ;i++){
-            Beans.order_transactions aaa=new Beans.order_transactions();
+            Dao.order_transactions aaa=new Dao.order_transactions();
             aaa.setAname(aname);
             
             try{
@@ -314,7 +314,7 @@ JDesktopPane pane=null;  /**
             
         }
            
-           Beans.order_transactions or=new Beans.order_transactions();
+           Dao.order_transactions or=new Dao.order_transactions();
            or.add(entries);
            System.out.println(aname);
       
@@ -420,17 +420,17 @@ try{
 
     private void fillTable() throws SQLException, ParseException {
        try{
-    Beans.order_transactions a=new Beans.order_transactions();
+    Dao.order_transactions a=new Dao.order_transactions();
     a.setAname(aname);
     
     
-    ArrayList<Beans.order_transactions> aa=a.returnOrder_Transactions();
-    Iterator<Beans.order_transactions> aaa=aa.iterator();
+    ArrayList<Dao.order_transactions> aa=a.returnOrder_Transactions();
+    Iterator<Dao.order_transactions> aaa=aa.iterator();
     
     DecimalFormat df = new DecimalFormat("##.##");
     while(aaa.hasNext()){
         
-        Beans.order_transactions aaaa=aaa.next();
+        Dao.order_transactions aaaa=aaa.next();
         
         int item_no=aaaa.getItem_no();
         float rate= aaaa.getRate();

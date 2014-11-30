@@ -26,9 +26,9 @@ public class AddNChangeBalance
         implements CellEditorListener {
 
     //These are the caches for groups, accounts, account_types
-    static public ArrayList<Beans.groups> group_list = new ArrayList<Beans.groups>();
-    static public ArrayList<Beans.accounts> account_list = new ArrayList<Beans.accounts>();
-    static public ArrayList<Beans.account_type> account_type_list = new ArrayList<Beans.account_type>();
+    static public ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
+    static public ArrayList<Dao.accounts> account_list = new ArrayList<Dao.accounts>();
+    static public ArrayList<Dao.account_type> account_type_list = new ArrayList<Dao.account_type>();
 
     static int gid = 0;
     static int account_typeid = 0;
@@ -268,7 +268,7 @@ public class AddNChangeBalance
     //It fills the table if group & acccount type is selected
     private void glistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_glistActionPerformed
         if (accountTypeList.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE) {
-            Beans.accounts account = new Beans.accounts();
+            Dao.accounts account = new Dao.accounts();
             account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
             gid = account.getGid();
             account.setAccount_typeid(account_type_list.get(accountTypeList.getSelectedIndex()).getAccount_typeid());
@@ -293,7 +293,7 @@ public class AddNChangeBalance
     private void accountTypeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountTypeListActionPerformed
         if (accountTypeList.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constants.Constant.INTEGER_ONE) {
 
-            Beans.accounts acc = new Beans.accounts();
+            Dao.accounts acc = new Dao.accounts();
             acc.setGid(group_list.get(glist.getSelectedIndex()).getGid());
             gid = acc.getGid();
             acc.setAccount_typeid(account_type_list.get(accountTypeList.getSelectedIndex()).getAccount_typeid());
@@ -312,10 +312,10 @@ public class AddNChangeBalance
         DecimalFormat df = new DecimalFormat("##.##");
 
         for (int index = 0; index < account_list.size(); index++) {
-            ((Beans.accounts) account_list.get(index)).setAbalance((int) table.getValueAt(index, 1));
+            ((Dao.accounts) account_list.get(index)).setAbalance((int) table.getValueAt(index, 1));
 
         }
-        (new Beans.accounts()).update_balance(account_list);
+        (new Dao.accounts()).update_balance(account_list);
         fillTable(account_list);
 
 // TODO add your handling code here:
@@ -347,7 +347,7 @@ public class AddNChangeBalance
         Object row[][] = new Object[no_of_accounts][];
 
         for (int index = 0; index < no_of_accounts; index++) {
-            Beans.accounts account = (Beans.accounts) acc_list.get(index);
+            Dao.accounts account = (Dao.accounts) acc_list.get(index);
             row[index] = new Object[]{account.getAname(), account.getAbalance()};
         }
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -366,7 +366,7 @@ public class AddNChangeBalance
 
     //It fills the groups cache and UI groups combo  
     public void fillGroupCacheNUI() {
-        Beans.groups g = new Beans.groups();
+        Dao.groups g = new Dao.groups();
         group_list = g.returnGroups();
         for (int index = constants.Constant.INTEGER_ZERO; index < group_list.size(); index++) {
             glist.addItem((group_list.get(index)).getGname());
@@ -376,7 +376,7 @@ public class AddNChangeBalance
 
     //It fills the account_type cache and UI combo
     private void fillAccountTypeCacheNUI() {
-        account_type_list = (new Beans.account_type()).returnAccount_type();
+        account_type_list = (new Dao.account_type()).returnAccount_type();
         for (int index = constants.Constant.INTEGER_ZERO; index < account_type_list.size(); index++) {
             accountTypeList.addItem(account_type_list.get(index).getAccount_type());
         }

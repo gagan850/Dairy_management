@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SaleSNF {
     
-    public static ArrayList<Beans.sale_snf_transactions> saved_enteries=new ArrayList<Beans.sale_snf_transactions>();
-public static ArrayList<Beans.sale_snf_transactions> new_enteries=new ArrayList<Beans.sale_snf_transactions>();
+    public static ArrayList<Dao.sale_snf_transactions> saved_enteries=new ArrayList<Dao.sale_snf_transactions>();
+public static ArrayList<Dao.sale_snf_transactions> new_enteries=new ArrayList<Dao.sale_snf_transactions>();
     
 }

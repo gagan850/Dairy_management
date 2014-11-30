@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author bansal
  */
 public class SaleFatBill extends javax.swing.JInternalFrame {
-  public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();  
-  public static ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();      
+  public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();  
+  public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();      
        
 
 
@@ -281,7 +281,7 @@ static int no_of_accounts=0;
     private void g_listItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_g_listItemStateChanged
    try{
    if(g_list.getSelectedIndex()!=0){
-       Beans.accounts accounts=new Beans.accounts();
+       Dao.accounts accounts=new Dao.accounts();
        accounts.setGid(group_list.get(g_list.getSelectedIndex()).getGid());
        accounts.setAccount_typeid(constants.Account_type.SALE_FAT);
        
@@ -377,12 +377,12 @@ String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)
 
    
     
-    private void fillTable(ArrayList<Beans.accounts> acc_list) throws SQLException, ParseException {
+    private void fillTable(ArrayList<Dao.accounts> acc_list) throws SQLException, ParseException {
    
   Object row[][]=new Object[no_of_accounts][];
 
         for(int i=0;i<no_of_accounts;i++){
-              Beans.accounts acc=(Beans.accounts)acc_list.get(i);
+              Dao.accounts acc=(Dao.accounts)acc_list.get(i);
             row[i]=new Object[]{false,acc.getAname()};
        }
 table.setModel(new javax.swing.table.DefaultTableModel(
@@ -405,7 +405,7 @@ table.setModel(new javax.swing.table.DefaultTableModel(
     
     
     public static void  fill_group_name_list() throws Exception{
-        Beans.groups g=new Beans.groups();
+        Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
       
         for(int i=0;i<group_list.size();i++){

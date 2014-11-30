@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class PurSNF {
     
-    public static ArrayList<Beans.pur_snf_transactions> saved_enteries=new ArrayList<Beans.pur_snf_transactions>();
-public static ArrayList<Beans.pur_snf_transactions> new_enteries=new ArrayList<Beans.pur_snf_transactions>();
+    public static ArrayList<Dao.pur_snf_transactions> saved_enteries=new ArrayList<Dao.pur_snf_transactions>();
+public static ArrayList<Dao.pur_snf_transactions> new_enteries=new ArrayList<Dao.pur_snf_transactions>();
     
 }

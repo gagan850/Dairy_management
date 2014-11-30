@@ -37,12 +37,12 @@ static int gid=0;
 static String qaname=null;
 static String aid=null;
 static int qaccount_typeid=0;
-Beans.accounts selectedAccount=null;
+Dao.accounts selectedAccount=null;
 
     /**
      * Creates new form SaleFatSnf
      */
-    public PurSNFMonthly(Beans.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
+    public PurSNFMonthly(Dao.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
         
         dd=dt;
         initComponents();
@@ -424,12 +424,12 @@ fillTable();
     try {
         
             int rows=table.getRowCount();
-            ArrayList<Beans.pur_snf_transactions> entries=new ArrayList<Beans.pur_snf_transactions>();
+            ArrayList<Dao.pur_snf_transactions> entries=new ArrayList<Dao.pur_snf_transactions>();
             PurSNF.saved_enteries.clear();
             PurSNF.new_enteries.clear();
        
         for(int i=0;i<rows ;i++){
-            Beans.pur_snf_transactions aaa=new Beans.pur_snf_transactions();
+            Dao.pur_snf_transactions aaa=new Dao.pur_snf_transactions();
             aaa.setAid(aid);
             aaa.setGid(gid);
             String year=(date.getDate().getYear()+1900)+"";
@@ -651,10 +651,10 @@ fillTable();
                           ////
                           
         }
-            Beans.pur_snf_transactions.divide_into_saved_N_new(entries);
+            Dao.pur_snf_transactions.divide_into_saved_N_new(entries);
            
-            Beans.pur_snf_transactions.update(PurSNF.saved_enteries);
-            Beans.pur_snf_transactions.save(PurSNF.new_enteries);
+            Dao.pur_snf_transactions.update(PurSNF.saved_enteries);
+            Dao.pur_snf_transactions.save(PurSNF.new_enteries);
             System.out.println("SAVE RUN "+PurSNF.new_enteries.size());
             System.out.println("UPDATE RUN"+PurSNF.saved_enteries.size());
             setLabels();
@@ -691,7 +691,7 @@ catch(Exception e){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        ArrayList<Beans.accounts> accs=new ArrayList<Beans.accounts>();
+        ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
         accs.add(selectedAccount);
         String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
         String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();
@@ -903,7 +903,7 @@ catch(Exception e){
 
     private void fillTable() throws SQLException, ParseException {
        
-    Beans.pur_snf_transactions a=new Beans.pur_snf_transactions();
+    Dao.pur_snf_transactions a=new Dao.pur_snf_transactions();
     a.setAid(aid);
     a.setGid(gid);
     
@@ -913,15 +913,15 @@ catch(Exception e){
    
     java.sql.Date d=new java.sql.Date(std.parse(ss).getTime());
     a.setTdate(d);
-    ArrayList<Beans.pur_snf_transactions> aa=a.get();
-    Iterator<Beans.pur_snf_transactions> aaa=aa.iterator();
+    ArrayList<Dao.pur_snf_transactions> aa=a.get();
+    Iterator<Dao.pur_snf_transactions> aaa=aa.iterator();
     int i=0;
     float milk=0,ghee=0,powder=0,receive=0,ammount=0;
 
  DecimalFormat df = new DecimalFormat("##.##");
     while(aaa.hasNext()){
         
-        Beans.pur_snf_transactions aaaa=aaa.next();
+        Dao.pur_snf_transactions aaaa=aaa.next();
         int date=aaaa.getTdate().getDate()-1;
         
         /////

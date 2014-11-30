@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author bansal
  */
 public class daily_data_report extends javax.swing.JInternalFrame {
-static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
+static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
 JDesktopPane d;
 
     /**
@@ -148,7 +148,7 @@ this.dispose();        // TODO add your handling code here:
 
     private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
 try{
-        Beans.daily_data d=new Beans.daily_data();
+        Dao.daily_data d=new Dao.daily_data();
         d.createDaily_Data(group_list, new java.sql.Date(start_date.getDate().getTime()));
          
 String s="jdbc:oracle:thin:@localhost:1521:";
@@ -198,7 +198,7 @@ String s="jdbc:oracle:thin:@localhost:1521:";
     // End of variables declaration//GEN-END:variables
 
     private void fillGLIST()throws Exception {
-    Beans.groups groups=new Beans.groups();
+    Dao.groups groups=new Dao.groups();
     group_list=groups.returnGroups();
     
     }

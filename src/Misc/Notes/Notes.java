@@ -7,7 +7,7 @@
 package Misc.Notes;
 
 
-import Beans.notes;
+import Dao.notes;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;

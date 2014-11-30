@@ -7,7 +7,7 @@
 package Transactions.SaleFAT;
 
 import Transactions.*;
-import Beans.sale_fat_transactions;
+import Dao.sale_fat_transactions;
 import Reports.SaleFat;
 import java.awt.Color;
 import java.awt.Component;
@@ -38,13 +38,13 @@ static int gid=0;
 static String aid=null;
 static String qaname=null;
 static int account_typeid=0;
-Beans.accounts selectedAccount=null;
+Dao.accounts selectedAccount=null;
 
 
     /**
      * Creates new form SaleFatSnf
      */
-    public SaleFATMonthly(Beans.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
+    public SaleFATMonthly(Dao.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
         
         dd=dt;
         initComponents();
@@ -389,12 +389,12 @@ fillTable();
         
    
             int rows=table.getRowCount();
-            ArrayList<Beans.sale_fat_transactions> entries=new ArrayList<Beans.sale_fat_transactions>();
+            ArrayList<Dao.sale_fat_transactions> entries=new ArrayList<Dao.sale_fat_transactions>();
             SaleFAT.saved_enteries.clear();
        SaleFAT.new_enteries.clear();
        
         for(int i=0;i<rows ;i++){
-            Beans.sale_fat_transactions aaa=new Beans.sale_fat_transactions();
+            Dao.sale_fat_transactions aaa=new Dao.sale_fat_transactions();
             aaa.setAid(aid);
             aaa.setGid(gid);
             String year=(date.getDate().getYear()+1900)+"";
@@ -531,10 +531,10 @@ fillTable();
                           ////
                           
         }
-            Beans.sale_fat_transactions.divide_into_saved_N_new(entries);
+            Dao.sale_fat_transactions.divide_into_saved_N_new(entries);
            
-            Beans.sale_fat_transactions.update(SaleFAT.saved_enteries);
-            Beans.sale_fat_transactions.save(SaleFAT.new_enteries);
+            Dao.sale_fat_transactions.update(SaleFAT.saved_enteries);
+            Dao.sale_fat_transactions.save(SaleFAT.new_enteries);
             setLabels();
             JOptionPane.showMessageDialog(null, "Data Saved!!");
         
@@ -580,7 +580,7 @@ catch(Exception e){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-ArrayList<Beans.accounts> accs=new ArrayList<Beans.accounts>();
+ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
 accs.add(selectedAccount);
 String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
 String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();

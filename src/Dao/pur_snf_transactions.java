@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,13 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
  * @author gagandeepbansal
  */
-public class sale_snf_transactions {
+public class pur_snf_transactions {
 
     private Date tdate;
     private int gid;
@@ -222,19 +224,19 @@ public class sale_snf_transactions {
         this.total_ammount = total_ammount;
     }
 
-    public static void save(ArrayList<sale_snf_transactions> a) throws SQLException {
+    public static void save(ArrayList<pur_snf_transactions> a) throws SQLException {
         Connection connection = null;
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            Iterator<sale_snf_transactions> it = a.iterator();
-            sale_snf_transactions aa = new sale_snf_transactions();
+            Iterator<pur_snf_transactions> it = a.iterator();
+            pur_snf_transactions aa = new pur_snf_transactions();
             PreparedStatement ps = null;
             while (it.hasNext()) {
                 aa = it.next();
                 System.out.println("Save date:" + aa.getTdate());
-                String ss = "insert into "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+"(tdate,gid,aid,mor_milk,mor_fat,mor_snf,mor_fat_rate,mor_ghee,mor_powder,mor_ghee_ammount,mor_powder_ammount,mor_ammount,eve_milk,eve_fat,eve_snf,eve_fat_rate,eve_ghee,eve_powder,eve_ghee_ammount,eve_powder_ammount,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String ss = "insert into "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+"(tdate,gid,aid,mor_milk,mor_fat,mor_snf,mor_fat_rate,mor_ghee,mor_powder,mor_ghee_ammount,mor_powder_ammount,mor_ammount,eve_milk,eve_fat,eve_snf,eve_fat_rate,eve_ghee,eve_powder,eve_ghee_ammount,eve_powder_ammount,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 ps = connection.prepareStatement(ss);
                 ps.setDate(1, aa.getTdate());
                 ps.setInt(2, aa.getGid());
@@ -271,20 +273,19 @@ public class sale_snf_transactions {
         }
     }
 
-    public static void update(ArrayList<sale_snf_transactions> a) throws SQLException {
+    public static void update(ArrayList<pur_snf_transactions> a) throws SQLException {
         Connection connection = null;
-
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            Iterator<sale_snf_transactions> it = a.iterator();
-            sale_snf_transactions aa = new sale_snf_transactions();
+            Iterator<pur_snf_transactions> it = a.iterator();
+            pur_snf_transactions aa = new pur_snf_transactions();
             PreparedStatement ps = null;
             while (it.hasNext()) {
                 aa = it.next();
 
-                String ss = "update "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_snf=?,mor_fat_rate=?,mor_ghee=?,mor_powder=?,mor_ghee_ammount=?,mor_powder_ammount=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_snf=?,eve_fat_rate=?,eve_ghee=?,eve_powder=?,eve_ghee_ammount=?,eve_powder_ammount=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
+                String ss = "update "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_snf=?,mor_fat_rate=?,mor_ghee=?,mor_powder=?,mor_ghee_ammount=?,mor_powder_ammount=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_snf=?,eve_fat_rate=?,eve_ghee=?,eve_powder=?,eve_ghee_ammount=?,eve_powder_ammount=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
                 ps = connection.prepareStatement(ss);
 
                 ps.setDouble(1, aa.getMor_milk());
@@ -324,12 +325,11 @@ public class sale_snf_transactions {
     public void save() throws Exception {
         Connection connection = null;
         try {
-
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
             PreparedStatement ps = null;
-            String ss = "insert into "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+"(tdate,gid,aid,mor_milk,mor_fat,mor_snf,mor_fat_rate,mor_ghee,mor_powder,mor_ghee_ammount,mor_powder_ammount,mor_ammount,eve_milk,eve_fat,eve_snf,eve_fat_rate,eve_ghee,eve_powder,eve_ghee_ammount,eve_powder_ammount,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String ss = "insert into "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+"(tdate,gid,aid,mor_milk,mor_fat,mor_snf,mor_fat_rate,mor_ghee,mor_powder,mor_ghee_ammount,mor_powder_ammount,mor_ammount,eve_milk,eve_fat,eve_snf,eve_fat_rate,eve_ghee,eve_powder,eve_ghee_ammount,eve_powder_ammount,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = connection.prepareStatement(ss);
             ps.setDate(1, this.getTdate());
             ps.setInt(2, this.getGid());
@@ -365,15 +365,14 @@ public class sale_snf_transactions {
     }
 
     //non static overloaded update method for single transaction
-    public void update(sale_snf_transactions a) throws SQLException {
+    public void update(pur_snf_transactions a) throws SQLException {
         Connection connection = null;
         try {
-
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
             PreparedStatement ps = null;
-            String ss = "update "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_snf=?,mor_fat_rate=?,mor_ghee=?,mor_powder=?,mor_ghee_ammount=?,mor_powder_ammount=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_snf=?,eve_fat_rate=?,eve_ghee=?,eve_powder=?,eve_ghee_ammount=?,eve_powder_ammount=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
+            String ss = "update "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_snf=?,mor_fat_rate=?,mor_ghee=?,mor_powder=?,mor_ghee_ammount=?,mor_powder_ammount=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_snf=?,eve_fat_rate=?,eve_ghee=?,eve_powder=?,eve_ghee_ammount=?,eve_powder_ammount=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
             ps = connection.prepareStatement(ss);
 
             ps.setDouble(1, a.getMor_milk());
@@ -407,16 +406,14 @@ public class sale_snf_transactions {
         }
     }
 
-    public ArrayList<sale_snf_transactions> get() throws SQLException {
+    public ArrayList<pur_snf_transactions> get() throws SQLException {
         Connection connection = null;
-
-        ArrayList<sale_snf_transactions> aa = new ArrayList<sale_snf_transactions>();
+        ArrayList<pur_snf_transactions> aa = new ArrayList<pur_snf_transactions>();
         try {
-
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
+            String ss = "select * from "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -434,7 +431,7 @@ public class sale_snf_transactions {
 
             while (rs.next()) {
 
-                sale_snf_transactions a = new sale_snf_transactions();
+                pur_snf_transactions a = new pur_snf_transactions();
                 a.setTdate(rs.getDate("tdate"));
                 a.setMor_milk(rs.getFloat("mor_milk"));
                 a.setMor_fat(rs.getFloat("mor_fat"));
@@ -466,30 +463,32 @@ public class sale_snf_transactions {
         } finally {
             connection.close();
         }
-
         return aa;
 
     }
 
-    public sale_snf_transactions getTransaction_aname_gname_date_given() throws SQLException {
+    public pur_snf_transactions getTransaction_aname_gname_date_given() throws SQLException {
         Connection connection = null;
-        sale_snf_transactions a = new sale_snf_transactions();
+        pur_snf_transactions a = new pur_snf_transactions();
         try {
-
+            String aid = null;
+            int gid = 0;
+            Date tdate = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
             ps.setDate(3, this.getTdate());
-
+            gid = this.getGid();
+            aid = this.getAid();
+            tdate = this.getTdate();
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
 
-                a.setTdate(rs.getDate("tdate"));
                 a.setTdate(rs.getDate("tdate"));
                 a.setMor_milk(rs.getFloat("mor_milk"));
                 a.setMor_fat(rs.getFloat("mor_fat"));
@@ -512,29 +511,102 @@ public class sale_snf_transactions {
                 a.setTotal_ammount(rs.getFloat("total_ammount"));
                 a.setAid(rs.getString("aid"));
                 a.setGid(rs.getInt("gid"));
+            } else {
+                a.setTdate(tdate);
+                a.setMor_milk(0);
+                a.setMor_fat(0);
+                a.setMor_snf(0);
+                a.setMor_fat_rate(0);
+                a.setMor_ghee(0);
+                a.setMor_powder(0);
+                a.setMor_ghee_ammount(0);
+                a.setMor_powder_ammount(0);
+                a.setMor_ammount(0);
+                a.setEve_milk(0);
+                a.setEve_fat(0);
+                a.setEve_snf(0);
+                a.setEve_fat_rate(0);
+                a.setEve_ghee(0);
+                a.setEve_powder(0);
+                a.setEve_ghee_ammount(0);
+                a.setEve_powder_ammount(0);
+                a.setEve_ammount(0);
+                a.setTotal_ammount(0);
+                a.setAid(aid);
+                a.setGid(gid);
             }
         } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
+
             connection.close();
         }
-
         return a;
 
     }
 
-    public static void divide_into_saved_N_new(ArrayList<sale_snf_transactions> entries) throws SQLException {
+    public Map<String, pur_snf_transactions> getTransaction_gname_date_given() throws SQLException {
         Connection connection = null;
-
+        Map<String, pur_snf_transactions> transactions = new HashMap<String, pur_snf_transactions>();
         try {
-
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            Iterator<sale_snf_transactions> iterator = entries.iterator();
-            while (iterator.hasNext()) {
-                sale_snf_transactions entry = iterator.next();
+            String ss = "select * from "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" where gid=? and tdate=?";
+            PreparedStatement ps = connection.prepareStatement(ss);
+            ps.setInt(1, this.getGid());
+            ps.setDate(2, this.getTdate());
+            ResultSet rs = ps.executeQuery();
 
-                String ss = "select * from "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            while (rs.next()) {
+                pur_snf_transactions a = new pur_snf_transactions();
+                a.setTdate(rs.getDate("tdate"));
+                a.setMor_milk(rs.getFloat("mor_milk"));
+                a.setMor_fat(rs.getFloat("mor_fat"));
+                a.setMor_snf(rs.getFloat("mor_snf"));
+                a.setMor_fat_rate(rs.getFloat("mor_fat_rate"));
+                a.setMor_ghee(rs.getFloat("mor_ghee"));
+                a.setMor_powder(rs.getFloat("mor_powder"));
+                a.setMor_ghee_ammount(rs.getFloat("mor_ghee_ammount"));
+                a.setMor_powder_ammount(rs.getFloat("mor_powder_ammount"));
+                a.setMor_ammount(rs.getFloat("mor_ammount"));
+                a.setEve_milk(rs.getFloat("eve_milk"));
+                a.setEve_fat(rs.getFloat("eve_fat"));
+                a.setEve_snf(rs.getFloat("eve_snf"));
+                a.setEve_fat_rate(rs.getFloat("eve_fat_rate"));
+                a.setEve_ghee(rs.getFloat("eve_ghee"));
+                a.setEve_powder(rs.getFloat("eve_powder"));
+                a.setEve_ghee_ammount(rs.getFloat("eve_ghee_ammount"));
+                a.setEve_powder_ammount(rs.getFloat("eve_powder_ammount"));
+                a.setEve_ammount(rs.getFloat("eve_ammount"));
+                a.setTotal_ammount(rs.getFloat("total_ammount"));
+                a.setAid(rs.getString("aid"));
+                a.setGid(rs.getInt("gid"));
+                transactions.put(rs.getString("aid"), a);
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        } finally {
+
+            connection.close();
+        }
+        return transactions;
+
+    }
+
+    public static void divide_into_saved_N_new(ArrayList<pur_snf_transactions> entries) throws SQLException {
+        Connection connection = null;
+
+        try {
+            Class.forName(DataBase.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+
+            Iterator<pur_snf_transactions> iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                pur_snf_transactions entry = iterator.next();
+
+                String ss = "select * from "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setInt(1, entry.getGid());
                 ps.setString(2, entry.getAid());
@@ -543,10 +615,10 @@ public class sale_snf_transactions {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Transactions.SaleSNF.SaleSNF.saved_enteries.add(entry);
+                    Transactions.PurSNF.PurSNF.saved_enteries.add(entry);
 
                 } else {
-                    Transactions.SaleSNF.SaleSNF.new_enteries.add(entry);
+                    Transactions.PurSNF.PurSNF.new_enteries.add(entry);
 
                 }
             }
@@ -555,7 +627,6 @@ public class sale_snf_transactions {
         } finally {
             connection.close();
         }
-
     }
 
     //search if there is a transaction on a particular day
@@ -563,11 +634,10 @@ public class sale_snf_transactions {
         Connection connection = null;
         boolean result = false;
         try {
-
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.SALE_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+DataBase.DBTableEnum.PUR_SNF_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());

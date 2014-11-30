@@ -8,7 +8,7 @@ package Transactions.Purchase;
 
 
 
-import Beans.purchase_transactions;
+import Dao.purchase_transactions;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class PurchaseDaily extends javax.swing.JInternalFrame implements CellEdi
 static Date current_date=null;
 static int gid=0;
 static int account_typeid=1;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
@@ -339,10 +339,10 @@ fillTable();
         Purchase.saved_enteries.clear();
         Purchase.new_enteries.clear();
                int rows=table.getRowCount();
-               ArrayList<Beans.purchase_transactions> transactions=new ArrayList<Beans.purchase_transactions>();
+               ArrayList<Dao.purchase_transactions> transactions=new ArrayList<Dao.purchase_transactions>();
         
         for(int i=0;i<rows ;i++){
-            Beans.purchase_transactions trans=new Beans.purchase_transactions();
+            Dao.purchase_transactions trans=new Dao.purchase_transactions();
             trans.setAid(accounts_list.get(i).getAid());
             trans.setGid(gid);
            
@@ -357,10 +357,10 @@ fillTable();
             
             transactions.add(trans);
         }
-        Beans.purchase_transactions.divide_into_saved_N_new(transactions);
+        Dao.purchase_transactions.divide_into_saved_N_new(transactions);
          
-        Beans.purchase_transactions.save(Purchase.new_enteries);
-        Beans.purchase_transactions.update(Purchase.saved_enteries);
+        Dao.purchase_transactions.save(Purchase.new_enteries);
+        Dao.purchase_transactions.update(Purchase.saved_enteries);
         JOptionPane.showMessageDialog(null, "Data Saved!!");
    
     }catch(Exception e){e.printStackTrace();}
@@ -468,7 +468,7 @@ this.dispose();
     
     
     
-    Beans.accounts acc=(Beans.accounts)accounts_list.get(table.getSelectedRow());
+    Dao.accounts acc=(Dao.accounts)accounts_list.get(table.getSelectedRow());
     table.setValueAt((bfl_milk*acc.getAbfl_rate()+cow_milk*acc.getAcow_rate()), table.getSelectedRow(), 7);
     
     int r=table.getRowCount();
@@ -567,7 +567,7 @@ this.dispose();
     c_m+=Float.parseFloat((String)table.getValueAt(i, 5)); 
     }catch(Exception ec){c_m+=0;
     }
-   Beans.accounts ac=(Beans.accounts)accounts_list.get(i);
+   Dao.accounts ac=(Dao.accounts)accounts_list.get(i);
    sum_ammount+=((ac.getAbfl_rate()*b_m)+(ac.getAcow_rate()*c_m));
    
     }
@@ -597,8 +597,8 @@ this.dispose();
     
 
     private void fillTable() throws SQLException, ParseException {
-       Beans.accounts acc=null;
-    Iterator<Beans.accounts> iterator=accounts_list.iterator();
+       Dao.accounts acc=null;
+    Iterator<Dao.accounts> iterator=accounts_list.iterator();
     int j=0;
     double mb=0,eb=0,mc=0,ec=0,ta=0,receive=0;
     
@@ -654,7 +654,7 @@ this.dispose();
 
     private void fillAccountList() throws Exception{
         
-        Beans.accounts acc=new Beans.accounts();
+        Dao.accounts acc=new Dao.accounts();
         acc.setGid(gid);
         acc.setAccount_typeid(account_typeid);
         accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();

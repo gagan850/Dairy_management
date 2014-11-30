@@ -238,7 +238,7 @@ fillValues();
           milk1=cash1/rate1;
       }
         
-        Beans.cash c1=new Beans.cash();
+        Dao.cash c1=new Dao.cash();
         c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
         c1.setAmmount(cash1);
         c1.setMilk(milk1);
@@ -272,7 +272,7 @@ fillValues();
        int ammount=Integer.parseInt(spend.getText());
       
         
-        Beans.spend c1=new Beans.spend();
+        Dao.spend c1=new Dao.spend();
         c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
         c1.setAmmount(ammount);
        
@@ -318,13 +318,13 @@ fillValues();
 
     private void fillValues() {
     
-        Beans.cash c1=new Beans.cash();
+        Dao.cash c1=new Dao.cash();
         c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
         c1.get();
         cash.setText(c1.getAmmount()+"");
         rate.setText(((int)(c1.getAmmount()/c1.getMilk()))+"");
     
-        Beans.spend c2=new Beans.spend();
+        Dao.spend c2=new Dao.spend();
         c2.setTdate(new java.sql.Date(s_date.getDate().getTime()));
         c2.get();
         spend.setText(c2.getAmmount()+"");

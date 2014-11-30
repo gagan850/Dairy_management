@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package Beans;
+package Dao;
 
 /**
  *
  * @author Dell
  */
-public class sale_snf_multiple_transactions {
+public class sale_fat_multiple_transactions {
     
 }

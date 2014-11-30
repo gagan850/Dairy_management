@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class PurFATMultiple {
     
-    public static ArrayList<Beans.pur_fat_multiple_transactions> saved_enteries=new ArrayList<Beans.pur_fat_multiple_transactions>();
-public static ArrayList<Beans.pur_fat_multiple_transactions> new_enteries=new ArrayList<Beans.pur_fat_multiple_transactions>();
+    public static ArrayList<Dao.pur_fat_multiple_transactions> saved_enteries=new ArrayList<Dao.pur_fat_multiple_transactions>();
+public static ArrayList<Dao.pur_fat_multiple_transactions> new_enteries=new ArrayList<Dao.pur_fat_multiple_transactions>();
     
 }

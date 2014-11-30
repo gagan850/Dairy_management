@@ -30,12 +30,12 @@ public class Entries extends javax.swing.JInternalFrame {
     }
     
     public void fillTable(){
-       try{ Beans.entries entries=new Beans.entries();
-        ArrayList<Beans.entries> entriesList=entries.get();
-        Iterator<Beans.entries> iterator=entriesList.iterator();
+       try{ Dao.entries entries=new Dao.entries();
+        ArrayList<Dao.entries> entriesList=entries.get();
+        Iterator<Dao.entries> iterator=entriesList.iterator();
         int j=0;
         while(iterator.hasNext()){
-            Beans.entries entry=iterator.next();
+            Dao.entries entry=iterator.next();
             table.setValueAt(constants.Account_type.getString(entry.getAccount_type_id()), j, 0);
             table.setValueAt(entry.getEntries(), j, 1);
             j++;
@@ -160,15 +160,15 @@ this.dispose();        // TODO add your handling code here:
 
     private void setActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setActionPerformed
 try{
-    ArrayList<Beans.entries> entriesList=new ArrayList<Beans.entries>();
+    ArrayList<Dao.entries> entriesList=new ArrayList<Dao.entries>();
 
 for(int i=0;i<table.getRowCount();i++){
-    Beans.entries entry=new Beans.entries();
+    Dao.entries entry=new Dao.entries();
     entry.setAccount_type_id(constants.Account_type.getInt((String)table.getValueAt(i, 0)));
     entry.setEntries((int)table.getValueAt(i, 1));
     entriesList.add(entry);
 }
-        Beans.entries entries=new Beans.entries();
+        Dao.entries entries=new Dao.entries();
         entries.update(entriesList);
         fillTable();
 }catch(Exception e){JOptionPane.showMessageDialog(null, "Database Error! While setting entries in db");

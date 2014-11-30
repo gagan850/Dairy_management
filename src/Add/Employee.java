@@ -17,7 +17,7 @@ public class Employee
         extends javax.swing.JInternalFrame {
 
 //Cache of Empoyees    
-    public static ArrayList<Beans.employees> employee_list = new ArrayList<Beans.employees>();
+    public static ArrayList<Dao.employees> employee_list = new ArrayList<Dao.employees>();
 
     /**
      * Creates new form groups
@@ -34,7 +34,7 @@ public class Employee
     public static void fillEmployeeCacheNUI() {
         employee_list.clear();
         elist.clear();
-        Beans.employees employee = new Beans.employees();
+        Dao.employees employee = new Dao.employees();
         employee_list = employee.returnEmployees();
         for (int index = 0; index < employee_list.size(); index++) {
             elist.add(employee_list.get(index).getEname());
@@ -286,7 +286,7 @@ public class Employee
 
         if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
             String nameToBeUpdated = gname.getText();
-            Beans.employees employee = new Beans.employees();
+            Dao.employees employee = new Dao.employees();
             employee.setEid(employee_list.get(elist.getSelectedIndex()).getEid());
             employee.setEname(gname.getText());
             employee.setEphone(gphone.getText());
@@ -307,7 +307,7 @@ public class Employee
 
         } else {
             String nameToBeSaved = gname.getText();
-            Beans.employees employee = new Beans.employees();
+            Dao.employees employee = new Dao.employees();
             employee.setEname(gname.getText());
             employee.setEaddress(gaddress.getText());
             employee.setEphone(gphone.getText());
@@ -344,7 +344,7 @@ public class Employee
     private void elistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elistItemStateChanged
 
         int selectedEid = employee_list.get(elist.getSelectedIndex()).getEid();
-        Beans.employees employee = new Beans.employees();
+        Dao.employees employee = new Dao.employees();
         employee.setEid(selectedEid);
         employee = employee.get();
         gname.setText(employee.getEname());
@@ -395,7 +395,7 @@ public class Employee
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted = elist.getSelectedItem();
         if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
-            Beans.employees a = new Beans.employees();
+            Dao.employees a = new Dao.employees();
             a.setEid(employee_list.get(elist.getSelectedIndex()).getEid());
             if (a.delete()) {
                 fillEmployeeCacheNUI();

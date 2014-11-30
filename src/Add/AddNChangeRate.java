@@ -22,9 +22,9 @@ import javax.swing.table.TableCellRenderer;
  * @author bansal
  */
 public class AddNChangeRate extends javax.swing.JInternalFrame {
-      static public ArrayList<Beans.groups> glist=new ArrayList<Beans.groups>();
-    static public ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();
-    static public ArrayList<Beans.account_type> account_type_list=new ArrayList<Beans.account_type>();
+      static public ArrayList<Dao.groups> glist=new ArrayList<Dao.groups>();
+    static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
+    static public ArrayList<Dao.account_type> account_type_list=new ArrayList<Dao.account_type>();
 
 static int gid=0;
 static int account_typeid=0;
@@ -356,14 +356,14 @@ try{
            float b_rate=Float.parseFloat(bfl_rate.getText());
            
                    float c_rate=Float.parseFloat(cow_rate.getText());
-             ((Beans.accounts)account_list.get(i)).setAbfl_rate(b_rate);
-             ((Beans.accounts)account_list.get(i)).setAcow_rate(c_rate);
-          System.out.println(((Beans.accounts)account_list.get(i)).getAid());
+             ((Dao.accounts)account_list.get(i)).setAbfl_rate(b_rate);
+             ((Dao.accounts)account_list.get(i)).setAcow_rate(c_rate);
+          System.out.println(((Dao.accounts)account_list.get(i)).getAid());
        }
        
    }     
 
-   (new Beans.accounts()).update_rates(account_list);
+   (new Dao.accounts()).update_rates(account_list);
     fillTable(account_list);
    bfl_rate.setText("");
    cow_rate.setText("");
@@ -379,7 +379,7 @@ try{
     private void g_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_g_listActionPerformed
 if(aaccount_type.getSelectedIndex()>-1&&g_list.getSelectedIndex()>-1){
     try{
-Beans.accounts acc=new Beans.accounts();
+Dao.accounts acc=new Dao.accounts();
 acc.setGid(group_list.get(g_list.getSelectedIndex()).getGid());
 gid=acc.getGid();
 acc.setAccount_typeid(account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
@@ -397,7 +397,7 @@ no_of_accounts=account_list.size();
     private void aaccount_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aaccount_typeActionPerformed
 if(aaccount_type.getSelectedIndex()>-1&&g_list.getSelectedIndex()>-1){
     try{
-Beans.accounts acc=new Beans.accounts();
+Dao.accounts acc=new Dao.accounts();
 acc.setGid(group_list.get(g_list.getSelectedIndex()).getGid());
 gid=acc.getGid();
 acc.setAccount_typeid(account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
@@ -449,7 +449,7 @@ no_of_accounts=account_list.size();
   Object row[][]=new Object[no_of_accounts][];
 
         for(int i=0;i<no_of_accounts;i++){
-              Beans.accounts acc=(Beans.accounts)acc_list.get(i);
+              Dao.accounts acc=(Dao.accounts)acc_list.get(i);
             row[i]=new Object[]{false,acc.getAname(),acc.getAbfl_rate(),acc.getAcow_rate()};
        }
 table.setModel(new javax.swing.table.DefaultTableModel(
@@ -466,7 +466,7 @@ table.getColumnModel().getColumn(1).setMinWidth(200);
     
      
     public void  fillGList(){
-     try{   Beans.groups g=new Beans.groups();
+     try{   Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             g_list.addItem((group_list.get(i)).getGname());
@@ -479,7 +479,7 @@ table.getColumnModel().getColumn(1).setMinWidth(200);
    
     
      private void fillAccount_type() {
-         account_type_list=(new Beans.account_type()).returnAccount_type();
+         account_type_list=(new Dao.account_type()).returnAccount_type();
      for(int i=0;i<account_type_list.size();i++){
          aaccount_type.addItem(account_type_list.get(i).getAccount_type());
      }

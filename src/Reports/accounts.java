@@ -25,8 +25,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author bansal
  */
 public class accounts extends javax.swing.JInternalFrame {
-public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
-public static ArrayList<Beans.account_type> account_type_list=new ArrayList<Beans.account_type>();
+public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+public static ArrayList<Dao.account_type> account_type_list=new ArrayList<Dao.account_type>();
     /**.
      * Creates new form accounts
      */
@@ -42,7 +42,7 @@ public static ArrayList<Beans.account_type> account_type_list=new ArrayList<Bean
 
     
     public static void  fillGList() throws Exception{
-        Beans.groups g=new Beans.groups();
+        Dao.groups g=new Dao.groups();
        group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             glist.addItem(group_list.get(i).getGname());
@@ -51,7 +51,7 @@ public static ArrayList<Beans.account_type> account_type_list=new ArrayList<Bean
      }
     
      public static void  fillAList(){
-     Beans.account_type acc=new Beans.account_type();
+     Dao.account_type acc=new Dao.account_type();
      account_type_list=acc.returnAccount_type();
      for(int i=0;i<account_type_list.size();i++){
             aaccount_type.addItem(account_type_list.get(i).getAccount_type());

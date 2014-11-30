@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -374,7 +374,7 @@ public class accounts {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Beans.accounts account = new Beans.accounts();
+                Dao.accounts account = new Dao.accounts();
                 account.setGid(resultSet.getInt("gid"));
                 account.setAccount_typeid(resultSet.getInt("account_typeid"));
                 account.setAname(resultSet.getString("aname"));
@@ -466,10 +466,10 @@ public class accounts {
         }
     }
 
-    public void setSortIds(ArrayList<Beans.accounts> acc) {
+    public void setSortIds(ArrayList<Dao.accounts> acc) {
         try {
             Connection connection = null;
-            Iterator<Beans.accounts> iterator = acc.iterator();
+            Iterator<Dao.accounts> iterator = acc.iterator();
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
@@ -477,7 +477,7 @@ public class accounts {
             PreparedStatement   statement = connection.prepareStatement(query);
 
             while (iterator.hasNext()) {
-                Beans.accounts account = iterator.next();
+                Dao.accounts account = iterator.next();
                 statement.setInt(constants.Constant.INTEGER_ONE, account.getId());
                 statement.setString(constants.Constant.INTEGER_TWO, account.getAid());
                 statement.addBatch();
@@ -497,7 +497,7 @@ public class accounts {
             String ss = "update  " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set abfl_rate=?,acow_rate=? where aid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             for (int i = 0; i < accounts.size(); i++) {
-                Beans.accounts account = (Beans.accounts) accounts.get(i);
+                Dao.accounts account = (Dao.accounts) accounts.get(i);
                 ps.setDouble(constants.Constant.INTEGER_ONE, account.getAbfl_rate());
                 ps.setDouble(constants.Constant.INTEGER_TWO, account.getAcow_rate());
                 ps.setString(constants.Constant.INTEGER_THREE, account.getAid());
@@ -520,7 +520,7 @@ public class accounts {
             String query = "update " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set abalance=? where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             for (int index = 0; index < accounts.size(); index++) {
-                Beans.accounts account = (Beans.accounts) accounts.get(index);
+                Dao.accounts account = (Dao.accounts) accounts.get(index);
                 statement.setInt(constants.Constant.INTEGER_ONE, account.getAbalance());
                 statement.setString(constants.Constant.INTEGER_TWO, account.getAid());
 

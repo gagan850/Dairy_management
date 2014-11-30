@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
  */ 
 public class ArrangeAccounts extends javax.swing.JInternalFrame {
     //Caches for groups,accounts,accountTypes
-    static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
-    static public ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();
-    static public ArrayList<Beans.account_type> account_type_list=new ArrayList<Beans.account_type>();
+    static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+    static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
+    static public ArrayList<Dao.account_type> account_type_list=new ArrayList<Dao.account_type>();
    
     public ArrangeAccounts(JDesktopPane desktopPane) {
     initComponents();
@@ -36,7 +36,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
 
       //It fills the groups cache and UI
     public void  fillGroupCacheNUI(){
-        Beans.groups g=new Beans.groups();
+        Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int index=constants.Constant.INTEGER_ZERO;index<group_list.size();index++){
             glist.add(group_list.get(index).getGname());
@@ -48,7 +48,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
     
     //It fills the accountType cache and UI
      private void fillAccountTypeCacheNUI() {
-         account_type_list=(new Beans.account_type()).returnAccount_type();
+         account_type_list=(new Dao.account_type()).returnAccount_type();
      for(int index=constants.Constant.INTEGER_ZERO;index<account_type_list.size();index++){
          aaccount_type.addItem(account_type_list.get(index).getAccount_type());
      }
@@ -251,7 +251,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             before_account_list.clear();
             after_account_list.clear();
             final_account_list.clear();
-            Beans.accounts account=new Beans.accounts();
+            Dao.accounts account=new Dao.accounts();
             account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
             account.setAccount_typeid(account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
             account_list=account.returnAccounts();
@@ -285,7 +285,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             else if(before_account_list.getSelectedIndex()<after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
                 final_account_list.remove(before_account_list.getSelectedIndex());
-                Beans.accounts acc=account_list.get(before_account_list.getSelectedIndex());
+                Dao.accounts acc=account_list.get(before_account_list.getSelectedIndex());
                 account_list.remove(before_account_list.getSelectedIndex());
                 final_account_list.add(before_account_list.getSelectedItem(),(account_list_afters_selected_index-1));
                 account_list.add(account_list_afters_selected_index-1,acc);
@@ -293,7 +293,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             else if(before_account_list.getSelectedIndex()>after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
                 final_account_list.remove(before_account_list.getSelectedIndex());
-                Beans.accounts acc=account_list.get(before_account_list.getSelectedIndex());
+                Dao.accounts acc=account_list.get(before_account_list.getSelectedIndex());
                 account_list.remove(before_account_list.getSelectedIndex());
                 final_account_list.add(before_account_list.getSelectedItem(),account_list_afters_selected_index);
                 account_list.add(account_list_afters_selected_index,acc);
@@ -308,7 +308,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             else if(before_account_list.getSelectedIndex()<after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
                 final_account_list.remove(before_account_list.getSelectedIndex());
-                Beans.accounts acc=account_list.get(before_account_list.getSelectedIndex());
+                Dao.accounts acc=account_list.get(before_account_list.getSelectedIndex());
                 account_list.remove(before_account_list.getSelectedIndex());
                 final_account_list.add(before_account_list.getSelectedItem(),account_list_afters_selected_index);
                 account_list.add(account_list_afters_selected_index,acc);
@@ -316,7 +316,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             else if(before_account_list.getSelectedIndex()>after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
                 final_account_list.remove(before_account_list.getSelectedIndex());
-                Beans.accounts acc=account_list.get(before_account_list.getSelectedIndex());
+                Dao.accounts acc=account_list.get(before_account_list.getSelectedIndex());
                 account_list.remove(before_account_list.getSelectedIndex());
                 final_account_list.add(before_account_list.getSelectedItem(),(account_list_afters_selected_index+1));
                 account_list.add(account_list_afters_selected_index+1,acc);
@@ -333,14 +333,14 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
 
     public void SortIds(){
         //Update Sort Id's for the updated account list
-            Beans.accounts a=new Beans.accounts();
-            ArrayList<Beans.accounts> accountListToBeUpdate=new ArrayList<Beans.accounts>();
+            Dao.accounts a=new Dao.accounts();
+            ArrayList<Dao.accounts> accountListToBeUpdate=new ArrayList<Dao.accounts>();
             for(int index=0;index<account_list.size();index++){
-                Beans.accounts account=account_list.get(index);
+                Dao.accounts account=account_list.get(index);
                 account.setId(index);
                 accountListToBeUpdate.add(account);
             }
-            Beans.accounts account=new Beans.accounts();
+            Dao.accounts account=new Dao.accounts();
             account.setSortIds(accountListToBeUpdate);   
        
     }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class SaleFATMultiple {
     
-    public static ArrayList<Beans.sale_fat_multiple_transactions> saved_enteries=new ArrayList<Beans.sale_fat_multiple_transactions>();
-public static ArrayList<Beans.sale_fat_multiple_transactions> new_enteries=new ArrayList<Beans.sale_fat_multiple_transactions>();
+    public static ArrayList<Dao.sale_fat_multiple_transactions> saved_enteries=new ArrayList<Dao.sale_fat_multiple_transactions>();
+public static ArrayList<Dao.sale_fat_multiple_transactions> new_enteries=new ArrayList<Dao.sale_fat_multiple_transactions>();
     
 }

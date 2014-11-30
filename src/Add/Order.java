@@ -19,7 +19,7 @@ import javax.swing.*;
 public class Order extends javax.swing.JInternalFrame {
 
     //It's caches for the order list
-    ArrayList<Beans.order_account> order_list=new ArrayList<Beans.order_account>();
+    ArrayList<Dao.order_account> order_list=new ArrayList<Dao.order_account>();
     /**
      * Creates new form order_account
      */
@@ -36,9 +36,9 @@ public class Order extends javax.swing.JInternalFrame {
     public void fillOrderCacheNUI(){
        olist.clear();
        order_list.clear();
-         Beans.order_account acc=new Beans.order_account();
+         Dao.order_account acc=new Dao.order_account();
          order_list=acc.returnAccounts();
-         Iterator<Beans.order_account> iterator=order_list.iterator();
+         Iterator<Dao.order_account> iterator=order_list.iterator();
          while(iterator.hasNext()){
              olist.add(iterator.next().getAname());
          }
@@ -288,7 +288,7 @@ public class Order extends javax.swing.JInternalFrame {
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted=aname.getText();
         if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
-                Beans.order_account order_account =new Beans.order_account();
+                Dao.order_account order_account =new Dao.order_account();
                 order_account.setAname(olist.getSelectedItem());
                 if(order_account.delete()){
                   JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_SUCCESS.getMessage(), constants.Constant.ORDER, nameToBeDeleted), constants.MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
@@ -342,7 +342,7 @@ save.setText(constants.Constant.SAVE);
 
             if(evt.getActionCommand().equals(constants.Constant.UPDATE)){
                 String nameToBeUpdated=aname.getText();
-                Beans.order_account order_account =new Beans.order_account();
+                Dao.order_account order_account =new Dao.order_account();
                
                 order_account.setAname(aname.getText());
                 order_account.setAaddress(aaddress.getText());
@@ -365,7 +365,7 @@ save.setText(constants.Constant.SAVE);
             }else if(aname.getText()==null||aname.getText().equals("")){
               JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
           }else{
-                Beans.order_account order_account=new Beans.order_account();
+                Dao.order_account order_account=new Dao.order_account();
                 
                 order_account.setAname(aname.getText());
                 order_account.setAphone(aphone.getText());
@@ -379,7 +379,7 @@ save.setText(constants.Constant.SAVE);
                 {
                String nameToBeSaved=aname.getText();
                         if(order_account.add()){
-                 Beans.order_transactions.addEmptyInTransactions(order_account.getAname());
+                 Dao.order_transactions.addEmptyInTransactions(order_account.getAname());
                     fillOrderCacheNUI();
                             JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_SUCCESS.getMessage(), constants.Constant.ORDER, nameToBeSaved), constants.MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
                   }
@@ -402,7 +402,7 @@ save.setText(constants.Constant.SAVE);
     
     private void olistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_olistItemStateChanged
         try {
-            Beans.order_account a=new Beans.order_account();
+            Dao.order_account a=new Dao.order_account();
             a.setAname(olist.getSelectedItem());
             a=a.get();
             aname.setText(a.getAname());

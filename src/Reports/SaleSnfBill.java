@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class SaleSnfBill extends javax.swing.JInternalFrame {
   
-static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
-static public ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();
+static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 
 
 static int no_of_accounts=0;
@@ -283,7 +283,7 @@ static int no_of_accounts=0;
     private void glistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_glistItemStateChanged
    try{
    
-       Beans.accounts accounts=new Beans.accounts();
+       Dao.accounts accounts=new Dao.accounts();
        accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
        accounts.setAccount_typeid(constants.Account_type.SALE_SNF);
        account_list=accounts.get_All_Accounts_under_group_N_Account_Type();
@@ -325,7 +325,7 @@ for(int i=0;i<no_of_accounts;i++){
             JOptionPane.showMessageDialog(null, "select end date");
         else
         {
-            ArrayList<Beans.accounts> accs=new ArrayList<Beans.accounts>();
+            ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
             for(int i=0;i<table.getRowCount();i++){
                 if((Boolean)table.getValueAt(i, 0))accs.add(account_list.get(i));
             }
@@ -383,7 +383,7 @@ String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)
   Object row[][]=new Object[no_of_accounts][];
 
         for(int i=0;i<no_of_accounts;i++){
-              Beans.accounts acc=(Beans.accounts)acc_list.get(i);
+              Dao.accounts acc=(Dao.accounts)acc_list.get(i);
             row[i]=new Object[]{false,acc.getAname()};
        }
 table.setModel(new javax.swing.table.DefaultTableModel(
@@ -406,7 +406,7 @@ table.setModel(new javax.swing.table.DefaultTableModel(
     
     
     public static void  fill_group_name_list() throws Exception{
-        Beans.groups g=new Beans.groups();
+        Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             glist.addItem(group_list.get(i).getGname());

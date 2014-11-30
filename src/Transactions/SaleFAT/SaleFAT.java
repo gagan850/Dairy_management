@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SaleFAT {
     
-    public static ArrayList<Beans.sale_fat_transactions> saved_enteries=new ArrayList<Beans.sale_fat_transactions>();
-public static ArrayList<Beans.sale_fat_transactions> new_enteries=new ArrayList<Beans.sale_fat_transactions>();
+    public static ArrayList<Dao.sale_fat_transactions> saved_enteries=new ArrayList<Dao.sale_fat_transactions>();
+public static ArrayList<Dao.sale_fat_transactions> new_enteries=new ArrayList<Dao.sale_fat_transactions>();
     
 }

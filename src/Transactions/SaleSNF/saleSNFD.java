@@ -15,8 +15,8 @@ import javax.swing.JDesktopPane;
  */
 public class saleSNFD extends javax.swing.JInternalFrame {
 static int account_typeid=constants.Account_type.SALE_SNF;
-static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
-static public ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();
+static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane d;
     /**
      * Creates new form sale
@@ -31,7 +31,7 @@ JDesktopPane d;
 
     
        public static void  fillGList(){
-       try{ Beans.groups g=new Beans.groups();
+       try{ Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             glist.addItem(group_list.get(i).getGname());
@@ -130,7 +130,7 @@ JDesktopPane d;
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
 this.dispose();
         int tot_accounts=0;
-        Beans.accounts total_accounts=new Beans.accounts();
+        Dao.accounts total_accounts=new Dao.accounts();
         total_accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
         total_accounts.setAccount_typeid(account_typeid);
        

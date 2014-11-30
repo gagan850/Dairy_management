@@ -19,9 +19,9 @@ public class Account
         extends javax.swing.JInternalFrame {
 //These lists works as cache, They gets filled at start(in  constructor) and remain till end.
 
-    static public ArrayList<Beans.groups> group_list = new ArrayList<>();
-    static public ArrayList<Beans.accounts> account_list = new ArrayList<>();
-    static public ArrayList<Beans.account_type> account_type_list = new ArrayList<>();
+    static public ArrayList<Dao.groups> group_list = new ArrayList<>();
+    static public ArrayList<Dao.accounts> account_list = new ArrayList<>();
+    static public ArrayList<Dao.account_type> account_type_list = new ArrayList<>();
 
     /**
      * Creates new form accounts
@@ -38,7 +38,7 @@ public class Account
 
     //It Fills the cache group_list and UI group list
     public static void fillGroupCacheNUI() {
-        Beans.groups g = new Beans.groups();
+        Dao.groups g = new Dao.groups();
         group_list = g.returnGroups();
         for (int index = 0; index < group_list.size(); index++) {
             glist.add(group_list.get(index).getGname());
@@ -51,7 +51,7 @@ public class Account
         account_list.clear();
         alist.clear();
 
-        Beans.accounts account = new Beans.accounts();
+        Dao.accounts account = new Dao.accounts();
         account.setAccount_typeid(account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
 
         if (glist.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE) {
@@ -66,7 +66,7 @@ public class Account
 
     //It fills the cache account_type_list
     private void fillAccountTypeCacheNUI() {
-        account_type_list = (new Beans.account_type()).returnAccount_type();
+        account_type_list = (new Dao.account_type()).returnAccount_type();
         for (int index = 0; index < account_type_list.size(); index++) {
             aaccount_type.addItem(account_type_list.get(index).getAccount_type());
         }
@@ -416,7 +416,7 @@ delete.setEnabled(false);
 
     //It populates the selected accounts's information in account's create form
     private void alistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_alistItemStateChanged
-        Beans.accounts account = new Beans.accounts();
+        Dao.accounts account = new Dao.accounts();
         account.setAid(account_list.get(alist.getSelectedIndex()).getAid());
         account = account.get();
         aname.setText(account.getAname());
@@ -453,7 +453,7 @@ delete.setEnabled(false);
         try {
 if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
                 String nameToBeUpdated = aname.getText();
-                Beans.accounts account = new Beans.accounts();
+                Dao.accounts account = new Dao.accounts();
                 account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
                 account.setAname(aname.getText());
                 account.setAid(account_list.get(alist.getSelectedIndex()).getAid());
@@ -486,7 +486,7 @@ if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
 
             } else {
                 String nameToBeSaved = aname.getText();
-                Beans.accounts account = new Beans.accounts();
+                Dao.accounts account = new Dao.accounts();
                 account.setId(account.getAccountId());
                 account.setAid(glist.getSelectedItem().charAt(0) + "" + account.getNewAId() + "");
                 account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
@@ -590,7 +590,7 @@ save.setEnabled(true);
 System.out.println("In delete"+alist.getSelectedIndex());
 String nameToBeDeleted = alist.getSelectedItem();
         if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
-            Beans.accounts a = new Beans.accounts();
+            Dao.accounts a = new Dao.accounts();
             a.setAid(account_list.get(alist.getSelectedIndex()).getAid());
             if (a.delete()) {
                 fillAccountCacheNUI();

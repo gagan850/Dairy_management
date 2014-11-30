@@ -25,8 +25,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author bansal
  */
 public class Daily_Data extends javax.swing.JInternalFrame {
-  public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();  
-  public static ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();      
+  public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();  
+  public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();      
        
 
 

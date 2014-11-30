@@ -6,7 +6,7 @@
 
 package Transactions.SaleFAT;
 
-import Beans.sale_fat_transactions;
+import Dao.sale_fat_transactions;
 import java.awt.Color;
 import java.awt.Component;
 
@@ -35,7 +35,7 @@ static Date current_date=null;
 static String group_name=null;
 static int gid=0;
 static int account_typeid=0;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
@@ -331,12 +331,12 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
 
             if(evt.getActionCommand().equals("Update")){
                 int rows=table.getRowCount();
-                ArrayList<Beans.sale_fat_transactions> entries=new ArrayList<Beans.sale_fat_transactions>();
+                ArrayList<Dao.sale_fat_transactions> entries=new ArrayList<Dao.sale_fat_transactions>();
                 SaleFAT.saved_enteries.clear();
                 SaleFAT.new_enteries.clear();
 
                 for(int i=0;i<rows ;i++){
-                    Beans.sale_fat_transactions aaa=new Beans.sale_fat_transactions();
+                    Dao.sale_fat_transactions aaa=new Dao.sale_fat_transactions();
                     aaa.setAid(accounts_list.get(i).getAid());
                     aaa.setGid(gid);
                     
@@ -471,10 +471,10 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
                     ////
 
                 }
-                Beans.sale_fat_transactions.divide_into_saved_N_new(entries);
+                Dao.sale_fat_transactions.divide_into_saved_N_new(entries);
 
-                Beans.sale_fat_transactions.update(SaleFAT.saved_enteries);
-                Beans.sale_fat_transactions.save(SaleFAT.new_enteries);
+                Dao.sale_fat_transactions.update(SaleFAT.saved_enteries);
+                Dao.sale_fat_transactions.save(SaleFAT.new_enteries);
                 setLabels();
                 JOptionPane.showMessageDialog(null, "Data Saved!!");
             }
@@ -699,12 +699,12 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
 
     private void fillTable() throws SQLException, ParseException {
        
-    Beans.accounts acc=new Beans.accounts();
+    Dao.accounts acc=new Dao.accounts();
    acc.setAccount_typeid(account_typeid);
     acc.setGid(gid);
     accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();
     System.out.print(accounts_list.size()+"   aaacccccsss");
-    Iterator<Beans.accounts> iterator=accounts_list.iterator();
+    Iterator<Dao.accounts> iterator=accounts_list.iterator();
     int j=0;
     double milk=0,ghee=0,receive=0,ammount=0;
     

@@ -5,7 +5,7 @@
  */
 
 package Transactions.Sale;
-import Beans.sale_transactions;
+import Dao.sale_transactions;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
@@ -50,7 +50,7 @@ public class SaleDaily extends javax.swing.JInternalFrame implements CellEditorL
 static Date current_date=null;
 static int gid=0;
 static int account_typeid=1;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 int no_of_accounts=0;
 static int total_balance=0;
 static String gname=null;
@@ -179,7 +179,7 @@ static String gname=null;
         TableColumn column=table.getColumnModel().getColumn(8);
         try{
             JComboBox comboBox=new JComboBox();
-            ArrayList<Beans.employees> emps=(new Beans.employees()).returnEmployees();
+            ArrayList<Dao.employees> emps=(new Dao.employees()).returnEmployees();
             for(int i=0;i<emps.size();i++){
                 comboBox.addItem(emps.get(i).getEname());
                 receive_by.addItem(emps.get(i).getEname());
@@ -426,7 +426,7 @@ table.setModel(new javax.swing.table.DefaultTableModel(
 ));
 try{     TableColumn column=table.getColumnModel().getColumn(8);
            JComboBox comboBox=new JComboBox();
-            ArrayList<Beans.employees> emps=(new Beans.employees()).returnEmployees();
+            ArrayList<Dao.employees> emps=(new Dao.employees()).returnEmployees();
             comboBox.removeAll();
             receive_by.removeAll();
             for(int i=0;i<emps.size();i++){
@@ -474,10 +474,10 @@ fillTable();
         
         
                int rows=table.getRowCount();
-               ArrayList<Beans.sale_transactions> transactions=new ArrayList<Beans.sale_transactions>();
+               ArrayList<Dao.sale_transactions> transactions=new ArrayList<Dao.sale_transactions>();
         
         for(int i=0;i<rows ;i++){
-            Beans.sale_transactions trans=new Beans.sale_transactions();
+            Dao.sale_transactions trans=new Dao.sale_transactions();
             trans.setAid(accounts_list.get(i).getAid());
             trans.setGid(gid);
            
@@ -493,10 +493,10 @@ fillTable();
             
             transactions.add(trans);
         }
-        Beans.sale_transactions.divide_into_saved_N_new(transactions);
+        Dao.sale_transactions.divide_into_saved_N_new(transactions);
          
-        Beans.sale_transactions.save(Sale.new_enteries);
-        Beans.sale_transactions.update(Sale.saved_enteries);
+        Dao.sale_transactions.save(Sale.new_enteries);
+        Dao.sale_transactions.update(Sale.saved_enteries);
         JOptionPane.showMessageDialog(null, "Data Saved!!");
    
     }catch(Exception e){e.printStackTrace();}
@@ -514,7 +514,7 @@ this.dispose();
 
     private void receive_byItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_receive_byItemStateChanged
   try{
-            Beans.sale_transactions aa=new Beans.sale_transactions();
+            Dao.sale_transactions aa=new Dao.sale_transactions();
             Calendar calendar=Calendar.getInstance();
             SimpleDateFormat std=new SimpleDateFormat("dd-MMM-yyyy");
             Date d=std.parse(date.getDate().getDate()+"-"+Transactions.Cal.month(date.getDate().getMonth()+1)+"-"+(date.getDate().getYear()+1900));
@@ -687,7 +687,7 @@ String searchText=searchName.getText().trim();
     
     
     
-    Beans.accounts acc=(Beans.accounts)accounts_list.get(table.getSelectedRow());
+    Dao.accounts acc=(Dao.accounts)accounts_list.get(table.getSelectedRow());
     table.setValueAt((bfl_milk*acc.getAbfl_rate()+cow_milk*acc.getAcow_rate()), table.getSelectedRow(), 9);
     
     int r=table.getRowCount();
@@ -786,7 +786,7 @@ String searchText=searchName.getText().trim();
     c_m+=Float.parseFloat((String)table.getValueAt(i, 6)); 
     }catch(Exception ec){c_m+=0;
     }
-   Beans.accounts ac=(Beans.accounts)accounts_list.get(i);
+   Dao.accounts ac=(Dao.accounts)accounts_list.get(i);
    sum_ammount+=((ac.getAbfl_rate()*b_m)+(ac.getAcow_rate()*c_m));
    
     }
@@ -817,13 +817,13 @@ String searchText=searchName.getText().trim();
 
     private void fillTable() throws Exception, ParseException {
      total_balance=0;
-        Beans.accounts acc=null;
-    Iterator<Beans.accounts> iterator1=accounts_list.iterator();
+        Dao.accounts acc=null;
+    Iterator<Dao.accounts> iterator1=accounts_list.iterator();
     int j=0;
     double mb=0,eb=0,mc=0,ec=0,ta=0,receive=0;
     
     DecimalFormat df = new DecimalFormat("##.##");
-    ArrayList<Integer> Balance=Beans.sale_transactions.getTransactionBalance_aname_gname_date_given1(accounts_list,new java.sql.Date(date.getDate().getTime()),new java.sql.Date(date.getDate().getTime()));
+    ArrayList<Integer> Balance=Dao.sale_transactions.getTransactionBalance_aname_gname_date_given1(accounts_list,new java.sql.Date(date.getDate().getTime()),new java.sql.Date(date.getDate().getTime()));
     ArrayList<sale_transactions> trans=new ArrayList<sale_transactions>();
     while(iterator1.hasNext()){
         acc=iterator1.next();
@@ -899,7 +899,7 @@ String searchText=searchName.getText().trim();
 
     private void fillAccountList() throws Exception{
         
-        Beans.accounts acc=new Beans.accounts();
+        Dao.accounts acc=new Dao.accounts();
         acc.setGid(gid);
         acc.setAccount_typeid(account_typeid);
         accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();

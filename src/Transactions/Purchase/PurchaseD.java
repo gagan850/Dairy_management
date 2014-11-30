@@ -18,7 +18,7 @@ public class PurchaseD extends javax.swing.JInternalFrame {
 static public int account_typeid=constants.Account_type.PURCHASE;
 JDesktopPane d;
 static int no_of_accounts=0;
-static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
+static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
     /**
      * Creates new form sale
      */
@@ -32,7 +32,7 @@ static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
 
     
        public static void  fillGList(){
-    try{    Beans.groups g=new Beans.groups();
+    try{    Dao.groups g=new Dao.groups();
          group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             glist.addItem(group_list.get(i).getGname());
@@ -132,7 +132,7 @@ static public ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
 this.dispose();
         
-        Beans.accounts total_accounts=new Beans.accounts();
+        Dao.accounts total_accounts=new Dao.accounts();
         total_accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
         total_accounts.setAccount_typeid(account_typeid);
     try {

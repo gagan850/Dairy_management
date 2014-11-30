@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class SaleFat {
     
     
-     public SaleFat(int gid,String start_date,String end_date,ArrayList<Beans.accounts> accs) {
+     public SaleFat(int gid,String start_date,String end_date,ArrayList<Dao.accounts> accs) {
 
         
            try {

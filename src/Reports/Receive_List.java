@@ -30,8 +30,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author bansal
  */
 public class Receive_List extends javax.swing.JInternalFrame {
-  public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();  
-  public static ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();      
+  public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();  
+  public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();      
        
 
 
@@ -369,7 +369,7 @@ String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)
     
     
     public static void  fill_group_name_list() throws Exception{
-        Beans.groups g=new Beans.groups();
+        Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
        
         for(int i=0;i<group_list.size();i++){

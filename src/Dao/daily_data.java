@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -75,7 +75,7 @@ public class daily_data {
         this.pur_ammount = pur_ammount;
     }
 
-    public void createDaily_Data(ArrayList<Beans.groups> group_ids, Date date) {
+    public void createDaily_Data(ArrayList<Dao.groups> group_ids, Date date) {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -86,7 +86,7 @@ public class daily_data {
             String query = "delete from " + DataBase.DBTableEnum.DAILY_DATA.getTableName();
             statement = connection.prepareStatement(query);
             statement.executeQuery();
-            Iterator<Beans.groups> iterator = group_ids.iterator();
+            Iterator<Dao.groups> iterator = group_ids.iterator();
             while (iterator.hasNext()) {
                 int id = iterator.next().getGid();
                 String curr = (date.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + (date.getMonth() + constants.Constant.INTEGER_ONE) + constants.Constant.HYPHEN + date.getDate();

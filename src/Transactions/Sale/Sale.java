@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Sale {
     
-    public static ArrayList<Beans.sale_transactions> saved_enteries=new ArrayList<Beans.sale_transactions>();
-public static ArrayList<Beans.sale_transactions> new_enteries=new ArrayList<Beans.sale_transactions>();
+    public static ArrayList<Dao.sale_transactions> saved_enteries=new ArrayList<Dao.sale_transactions>();
+public static ArrayList<Dao.sale_transactions> new_enteries=new ArrayList<Dao.sale_transactions>();
     
 }

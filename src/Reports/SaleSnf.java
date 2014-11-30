@@ -26,7 +26,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class SaleSnf {
     
     
-     public SaleSnf(int gid,String start_date,String end_date,ArrayList<Beans.accounts> accs) {
+     public SaleSnf(int gid,String start_date,String end_date,ArrayList<Dao.accounts> accs) {
 
         
            try {

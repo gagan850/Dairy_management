@@ -7,7 +7,7 @@
 package Transactions.SaleSNF;
 
 import Transactions.*;
-import Beans.sale_snf_transactions;
+import Dao.sale_snf_transactions;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -37,12 +37,12 @@ static int gid=0;
 static String qaname=null;
 static String aid=null;
 static int qaccount_typeid=0;
-Beans.accounts selectedAccount=null;
+Dao.accounts selectedAccount=null;
 
     /**
      * Creates new form SaleFatSnf
      */
-    public SaleSNFMonthly(Beans.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
+    public SaleSNFMonthly(Dao.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
         
         dd=dt;
         initComponents();
@@ -412,12 +412,12 @@ fillTable();
     try {
         
             int rows=table.getRowCount();
-            ArrayList<Beans.sale_snf_transactions> entries=new ArrayList<Beans.sale_snf_transactions>();
+            ArrayList<Dao.sale_snf_transactions> entries=new ArrayList<Dao.sale_snf_transactions>();
             SaleSNF.saved_enteries.clear();
            SaleSNF.new_enteries.clear();
        
         for(int i=0;i<rows ;i++){
-            Beans.sale_snf_transactions aaa=new Beans.sale_snf_transactions();
+            Dao.sale_snf_transactions aaa=new Dao.sale_snf_transactions();
             aaa.setAid(aid);
             aaa.setGid(gid);
             String year=(date.getDate().getYear()+1900)+"";
@@ -639,10 +639,10 @@ fillTable();
                           ////
                           
         }
-            Beans.sale_snf_transactions.divide_into_saved_N_new(entries);
+            Dao.sale_snf_transactions.divide_into_saved_N_new(entries);
            
-            Beans.sale_snf_transactions.update(SaleSNF.saved_enteries);
-            Beans.sale_snf_transactions.save(SaleSNF.new_enteries);
+            Dao.sale_snf_transactions.update(SaleSNF.saved_enteries);
+            Dao.sale_snf_transactions.save(SaleSNF.new_enteries);
             System.out.println("SAVE RUN "+SaleSNF.new_enteries.size());
             System.out.println("UPDATE RUN"+SaleSNF.saved_enteries.size());
             setLabels();
@@ -691,7 +691,7 @@ catch(Exception e){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        ArrayList<Beans.accounts> accs=new ArrayList<Beans.accounts>();
+        ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
         accs.add(selectedAccount);
         String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
         String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();

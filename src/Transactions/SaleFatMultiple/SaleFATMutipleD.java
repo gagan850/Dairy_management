@@ -18,8 +18,8 @@ import javax.swing.JDesktopPane;
  */
 public class SaleFATMutipleD extends javax.swing.JInternalFrame {
 static int account_typeid=constants.Account_type.FAT_SALE_MULTIPLE;
-public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
-public static ArrayList<Beans.accounts> account_list=new ArrayList<Beans.accounts>();
+public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane pane=null;    
 /**
      * Creates new form sale
@@ -34,7 +34,7 @@ JDesktopPane pane=null;
 
     
        public static void  fillGList(){
-      try{  Beans.groups g=new Beans.groups();
+      try{  Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             glist.addItem(group_list.get(i).getGname());
@@ -45,7 +45,7 @@ JDesktopPane pane=null;
       }}
     
      public static void  fillAList(){
-      try{  Beans.accounts g=new Beans.accounts();
+      try{  Dao.accounts g=new Dao.accounts();
         g.setGid(group_list.get(glist.getSelectedIndex()).getGid());
         g.setAccount_typeid(account_typeid);
         account_list=g.returnAccounts();

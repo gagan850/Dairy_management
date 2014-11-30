@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Beans;
+package Dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -83,7 +83,7 @@ public class daily_data_list {
         this.tdate = tdate;
     }
     
-    public void createDaily_Data(ArrayList<Beans.groups> group_ids,Date startDate,Date endDate){
+    public void createDaily_Data(ArrayList<Dao.groups> group_ids,Date startDate,Date endDate){
        Connection connection=null;
        PreparedStatement statement=null;
    
@@ -97,7 +97,7 @@ public class daily_data_list {
            statement.executeQuery();
            
            for(Date date=startDate;date.before(endDate);date=new Date(date.getTime()+86400000L)){
-          Iterator<Beans.groups> iterator=group_ids.iterator();
+          Iterator<Dao.groups> iterator=group_ids.iterator();
           while(iterator.hasNext()){
               int id=iterator.next().getGid();
             String curr=(date.getYear()+1900)+"-"+(date.getMonth()+1)+"-"+date.getDate();

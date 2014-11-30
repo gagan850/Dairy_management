@@ -20,7 +20,7 @@ public class Group
         extends javax.swing.JInternalFrame {
 //This group list works as cache, It gets filled at start(in  constructor) and remain till end.
 
-    public static ArrayList<Beans.groups> groups_cache = new ArrayList();
+    public static ArrayList<Dao.groups> groups_cache = new ArrayList();
 
     public Group(JDesktopPane desktopPane)
             throws ClassNotFoundException, SQLException {
@@ -37,8 +37,8 @@ public class Group
         glist.clear();
         groups_cache.clear();
         //fill cache and UI group list
-        Beans.groups group = new Beans.groups();
-        ArrayList<Beans.groups> groups = group.returnGroups();
+        Dao.groups group = new Dao.groups();
+        ArrayList<Dao.groups> groups = group.returnGroups();
         for (int index = 0; index < groups.size(); index++) {
             glist.add(groups.get(index).getGname());
             groups_cache.add(groups.get(index));
@@ -276,7 +276,7 @@ public class Group
         //UPDATE CASE      //MANDATORY FIELD CASE   //SAVE CASE
         if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
             String nameToBeUpdated = gname.getText();
-            Beans.groups group = new Beans.groups();
+            Dao.groups group = new Dao.groups();
             group.setGid(groups_cache.get(glist.getSelectedIndex()).getGid());
             group.setGname(gname.getText());
             group.setGphone(gphone.getText());
@@ -295,7 +295,7 @@ public class Group
             JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
         } else {
             String nameToBeSaved = gname.getText();
-            Beans.groups group = new Beans.groups();
+            Dao.groups group = new Dao.groups();
             group.setGname(gname.getText());
             group.setGaddress(gaddress.getText());
             group.setGphone(gphone.getText());
@@ -320,7 +320,7 @@ public class Group
     private void glistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_glistItemStateChanged
 
         int selectedIndex = glist.getSelectedIndex();
-        Beans.groups group = groups_cache.get(selectedIndex);
+        Dao.groups group = groups_cache.get(selectedIndex);
         gname.setText(group.getGname());
         gaddress.setText(group.getGaddress());
         gphone.setText(group.getGphone());
@@ -367,7 +367,7 @@ public class Group
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted = gname.getText();
         if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
-            Beans.groups group = new Beans.groups();
+            Dao.groups group = new Dao.groups();
             group.setGid(groups_cache.get(glist.getSelectedIndex()).getGid());
             if (group.delete()) {
                 reset.doClick();

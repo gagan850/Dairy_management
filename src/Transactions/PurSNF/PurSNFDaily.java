@@ -37,7 +37,7 @@ static Date current_date=null;
 static String group_name=null;
 static int gid=0;
 static int account_typeid=0;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
@@ -360,11 +360,11 @@ setLabels();
         
         
                int rows=table.getRowCount();
-               ArrayList<Beans.pur_snf_transactions> aa=new ArrayList<Beans.pur_snf_transactions>();
+               ArrayList<Dao.pur_snf_transactions> aa=new ArrayList<Dao.pur_snf_transactions>();
           PurSNF.new_enteries.clear();
           PurSNF.saved_enteries.clear();
         for(int i=0;i<rows ;i++){
-            Beans.pur_snf_transactions aaa=new Beans.pur_snf_transactions();
+            Dao.pur_snf_transactions aaa=new Dao.pur_snf_transactions();
             aaa.setAid((String)accounts_list.get(i).getAid());
             aaa.setGid(gid);
             
@@ -590,10 +590,10 @@ setLabels();
            
             aa.add(aaa);
         }
-        Beans.pur_snf_transactions.divide_into_saved_N_new(aa);
+        Dao.pur_snf_transactions.divide_into_saved_N_new(aa);
          
-        Beans.pur_snf_transactions.save(PurSNF.new_enteries);
-        Beans.pur_snf_transactions.update(PurSNF.saved_enteries);
+        Dao.pur_snf_transactions.save(PurSNF.new_enteries);
+        Dao.pur_snf_transactions.update(PurSNF.saved_enteries);
         System.out.println("SSAAVVEEDD"+PurSNF.new_enteries.size());
         System.out.println("UUPPDDAATTEEDD"+PurSNF.saved_enteries.size());
         JOptionPane.showMessageDialog(null, "Data Saved!!");
@@ -792,18 +792,18 @@ this.dispose();
 
     private void fillTable() throws SQLException, ParseException {
        
-    Beans.accounts acc=new Beans.accounts();
+    Dao.accounts acc=new Dao.accounts();
    acc.setAccount_typeid(account_typeid);
     acc.setGid(gid);
     accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();
     Map<String, String> accountIdNName=acc.get_AccountIdNNAme_under_group_N_Account_Type();
-    Iterator<Beans.accounts> iterator=accounts_list.iterator();
+    Iterator<Dao.accounts> iterator=accounts_list.iterator();
     int j=0;
     double milk=0,ghee=0,powder=0,receive=0,ammount=0;
     
     DecimalFormat df = new DecimalFormat("##.##");
     List<String> selectedIds=new ArrayList(); 
-      Beans.pur_snf_transactions tran=new Beans.pur_snf_transactions();
+      Dao.pur_snf_transactions tran=new Dao.pur_snf_transactions();
       while(iterator.hasNext()){
           acc=iterator.next();
        
@@ -815,7 +815,7 @@ this.dispose();
     }
       tran.setGid(gid);
        tran.setTdate(new java.sql.Date(date.getDate().getTime()));
-    Map<String, Beans.pur_snf_transactions> getOrigionalRequiredTransaction=tran.getTransaction_gname_date_given();
+    Map<String, Dao.pur_snf_transactions> getOrigionalRequiredTransaction=tran.getTransaction_gname_date_given();
     Iterator<String> iterator_String=selectedIds.iterator();
     j=0;
     while(iterator_String.hasNext()){
@@ -824,7 +824,7 @@ this.dispose();
         String name=accountIdNName.get(id) ;
         
     if(getOrigionalRequiredTransaction.containsKey(id)){
-       Beans.pur_snf_transactions trans=getOrigionalRequiredTransaction.get(id);
+       Dao.pur_snf_transactions trans=getOrigionalRequiredTransaction.get(id);
         table.setValueAt(name , j, 0); 
         table.setValueAt((trans.getMor_milk()!=0.0)?df.format(trans.getMor_milk())+"":"", j, 1);
         table.setValueAt((trans.getEve_milk()!=0.0)?df.format(trans.getEve_milk())+"":"", j, 8);
@@ -875,7 +875,7 @@ this.dispose();
 
     private void fillAccountList() throws Exception{
         
-        Beans.accounts acc=new Beans.accounts();
+        Dao.accounts acc=new Dao.accounts();
         acc.setGid(gid);
         acc.setAccount_typeid(account_typeid);
         accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();

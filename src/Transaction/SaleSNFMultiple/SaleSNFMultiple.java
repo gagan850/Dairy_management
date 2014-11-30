@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class SaleSNFMultiple {
     
-    public static ArrayList<Beans.sale_snf_multiple_transactions> saved_enteries=new ArrayList<Beans.sale_snf_multiple_transactions>();
-public static ArrayList<Beans.sale_snf_multiple_transactions> new_enteries=new ArrayList<Beans.sale_snf_multiple_transactions>();
+    public static ArrayList<Dao.sale_snf_multiple_transactions> saved_enteries=new ArrayList<Dao.sale_snf_multiple_transactions>();
+public static ArrayList<Dao.sale_snf_multiple_transactions> new_enteries=new ArrayList<Dao.sale_snf_multiple_transactions>();
     
 }

@@ -37,7 +37,7 @@ static Date current_date=null;
 static String group_name=null;
 static int gid=0;
 static int account_typeid=0;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
@@ -334,12 +334,12 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
 
             if(evt.getActionCommand().equals("Update")){
                 int rows=table.getRowCount();
-                ArrayList<Beans.pur_fat_transactions> entries=new ArrayList<Beans.pur_fat_transactions>();
+                ArrayList<Dao.pur_fat_transactions> entries=new ArrayList<Dao.pur_fat_transactions>();
                 PurFAT.saved_enteries.clear();
                 PurFAT.new_enteries.clear();
 
                 for(int i=0;i<rows ;i++){
-                    Beans.pur_fat_transactions aaa=new Beans.pur_fat_transactions();
+                    Dao.pur_fat_transactions aaa=new Dao.pur_fat_transactions();
                     aaa.setAid(accounts_list.get(i).getAid());
                     aaa.setGid(gid);
                     
@@ -474,10 +474,10 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
                     ////
 
                 }
-                Beans.pur_fat_transactions.divide_into_saved_N_new(entries);
+                Dao.pur_fat_transactions.divide_into_saved_N_new(entries);
 
-                Beans.pur_fat_transactions.update(PurFAT.saved_enteries);
-                Beans.pur_fat_transactions.save(PurFAT.new_enteries);
+                Dao.pur_fat_transactions.update(PurFAT.saved_enteries);
+                Dao.pur_fat_transactions.save(PurFAT.new_enteries);
                 setLabels();
                 JOptionPane.showMessageDialog(null, "Data Saved!!");
             }
@@ -702,12 +702,12 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
 
     private void fillTable() throws SQLException, ParseException {
        
-    Beans.accounts acc=new Beans.accounts();
+    Dao.accounts acc=new Dao.accounts();
    acc.setAccount_typeid(account_typeid);
     acc.setGid(gid);
     accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();
     
-    Iterator<Beans.accounts> iterator=accounts_list.iterator();
+    Iterator<Dao.accounts> iterator=accounts_list.iterator();
     int j=0;
     double milk=0,ghee=0,receive=0,ammount=0;
     
@@ -715,7 +715,7 @@ table.getColumnModel().getColumn(0).setMinWidth(200);
     while(iterator.hasNext()){
           acc=iterator.next();
        table.setValueAt(acc.getAname(), j, 0); 
-         Beans.pur_fat_transactions trans=new Beans.pur_fat_transactions();
+         Dao.pur_fat_transactions trans=new Dao.pur_fat_transactions();
       trans.setGid(gid);
       
       trans.setAid(acc.getAid());

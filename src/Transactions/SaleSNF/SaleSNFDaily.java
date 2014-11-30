@@ -6,7 +6,7 @@
 
 package Transactions.SaleSNF;
 
-import Beans.sale_snf_transactions;
+import Dao.sale_snf_transactions;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ static Date current_date=null;
 static String group_name=null;
 static int gid=0;
 static int account_typeid=0;
-static ArrayList<Beans.accounts> accounts_list=new ArrayList<Beans.accounts>();
+static ArrayList<Dao.accounts> accounts_list=new ArrayList<Dao.accounts>();
 
 int no_of_accounts=0;
     /**
@@ -363,11 +363,11 @@ fillTable();
         
         
                int rows=table.getRowCount();
-               ArrayList<Beans.sale_snf_transactions> aa=new ArrayList<Beans.sale_snf_transactions>();
+               ArrayList<Dao.sale_snf_transactions> aa=new ArrayList<Dao.sale_snf_transactions>();
           SaleSNF.new_enteries.clear();
           SaleSNF.saved_enteries.clear();
         for(int i=0;i<rows ;i++){
-            Beans.sale_snf_transactions aaa=new Beans.sale_snf_transactions();
+            Dao.sale_snf_transactions aaa=new Dao.sale_snf_transactions();
             aaa.setAid((String)accounts_list.get(i).getAid());
             aaa.setGid(gid);
             
@@ -593,10 +593,10 @@ fillTable();
            
             aa.add(aaa);
         }
-        Beans.sale_snf_transactions.divide_into_saved_N_new(aa);
+        Dao.sale_snf_transactions.divide_into_saved_N_new(aa);
          
-        Beans.sale_snf_transactions.save(SaleSNF.new_enteries);
-        Beans.sale_snf_transactions.update(SaleSNF.saved_enteries);
+        Dao.sale_snf_transactions.save(SaleSNF.new_enteries);
+        Dao.sale_snf_transactions.update(SaleSNF.saved_enteries);
         System.out.println("UPPDDAATTEE"+SaleSNF.saved_enteries.size());
         System.out.println("SSSAAAVVVEEEDD"+SaleSNF.new_enteries.size());
         JOptionPane.showMessageDialog(null, "Data Saved!!");
@@ -795,12 +795,12 @@ this.dispose();
 
     private void fillTable() throws SQLException, ParseException {
        
-    Beans.accounts acc=new Beans.accounts();
+    Dao.accounts acc=new Dao.accounts();
    acc.setAccount_typeid(account_typeid);
     acc.setGid(gid);
     accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();
     
-    Iterator<Beans.accounts> iterator=accounts_list.iterator();
+    Iterator<Dao.accounts> iterator=accounts_list.iterator();
     int j=0;
     double milk=0,ghee=0,powder=0,receive=0,ammount=0;
     
@@ -863,7 +863,7 @@ this.dispose();
 
     private void fillAccountList() throws Exception{
         
-        Beans.accounts acc=new Beans.accounts();
+        Dao.accounts acc=new Dao.accounts();
         acc.setGid(gid);
         acc.setAccount_typeid(account_typeid);
         accounts_list=acc.get_All_Accounts_under_group_N_Account_Type();

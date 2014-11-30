@@ -21,7 +21,7 @@ import javax.swing.JDesktopPane;
 public class SaleReport extends javax.swing.JInternalFrame {
 static String account_type="";
 JDesktopPane d;
-public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
+public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
     /**
      * Creates new form sale
      */
@@ -44,7 +44,7 @@ public static ArrayList<Beans.groups> group_list=new ArrayList<Beans.groups>();
 
     
        public static void  fillGList(){
-    try{    Beans.groups g=new Beans.groups();
+    try{    Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
         for(int i=0;i<group_list.size();i++){
             group_name.addItem(group_list.get(i).getGname());

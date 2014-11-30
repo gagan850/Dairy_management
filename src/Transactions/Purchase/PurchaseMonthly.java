@@ -7,7 +7,7 @@
 package Transactions.Purchase;
 
 import Transactions.*;
-import Beans.purchase_transactions;
+import Dao.purchase_transactions;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -39,11 +39,11 @@ static int account_typeid=0;
 static String aid="";
 static double cow_milk_rate=0;
 static double bfl_milk_rate=0;
-Beans.accounts selectedAccount=new Beans.accounts();
+Dao.accounts selectedAccount=new Dao.accounts();
     /**
      * Creates new form SaleFatSnf
      */
-    public PurchaseMonthly(Beans.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
+    public PurchaseMonthly(Dao.accounts account,Date dt,JDesktopPane d ) throws SQLException, ParseException {    
         
         dd=dt;
         initComponents();
@@ -346,12 +346,12 @@ Beans.accounts selectedAccount=new Beans.accounts();
     try {
         
             int rows=table.getRowCount();
-            ArrayList<Beans.purchase_transactions> entries=new ArrayList<Beans.purchase_transactions>();
+            ArrayList<Dao.purchase_transactions> entries=new ArrayList<Dao.purchase_transactions>();
             Purchase.saved_enteries.clear();
        Purchase.new_enteries.clear();
        
         for(int i=0;i<rows ;i++){
-            Beans.purchase_transactions aaa=new Beans.purchase_transactions();
+            Dao.purchase_transactions aaa=new Dao.purchase_transactions();
             aaa.setAid(aid);
             aaa.setGid(gid);
             String year=(date.getDate().getYear()+1900)+"";
@@ -369,10 +369,10 @@ Beans.accounts selectedAccount=new Beans.accounts();
             entries.add(aaa);
             
         }
-            Beans.purchase_transactions.divide_into_saved_N_new(entries);
+            Dao.purchase_transactions.divide_into_saved_N_new(entries);
            
-            Beans.purchase_transactions.update(Purchase.saved_enteries);
-            Beans.purchase_transactions.save(Purchase.new_enteries);
+            Dao.purchase_transactions.update(Purchase.saved_enteries);
+            Dao.purchase_transactions.save(Purchase.new_enteries);
             JOptionPane.showMessageDialog(null, "Data Saved!!");
     
     }catch(Exception e){e.printStackTrace();}
@@ -429,7 +429,7 @@ this.dispose();
 
     private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
 
-        ArrayList<Beans.accounts> accs=new ArrayList<Beans.accounts>();
+        ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
         accs.add(selectedAccount);
         String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
         String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();
