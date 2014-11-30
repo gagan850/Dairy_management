@@ -6,18 +6,15 @@
 
 package Misc.Order;
 
-import Transactions.Sale.*;
-import Transactions.*;
+import Enum.*;
 import java.awt.Color;
 import java.awt.Component;
 
 import java.sql.SQLException;
+import java.text.*;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
 import javax.swing.event.CellEditorListener;
@@ -32,43 +29,27 @@ public class order_transactions extends javax.swing.JInternalFrame implements Ce
 
 
 static String aname=null;
-JDesktopPane pane=null;  /**
+  /**
      * Creates new form SaleFatSnf
      */
-    public order_transactions(JDesktopPane d ) throws SQLException, ParseException {    
-        
-        pane=d;
+    public order_transactions(JDesktopPane desktopPane ) throws SQLException, ParseException {    
         initComponents();
-          this.setTitle("Order Transaction");
+         this.setTitle(MessageFormat.format(MessageEnum.TRANSACTION.getMessage(), constant.Constant.ORDER));
          fillAList();
-        table.getDefaultEditor(String.class).addCellEditorListener(this);
-        
-         pane.add(this);
-    /*    String header[]={"Date","MorMilk","EveMilk","Ammount"};
-        
-        Object row[][]=new Object[30][];
-        for(int i=0;i<30;i++){
-            row[i]=new Object[]{new Date()+"","","",""};
-       }
-        DefaultTableModel dtm=new DefaultTableModel(row,header);
-        JTable table=new JTable(dtm);
-        table.setVisible(true);
-        
-        table.setBounds(50, 50, 400, 400);*/
+         table.getDefaultEditor(String.class).addCellEditorListener(this);
+         desktopPane.add(this);
     }
 
     
      public void fillAList(){
-      try{  alist.clear();
-         Dao.order_account acc=new Dao.order_account();
-        ArrayList<Dao.order_account> al=acc.returnAccounts();
-         Iterator<Dao.order_account> iterator=al.iterator();
+        alist.clear();
+         Dao.order_account account=new Dao.order_account();
+        ArrayList<Dao.order_account> acoount_list=account.returnAccounts();
+         Iterator<Dao.order_account> iterator=acoount_list.iterator();
          while(iterator.hasNext()){
              alist.add(iterator.next().getAname());
          }
-    }catch(Exception e){e.printStackTrace();
-        
-    }}
+    }
    
      
     /**
@@ -332,13 +313,10 @@ this.dispose();
     }//GEN-LAST:event_exitActionPerformed
 
     private void alistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_alistItemStateChanged
-try{
     aname=alist.getSelectedItem();
     clearTable();
      fillTable();
-}catch(Exception e){
-    e.printStackTrace();
-}
+
     // TODO add your handling code here:
     }//GEN-LAST:event_alistItemStateChanged
 
@@ -418,8 +396,7 @@ try{
 
     
 
-    private void fillTable() throws SQLException, ParseException {
-       try{
+    private void fillTable()  {
     Dao.order_transactions a=new Dao.order_transactions();
     a.setAname(aname);
     
@@ -441,10 +418,7 @@ try{
         table.setValueAt((rate==0.0)?"":df.format(rate), (item_no-1), 2);
         table.setValueAt((quantity==0.0)?"":df.format(quantity), (item_no-1), 3);
         table.setValueAt((amount==0)?"":df.format(amount), (item_no-1), 4);
-    }}
-    catch(Exception e){e.printStackTrace();
-            
-            }
+    }
     
     }
 
@@ -454,10 +428,10 @@ try{
     }
     
     public  void clearTable(){
-        for(int i=0;i<table.getRowCount();i++){
-             table.setValueAt((i+1), i, 0);
-             for(int j=1;j<table.getColumnCount();j++){
-                table.setValueAt("", i, j);
+        for(int index=0;index<table.getRowCount();index++){
+             table.setValueAt((index+1), index, 0);
+             for(int index1=1;index1<table.getColumnCount();index1++){
+                table.setValueAt("", index, index1);
             }
         }
     }

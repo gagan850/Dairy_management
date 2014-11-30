@@ -27,7 +27,9 @@ public enum MessageEnum {
     ARRANGE(Messages.ARRANGE, ""),
     WRONG_CHOICE(Messages.WRONG_CHOICE, ""),
     SELECT_NO_CHOICE(Messages.SELECT_NO_CHOICE, ""),
-    MISS(Messages.MISS, "");
+    MISS(Messages.MISS, ""),
+    REPORT(Messages.REPORT, ""),
+    TRANSACTION(Messages.TRANSACTION, "");
     
     String message;
     String messageType;
@@ -66,6 +68,8 @@ class Messages {
     public static final String WRONG_CHOICE = "Wrong choice";
     public static final String SELECT_NO_CHOICE = "Please select {0} or {1}";
     public static final String MISS = "{0} Miss";
+    public static final String REPORT = "{0} Report";
+    public static final String TRANSACTION = "{0} Transaction";
 }
 
 class MessagesType {

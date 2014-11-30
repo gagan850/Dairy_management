@@ -7,7 +7,7 @@
 package dairy_manage;
 import Add.*;
 import Enum.*;
-import Misc.Notes.Notes;
+import Misc.Note.Notes;
 import Transactions.Purchase.PurchaseReport;
 import Transactions.Sale.SaleReport;
 import java.awt.Dimension;
@@ -115,11 +115,6 @@ static{
             jMenuItem2 = new javax.swing.JMenuItem();
             setting = new javax.swing.JMenu();
             entries = new javax.swing.JMenuItem();
-            multiple = new javax.swing.JMenu();
-            sale_fat_miltiple = new javax.swing.JMenuItem();
-            jMenuItem6 = new javax.swing.JMenuItem();
-            jMenuItem7 = new javax.swing.JMenuItem();
-            jMenuItem8 = new javax.swing.JMenuItem();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -467,35 +462,6 @@ static{
 
         menuBar.add(setting);
 
-        multiple.setMnemonic('u');
-        multiple.setText("Multiple");
-        multiple.setVisible(false);
-
-        sale_fat_miltiple.setText("Sale Fat Multiple");
-        sale_fat_miltiple.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_fat_miltipleActionPerformed(evt);
-            }
-        });
-        multiple.add(sale_fat_miltiple);
-
-        jMenuItem6.setText("Purchase Fat Multiple");
-        multiple.add(jMenuItem6);
-        dailyTransactionMenu.addSeparator();
-
-        jMenuItem7.setText("Sale SNF Multiple");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        multiple.add(jMenuItem7);
-
-        jMenuItem8.setText("Purchase SNF Multiple");
-        multiple.add(jMenuItem8);
-
-        menuBar.add(multiple);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -817,7 +783,7 @@ data.setVisible(true);
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 try{
-    Misc.Daily_Data.daily_data_report report=new Misc.Daily_Data.daily_data_report(d);
+    Misc.DailyData.DailyData report=new Misc.DailyData.DailyData(d);
 
   report.setSize(600, 600);
 report.setVisible(true);}catch(Exception e){e.printStackTrace();
@@ -851,22 +817,6 @@ report.setVisible(true);}catch(Exception e){e.printStackTrace();
 
 // TODO add your handling code here:
     }//GEN-LAST:event_entriesActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void sale_fat_miltipleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_fat_miltipleActionPerformed
-
-        Transactions.SaleFatMultiple.SaleFATMutipleD a=new Transactions.SaleFatMultiple.SaleFATMutipleD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_sale_fat_miltipleActionPerformed
 
     private void add_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_balanceActionPerformed
 
@@ -916,12 +866,8 @@ a.setIconifiable(true);
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu monthlyTransactionMenu;
-    private javax.swing.JMenu multiple;
     private javax.swing.JMenuItem order_transaction;
     private javax.swing.JMenuItem purchase_daily;
     private javax.swing.JMenuItem purchase_fat_daily;
@@ -936,7 +882,6 @@ a.setIconifiable(true);
     private javax.swing.JMenu reportMenu;
     private javax.swing.JMenuItem sale_daily;
     private javax.swing.JMenuItem sale_fat_daily;
-    private javax.swing.JMenuItem sale_fat_miltiple;
     private javax.swing.JMenuItem sale_fat_monthly;
     private javax.swing.JMenuItem sale_fat_reports;
     private javax.swing.JMenuItem sale_monthly;

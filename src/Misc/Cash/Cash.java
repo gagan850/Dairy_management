@@ -5,35 +5,23 @@ package Misc.Cash;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-
-import javax.swing.JDesktopPane;
-import javax.swing.JOptionPane;
+import Enum.*;
+import java.text.*;
+import javax.swing.*;
 
 /**
  *
  * @author bansal
  */
 public class Cash extends javax.swing.JInternalFrame {
-    
-       
    /**
      * Creates new form SaleFatSnf
      */
-    public Cash(JDesktopPane d){    
-    
-       
-        initComponents();
-         s_date.setDate(new java.util.Date());
+    public Cash(JDesktopPane desktopPane){    
+         initComponents();
+         date.setDate(new java.util.Date());
          fillValues();  
-         d.add(this);
-        
-    
-    
-    
-    
+         desktopPane.add(this);
     }
 
    
@@ -51,17 +39,17 @@ public class Cash extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         label_group_name = new javax.swing.JLabel();
-        s_date = new org.jdesktop.swingx.JXDatePicker();
+        date = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
-        cash = new javax.swing.JTextField();
-        save = new java.awt.Button();
-        rate = new javax.swing.JTextField();
+        cashT = new javax.swing.JTextField();
+        saveCash = new java.awt.Button();
+        rateT = new javax.swing.JTextField();
         cash_l = new javax.swing.JLabel();
         rate_l = new javax.swing.JLabel();
         label_group_name1 = new javax.swing.JLabel();
-        spend = new javax.swing.JTextField();
+        spendT = new javax.swing.JTextField();
         cash_l1 = new javax.swing.JLabel();
-        save1 = new java.awt.Button();
+        saveSpend = new java.awt.Button();
 
         jButton1.setText("jButton1");
 
@@ -74,31 +62,31 @@ public class Cash extends javax.swing.JInternalFrame {
         label_group_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         label_group_name.setText("ADD CASH");
 
-        s_date.addActionListener(new java.awt.event.ActionListener() {
+        date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                s_dateActionPerformed(evt);
+                dateActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("SELECT DATE");
 
-        cash.addActionListener(new java.awt.event.ActionListener() {
+        cashT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cashActionPerformed(evt);
+                cashTActionPerformed(evt);
             }
         });
 
-        save.setLabel("Save");
-        save.addActionListener(new java.awt.event.ActionListener() {
+        saveCash.setLabel("Save");
+        saveCash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                saveCashActionPerformed(evt);
             }
         });
 
-        rate.addActionListener(new java.awt.event.ActionListener() {
+        rateT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rateActionPerformed(evt);
+                rateTActionPerformed(evt);
             }
         });
 
@@ -111,19 +99,19 @@ public class Cash extends javax.swing.JInternalFrame {
         label_group_name1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         label_group_name1.setText("ADD SPEND");
 
-        spend.addActionListener(new java.awt.event.ActionListener() {
+        spendT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                spendActionPerformed(evt);
+                spendTActionPerformed(evt);
             }
         });
 
         cash_l1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cash_l1.setText("Spend:");
 
-        save1.setLabel("Save");
-        save1.addActionListener(new java.awt.event.ActionListener() {
+        saveSpend.setLabel("Save");
+        saveSpend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save1ActionPerformed(evt);
+                saveSpendActionPerformed(evt);
             }
         });
 
@@ -138,7 +126,7 @@ public class Cash extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(cash_l1)
                             .addGap(18, 18, 18)
-                            .addComponent(spend, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spendT, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(41, 41, 41))
                         .addComponent(label_group_name1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +136,11 @@ public class Cash extends javax.swing.JInternalFrame {
                                 .addComponent(cash_l))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cash, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cashT, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rateT, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(40, 40, 40))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveCash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(103, 103, 103))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(38, 38, 38)
@@ -162,11 +150,11 @@ public class Cash extends javax.swing.JInternalFrame {
                 .addGap(136, 136, 136))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveSpend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(236, 236, 236))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(203, 203, 203)
-                .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,27 +163,27 @@ public class Cash extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cash, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cashT, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cash_l))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rateT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rate_l))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveCash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(label_group_name1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spend, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spendT, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cash_l1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(save1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveSpend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
@@ -212,85 +200,101 @@ public class Cash extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void s_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_dateActionPerformed
-
-        
-        
-cash.setText("");
-rate.setText("");
-
-fillValues();
+/** 
+ * 
+ * @param evt 
+ */
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+   cashT.setText("");
+   rateT.setText("");
+   fillValues();
 // TODO add your handling code here:
-    }//GEN-LAST:event_s_dateActionPerformed
+    }//GEN-LAST:event_dateActionPerformed
 
-    private void cashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashActionPerformed
+    private void cashTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cashActionPerformed
+    }//GEN-LAST:event_cashTActionPerformed
 
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    private void saveCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCashActionPerformed
 
-        try{
-       float cash1=Float.parseFloat(cash.getText());
-       float rate1=Float.parseFloat(rate.getText());
-      float milk1=0f;
-       if(cash1!=0.0&&rate1!=0.0){
+        
+       int cash1=validateInt(cashT.getText());
+       int rate1=validateInt(rateT.getText());
+       int milk1=0;
+       if(cash1!=0&&rate1!=0){
           milk1=cash1/rate1;
       }
         
-        Dao.cash c1=new Dao.cash();
-        c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
-        c1.setAmmount(cash1);
-        c1.setMilk(milk1);
-        if(c1.exist())
-            c1.update();
-        else c1.save();
-        JOptionPane.showMessageDialog(null, "Cash has Saved!!");
-        }catch(Exception e){e.printStackTrace();
-           JOptionPane.showMessageDialog(null, "Enter valid value");
+        Dao.cash cash=new Dao.cash();
+        cash.setTdate(new java.sql.Date(date.getDate().getTime()));
+        cash.setAmmount(cash1);
+        cash.setMilk(milk1);
+        String cashToBeSaved=cash1+"";
+        if(cash.exist())
+            if (cash.update()) {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.CASH, cashToBeSaved), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
+                } else {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.CASH, cashToBeSaved), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
+         }
+        else {
+                if (cash.save()) {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.CASH, cashToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
+                } else {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.CASH, cashToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
+
+                }
+            }
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_saveCashActionPerformed
+
+    private void rateTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rateTActionPerformed
+
+    private void spendTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spendTActionPerformed
+
+    private void saveSpendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSpendActionPerformed
+        int ammount=validateInt(spendT.getText());
+        Dao.spend spend=new Dao.spend();
+        spend.setTdate(new java.sql.Date(date.getDate().getTime()));
+        spend.setAmmount(ammount);
+        String cashToBeSaved=ammount+"";
+       if(spend.exist()){
+                if (spend.update()) {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.SPEND, cashToBeSaved), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
+                } else {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.SPEND, cashToBeSaved), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
+         }
+       }
+        else {
+                if (spend.save()) {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.SPEND, cashToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
+                } else {
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.SPEND, cashToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
+
+                }
         }
         
         
+        
+
 
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_saveActionPerformed
+    }//GEN-LAST:event_saveSpendActionPerformed
 
-    private void rateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rateActionPerformed
-
-    private void spendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_spendActionPerformed
-
-    private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
-
-        
-
-        try{
-       int ammount=Integer.parseInt(spend.getText());
-      
-        
-        Dao.spend c1=new Dao.spend();
-        c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
-        c1.setAmmount(ammount);
-       
-        if(c1.exist())
-            c1.update();
-        else c1.save();
-        
-        JOptionPane.showMessageDialog(null, "Spend has saved!!");
-        }catch(Exception e){e.printStackTrace();
-           JOptionPane.showMessageDialog(null, "Enter valid value");
+    public int validateInt(String text){
+        if(text==null)  return 0;
+        else if(!text.matches("\\d*")||text.equals("")){
+            return 0;
+        }else{
+            return Integer.valueOf(text);
         }
-        
-
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_save1ActionPerformed
-
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -299,53 +303,35 @@ fillValues();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cash;
+    private javax.swing.JTextField cashT;
     private javax.swing.JLabel cash_l;
     private javax.swing.JLabel cash_l1;
+    private org.jdesktop.swingx.JXDatePicker date;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
     private static javax.swing.JLabel label_group_name;
     private static javax.swing.JLabel label_group_name1;
-    private javax.swing.JTextField rate;
+    private javax.swing.JTextField rateT;
     private javax.swing.JLabel rate_l;
-    private org.jdesktop.swingx.JXDatePicker s_date;
-    private java.awt.Button save;
-    private java.awt.Button save1;
-    private javax.swing.JTextField spend;
+    private java.awt.Button saveCash;
+    private java.awt.Button saveSpend;
+    private javax.swing.JTextField spendT;
     // End of variables declaration//GEN-END:variables
 
+    //It fills the current day's Spend and Cash, If have added earlier
     private void fillValues() {
+        Dao.cash cash=new Dao.cash();
+        cash.setTdate(new java.sql.Date(date.getDate().getTime()));
+        cash.get();
+        cashT.setText(cash.getAmmount()+"");
+        rateT.setText(((int)(cash.getAmmount()/cash.getMilk()))+"");
     
-        Dao.cash c1=new Dao.cash();
-        c1.setTdate(new java.sql.Date(s_date.getDate().getTime()));
-        c1.get();
-        cash.setText(c1.getAmmount()+"");
-        rate.setText(((int)(c1.getAmmount()/c1.getMilk()))+"");
-    
-        Dao.spend c2=new Dao.spend();
-        c2.setTdate(new java.sql.Date(s_date.getDate().getTime()));
-        c2.get();
-        spend.setText(c2.getAmmount()+"");
+        Dao.spend spend=new Dao.spend();
+        spend.setTdate(new java.sql.Date(date.getDate().getTime()));
+        spend.get();
+        spendT.setText(spend.getAmmount()+"");
     }
 
-   
-    
-
-        
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

@@ -74,10 +74,10 @@ public class order_transactions {
         this.rate = rate;
     }
 
-    public ArrayList<order_transactions> returnOrder_Transactions() throws Exception {
-        Connection connection = null;
-        ArrayList<order_transactions> a = new ArrayList<order_transactions>();
+    public ArrayList<order_transactions> returnOrder_Transactions() {
+        ArrayList<order_transactions> account_list = new ArrayList<order_transactions>();
         try {
+            Connection connection = null;
             Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
@@ -87,50 +87,46 @@ public class order_transactions {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                order_transactions g = new order_transactions();
-                g.aname = rs.getString("aname");
-                g.item_no = rs.getInt("item_no");
-                g.item_name = rs.getString("item_name");
-                g.quantity = rs.getFloat("quantity");
-                g.ammount = rs.getFloat("ammount");
-                g.rate = rs.getFloat("rate");
-                a.add(g);
+                order_transactions order = new order_transactions();
+                order.aname = rs.getString("aname");
+                order.item_no = rs.getInt("item_no");
+                order.item_name = rs.getString("item_name");
+                order.quantity = rs.getFloat("quantity");
+                order.ammount = rs.getFloat("ammount");
+                order.rate = rs.getFloat("rate");
+                account_list.add(order);
             }
+            connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
-        } finally {
-            connection.close();
-        }
+        } 
 
-        return a;
+        return account_list;
     }
 
     public void add(ArrayList<order_transactions> transactions) throws Exception {
-        Connection connection = null;
-
         try {
+            Connection connection = null;
             Class.forName(constant.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
-
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD); 
+            PreparedStatement statement=null;
             Iterator<order_transactions> iterator = transactions.iterator();
             while (iterator.hasNext()) {
                 order_transactions transaction = iterator.next();
                 String ss = "update "+ DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" set item_name=?, quantity=?, ammount=?, rate=? where aname=? and item_no=?";
-                PreparedStatement ps = connection.prepareStatement(ss);
-                ps.setString(1, transaction.getItem_name());
-                ps.setFloat(2, transaction.getQuantity());
-                ps.setFloat(3, transaction.getAmmount());
-                ps.setFloat(4, transaction.getRate());
-                ps.setString(5, transaction.getAname());
-                ps.setInt(6, transaction.getItem_no());
-                ps.executeQuery();
-
-            }
-
+                statement= connection.prepareStatement(ss);
+                statement.setString(1, transaction.getItem_name());
+                statement.setFloat(2, transaction.getQuantity());
+                statement.setFloat(3, transaction.getAmmount());
+                statement.setFloat(4, transaction.getRate());
+                statement.setString(5, transaction.getAname());
+                statement.setInt(6, transaction.getItem_no());
+                statement.addBatch();
+              }
+            statement.executeBatch();
+         connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
-        } finally {
-            connection.close();
         }
     }
 

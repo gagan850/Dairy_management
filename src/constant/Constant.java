@@ -47,6 +47,11 @@ public class Constant {
     public static final String AFTER = "After";
     public static final String SALE = "Sale";
     public static final String PURCHASE = "Purchase";
+    public static final String CASH = "Cash";
+   
+    public static final String SPEND = "Spend";
+    public static final String DAILY_DATA = "Daily Data";
+    public static final String REPORT = "Report";
    
     public static final int INTEGER_MINUS_ONE = -1;
     public static final int INTEGER_ZERO = 0;

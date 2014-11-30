@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.*;
 
 /**
  *
@@ -39,9 +40,9 @@ public class spend {
 
     public boolean exist() {
         int result = 0;
-        Connection connection;
         try {
-            Class.forName(constant.DBConstant.DRIVER_NAME);
+       Connection connection;
+       Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "select * from "+ DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -50,20 +51,15 @@ public class spend {
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        if (result > 0) {
-            return true;
-        } else {
-            return false;
-        }
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+         }
+        return (result==1)?true:false;
+}
 
-    }
-
-    public void update() {
-
-        Connection connection;
+    public boolean update() {
+       int result=0;
         try {
+             Connection connection;
             Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "update "+ DBTableEnum.SPEND+" set ammount=? where tdate=to_date(?,'yyyy-mm-dd')";
@@ -72,18 +68,19 @@ public class spend {
             statement.setInt(1, this.getAmmount());
 
             statement.setString(2, date);
-            statement.executeQuery();
+            result=statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            exception.printStackTrace();
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
+        return (result==1)?true:false;
     }
 
-    public void save() {
-
-        Connection connection;
+    public boolean save() {
+        int result=0;
         try {
-            Class.forName(constant.DBConstant.DRIVER_NAME);
+        Connection connection;
+        Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "insert into "+ DBTableEnum.SPEND+"(tdate,ammount) values(to_date(?,'yyyy-mm-dd'),?)";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -91,18 +88,20 @@ public class spend {
             statement.setString(1, date);
 
             statement.setInt(2, this.getAmmount());
-            statement.executeQuery();
+            result=statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            exception.printStackTrace();
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
+        return (result==1)?true:false;
     }
 
+   
+    
     public void get() {
-
-        Connection connection;
         try {
-            Class.forName(constant.DBConstant.DRIVER_NAME);
+        Connection connection;
+         Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "select * from "+ DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -116,7 +115,7 @@ public class spend {
             }
             connection.close();
         } catch (Exception exception) {
-            exception.printStackTrace();
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 

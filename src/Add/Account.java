@@ -13,13 +13,18 @@ import java.text.*;
 import javax.swing.*;
 
 /**
- *
+ *<p>It manages the accounts.
+ * we can perform various operations:</p>
+ * <li>Create Account</li>
+ * <li>Delete Account</li>
+ * <li>Update Account</li>
+ * 
  * @author gaganbansal
  */
 public class Account
         extends javax.swing.JInternalFrame {
-//These lists works as cache, They gets filled at start(in  constructor) and remain till end.
 
+//These lists works as cache, They gets filled at start(in  constructor) and remain till end.
     static public ArrayList<Dao.groups> group_list = new ArrayList<>();
     static public ArrayList<Dao.accounts> account_list = new ArrayList<>();
     static public ArrayList<Dao.account_type> account_type_list = new ArrayList<>();
@@ -37,7 +42,9 @@ public class Account
         desktopPane.add(this);
     }
 
-    //It Fills the cache group_list and UI group list
+    /**
+     *It fills the cache group_list and UI group list.
+     */
     public static void fillGroupCacheNUI() {
         Dao.groups g = new Dao.groups();
         group_list = g.returnGroups();

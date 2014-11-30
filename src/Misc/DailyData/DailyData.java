@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package Misc.Daily_Data;
+package Misc.DailyData;
 
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,21 +28,21 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author bansal
  */
-public class daily_data_report extends javax.swing.JInternalFrame {
-static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
-JDesktopPane d;
+public class DailyData extends javax.swing.JInternalFrame {
+
+    //cache for groups
+    static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
+
 
     /**
      * Creates new form sale
      */
-    public daily_data_report(JDesktopPane d) throws Exception{
+    public DailyData(JDesktopPane desktopPane) throws Exception{
         initComponents();
-          this.setTitle("Daily Data Reports");
+        this.setTitle(MessageFormat.format(MessageEnum.REPORT.getMessage(), constant.Constant.DAILY_DATA));
         fillGLIST();
-       
-     start_date.setDate(new Date());
-       this.d=d;
-         d.add(this);
+        date.setDate(new Date());
+        desktopPane.add(this);
     }
 
     
@@ -59,7 +61,7 @@ JDesktopPane d;
 
         jPanel1 = new javax.swing.JPanel();
         exit = new javax.swing.JButton();
-        start_date = new org.jdesktop.swingx.JXDatePicker();
+        date = new org.jdesktop.swingx.JXDatePicker();
         report = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -77,9 +79,9 @@ JDesktopPane d;
             }
         });
 
-        start_date.addActionListener(new java.awt.event.ActionListener() {
+        date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                start_dateActionPerformed(evt);
+                dateActionPerformed(evt);
             }
         });
 
@@ -99,13 +101,12 @@ JDesktopPane d;
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addComponent(report)
-                .addGap(26, 123, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
+                        .addComponent(report))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,7 +122,7 @@ JDesktopPane d;
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(report))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(exit)
@@ -148,18 +149,18 @@ this.dispose();        // TODO add your handling code here:
 
     private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
 try{
-        Dao.daily_data d=new Dao.daily_data();
-        d.createDaily_Data(group_list, new java.sql.Date(start_date.getDate().getTime()));
+        Dao.daily_data daily_data=new Dao.daily_data();
+        daily_data.createDaily_Data(group_list, new java.sql.Date(date.getDate().getTime()));
          
-String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-               
+            Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             File f=new File(".");
             String path=f.getCanonicalPath();
-          HashMap parameters=new HashMap();
-          String dat=(start_date.getDate().getYear()+1900)+"-"+(start_date.getDate().getMonth()+1)+"-"+(start_date.getDate().getDate());
-          parameters.put("tdate",dat );
-          System.out.println(dat);
+            HashMap parameters=new HashMap();
+            String dat=(date.getDate().getYear()+1900)+"-"+(date.getDate().getMonth()+1)+"-"+(date.getDate().getDate());
+            parameters.put("tdate",dat );
+            System.out.println(dat);
           
             
               
@@ -178,9 +179,9 @@ String s="jdbc:oracle:thin:@localhost:1521:";
         
     }//GEN-LAST:event_reportActionPerformed
 
-    private void start_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_dateActionPerformed
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_start_dateActionPerformed
+    }//GEN-LAST:event_dateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,16 +191,15 @@ String s="jdbc:oracle:thin:@localhost:1521:";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXDatePicker date;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton report;
-    private org.jdesktop.swingx.JXDatePicker start_date;
     // End of variables declaration//GEN-END:variables
 
-    private void fillGLIST()throws Exception {
+    private void fillGLIST(){
     Dao.groups groups=new Dao.groups();
     group_list=groups.returnGroups();
-    
     }
 }

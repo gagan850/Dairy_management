@@ -60,7 +60,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="cash_l1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="spend" min="-2" pref="136" max="-2" attributes="0"/>
+                              <Component id="spendT" min="-2" pref="136" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                           <Component id="label_group_name1" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
@@ -73,13 +73,13 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cash" min="-2" pref="136" max="-2" attributes="0"/>
-                                  <Component id="rate" min="-2" pref="136" max="-2" attributes="0"/>
+                                  <Component id="cashT" min="-2" pref="136" max="-2" attributes="0"/>
+                                  <Component id="rateT" min="-2" pref="136" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="save" min="-2" max="-2" attributes="0"/>
+                              <Component id="saveCash" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -95,12 +95,12 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="save1" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveSpend" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                  <Component id="s_date" min="-2" max="-2" attributes="0"/>
+                  <Component id="date" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -111,30 +111,30 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="s_date" min="-2" max="-2" attributes="0"/>
+                  <Component id="date" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="label_group_name" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cash" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="cashT" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="cash_l" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rate" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="rateT" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="rate_l" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="save" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveCash" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="label_group_name1" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="spend" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="spendT" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="cash_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="save1" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveSpend" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -152,9 +152,9 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
         </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="s_date">
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="date">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="s_dateActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dateActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -165,22 +165,22 @@
             <Property name="text" type="java.lang.String" value="SELECT DATE"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="cash">
+        <Component class="javax.swing.JTextField" name="cashT">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cashActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cashTActionPerformed"/>
           </Events>
         </Component>
-        <Component class="java.awt.Button" name="save">
+        <Component class="java.awt.Button" name="saveCash">
           <Properties>
             <Property name="label" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveCashActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="rate">
+        <Component class="javax.swing.JTextField" name="rateT">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rateActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rateTActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="cash_l">
@@ -210,9 +210,9 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="spend">
+        <Component class="javax.swing.JTextField" name="spendT">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spendActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spendTActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="cash_l1">
@@ -223,12 +223,12 @@
             <Property name="text" type="java.lang.String" value="Spend:"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Button" name="save1">
+        <Component class="java.awt.Button" name="saveSpend">
           <Properties>
             <Property name="label" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="save1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveSpendActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Misc.Notes;
+package Misc.Note;
 
 
 import Dao.notes;

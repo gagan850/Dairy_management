@@ -75,7 +75,7 @@ public class account_type {
                 this.account_typeid = rs.getInt("account_typeid");
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
         return this.getAccount_type();
     }
