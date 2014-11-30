@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="groups" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ce33b8e-8ecb-45d4-99c9-b991ca71fb62">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="81fd45a4-777b-4f73-8bb4-b9662d13095d"/>
+	<parameter name="START_DATE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="END_DATE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="GID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select tdate TDATE,(select aname from accounts where aid=s.aid) ANAME,nvl(receive,0) receive, receive_by,nvl((select sum(c.ammount) from cash c where c.tdate>=TO_DATE($P{START_DATE},'yyyy/mm/dd') and c.tdate<=TO_DATE($P{END_DATE},'yyyy/mm/dd')),0) cash from sale_transactions s where tdate>=TO_DATE($P{START_DATE},'yyyy/mm/dd') and tdate<=TO_DATE($P{END_DATE},'yyyy/mm/dd') and gid=$P{GID} and receive!=0 order by tdate]]>
+	</queryString>
+	<field name="TDATE" class="java.sql.Timestamp"/>
+	<field name="ANAME" class="java.lang.String"/>
+	<field name="RECEIVE" class="java.math.BigDecimal"/>
+	<field name="RECEIVE_BY" class="java.lang.String"/>
+	<field name="CASH" class="java.math.BigDecimal"/>
+	<variable name="SUM_RECEIVE" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{RECEIVE}]]></variableExpression>
+	</variable>
+	<variable name="sum_cash" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{CASH}]]></variableExpression>
+	</variable>
+	<variable name="sum" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="738fca34-169c-452f-8202-bb81fe177455" x="468" y="10" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[9464189532]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07dadcad-2b58-4ad4-92e1-b09510d94b4d" x="68" y="30" width="428" height="52"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAJESH MILK CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09689341-590a-4afe-bb1c-61aa8a1272d5" x="393" y="10" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rajesh]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="761b92d6-9e1e-4235-97b5-2ac9170fe50c" x="240" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receive List ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2395a13a-661e-4709-b857-2ba7144ac0e8" x="121" y="0" width="135" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b895a67-ee86-47b2-8a60-83582595aee4" x="336" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receive By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d3e584dd-ad7f-4602-ba5e-d716edbad79e" x="256" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receive]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fe5422dd-28d6-4eec-bd4f-e13db0084797" x="38" y="0" width="83" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="dd8e9720-1740-4750-9d19-f75164dd6d4d" x="38" y="1" width="407" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="95c911ab-8ef2-458e-b047-bc107457a084" x="38" y="19" width="407" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9cf9700c-e26b-4e01-a09c-7b787d0b71d2" x="120" y="2" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement uuid="a77b2fd3-c81d-4da3-8e9f-bba20d74a339" x="255" y="2" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement uuid="405f80f3-5e9c-4117-bbf8-0256c856f0e4" x="38" y="2" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement uuid="5579b544-2529-42fa-bfc3-c5989472f38e" x="335" y="2" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement uuid="1708b7ed-9d48-422e-bd79-fe0529745f73" x="445" y="2" width="1" height="17"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="180ef56b-4d65-4fd6-8d38-f25a8b85096a" x="119" y="0" width="136" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="397afcc1-e99b-423d-85b8-3303cbaa3244" x="256" y="1" width="80" height="19"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{RECEIVE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5162c03-3287-4a4a-882b-e82930e3f395" x="335" y="1" width="110" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{RECEIVE_BY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM">
+				<reportElement uuid="e7361467-6ecf-42c6-92df-63ee79134cd4" x="38" y="0" width="82" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{TDATE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="df4d4b40-c982-454a-9693-8d03b7140035" x="38" y="20" width="407" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="8a47402f-8788-4330-b5fd-ed30deb798ba" x="38" y="-18" width="1" height="39"/>
+			</line>
+			<line>
+				<reportElement uuid="40a0411d-96a8-489e-a6cd-bfa861035926" x="120" y="-18" width="1" height="39"/>
+			</line>
+			<line>
+				<reportElement uuid="dccd9581-2882-4ea7-893c-9c0b4fc9b424" x="255" y="-1" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement uuid="5a0f25a8-f1ac-4e67-aa8d-d6be6c4fb5a1" x="335" y="-1" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement uuid="4e4c6235-c7a4-4d74-9175-5c331b253712" x="445" y="-1" width="1" height="22"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="65f3078d-58fa-47d3-a0e6-ad877f06a470" x="121" y="0" width="136" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cash]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement uuid="f33c0891-3d00-4552-9889-82bcf0f36bf8" x="257" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_cash}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="d1ca4edc-24a8-4ed1-b35c-0e8c9f784d57" x="257" y="20" width="78" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{SUM_RECEIVE}+$V{sum_cash}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="d0bbc621-49d1-47ff-9309-e0e1a87a73d4" x="39" y="20" width="406" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="bcd1c2f4-54c6-4150-9df8-09f1b00c875a" x="121" y="20" width="136" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Receive]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" columnCount="2" pageWidth="525" pageHeight="802" columnWidth="262" leftMargin="0" rightMargin="0" topMargin="5" bottomMargin="0" uuid="817e1b18-4633-4863-a75c-642a42a655a3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="GID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="START_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (select aname from accounts where aid=s.aid) ANAME,s.aid,(select accounts.id from accounts where accounts.aid=s.aid) id,(select abalance from accounts where aid=s.aid and gid=$P{GID} and account_typeid=1 ) start_bal,NVL(sum(MB_MILK+EB_MILK),0) bfl_milk,NVL(sum(EC_MILK+MC_MILK),0) cow_milk,NVL(sum(ammount),0) new_ammount,
+NVL(NVL((select sum(ammount) from sale_transactions where aid=s.aid and tdate<to_date($P{START_DATE},'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=s.aid and tdate<=to_date($P{END_DATE},'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=s.aid),0),0)
+previous,NVL(sum(ammount)+(select sum(ammount) from sale_transactions where aid=s.aid and gid=$P{GID} and tdate<TO_DATE($P{START_DATE}, 'yyyy-mm-dd'))-
+(select sum(receive) from sale_transactions where aid=s.aid and gid=$P{GID} and tdate<TO_DATE($P{END_DATE}, 'yyyy-mm-dd')),0) net_ammount,' ' Receive,' '
+Receive_Date from sale_transactions s where s.aid in(select aid from accounts  where gid=$P{GID} and account_typeid=1) and
+TDATE>= TO_DATE($P{START_DATE}, 'yyyy-mm-dd') and TDATE<= TO_DATE($P{END_DATE}, 'yyyy-mm-dd') group by s.aid]]>
+	</queryString>
+	<field name="ANAME" class="java.lang.String"/>
+	<field name="AID" class="java.lang.String"/>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="START_BAL" class="java.math.BigDecimal"/>
+	<field name="BFL_MILK" class="java.math.BigDecimal"/>
+	<field name="COW_MILK" class="java.math.BigDecimal"/>
+	<field name="NEW_AMMOUNT" class="java.math.BigDecimal"/>
+	<field name="PREVIOUS" class="java.math.BigDecimal"/>
+	<field name="NET_AMMOUNT" class="java.math.BigDecimal"/>
+	<field name="RECEIVE" class="java.lang.String"/>
+	<field name="RECEIVE_DATE" class="java.lang.String"/>
+	<sortField name="ID"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="238" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="6011dfd5-fe54-4708-be7e-6b46e1c61654" x="160" y="102" width="56" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COW_MILK}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="1296254a-7832-42b6-9a9e-e02c2fbe1efa" x="160" y="163" width="56" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NEW_AMMOUNT}+$F{PREVIOUS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="a82a0e4a-4939-4058-8c1b-cb221a0640c5" x="161" y="142" width="56" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREVIOUS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="565c4039-ae59-409b-9dcb-a50f4d547dee" x="161" y="123" width="57" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NEW_AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9bdfdeac-83a0-4cd8-85f3-ef3267a03863" x="73" y="65" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="3c2917ea-5f6a-41a0-9821-fdf000f746b8" x="160" y="83" width="56" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BFL_MILK}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5f28d136-c5e6-4260-a3dd-056c56ec5195" x="43" y="83" width="62" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[BFL MILK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="483c1df6-1fa0-4f42-b653-b7962a95d769" x="42" y="103" width="62" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[COW MILK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abb94132-68d5-4b31-b5e4-993813ee7cc3" x="43" y="123" width="62" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="788a241c-ce2d-4e5c-afeb-5d95817d4f73" x="43" y="142" width="61" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[PREVIOUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7fbea39a-a960-462e-849f-37fa2e9967bb" x="43" y="161" width="61" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[NET]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5bfe81a2-27d4-4f6d-a24d-f74587357885" x="12" y="12" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ea756881-c96b-4081-8f09-7cc228264f56" x="11" y="122" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="f19c6054-b8f6-4907-9f4f-80db8204ecd3" x="11" y="162" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="27e589a4-680e-45ab-8875-44ce3f0d6520" x="11" y="182" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="664f56cc-82ff-4195-b6e5-c0026a4b481d" x="261" y="13" width="1" height="214"/>
+			</line>
+			<line>
+				<reportElement uuid="c3f604ce-ade2-4649-9880-0ea3fd6dd3dd" x="11" y="12" width="1" height="215"/>
+			</line>
+			<textField>
+				<reportElement uuid="67c6ba11-6f80-454b-909b-daf17ffaf0c3" x="205" y="65" width="55" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{START_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0961c438-d101-4f48-be87-21b706a9e2b5" x="170" y="65" width="36" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[From:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0af11382-fdad-47a9-825d-d432f32915df" x="11" y="65" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="39d7bf62-ac27-4eee-bf86-f9823e721cd2" x="11" y="227" width="250" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="06708ed4-c384-4700-89f0-03d5555b6275" x="12" y="183" width="249" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[  *Contact for dairy products            *Home Delivery]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="093a0a9d-6e36-4372-8802-e760cd70dc47" x="12" y="198" width="249" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[  If you find any complaint please contact at above]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0bb20f3-7ed2-4550-bc4a-b173d5707c0d" x="13" y="209" width="249" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[  numbers.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0128e978-d689-4778-b2f4-4bc70100ee05" x="40" y="65" width="26" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e1a37873-26f6-4b50-922f-7b3d3d20812b" x="20" y="66" width="20" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Acc:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="31f1357f-8075-414c-9b7f-3fe68bc5ffdc" x="191" y="13" width="69" height="17"/>
+				<textElement/>
+				<text><![CDATA[9464189532]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="870d9b5c-331c-4812-8b51-20f5b3188f53" x="13" y="30" width="247" height="23"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAJESH MILK CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60d90c45-eba6-44dd-86ba-2c84f7a8958b" x="116" y="13" width="75" height="17"/>
+				<textElement/>
+				<text><![CDATA[Rajesh]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+</jasperReport>

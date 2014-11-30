@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="817e1b18-4633-4863-a75c-642a42a655a3">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="GROUP_NAME" class="java.lang.String"/>
+	<parameter name="START_DATE" class="java.lang.String"/>
+	<parameter name="END_DATE" class="java.lang.String"/>
+	<parameter name="ANAME" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select aname,tdate CDate,mor_milk M_MILK,mor_fat MFAT,mor_snf MSNF,eve_milk E_MILK,eve_fat EFAT,eve_snf ESNF,ghee GHEE,powder POWDER,ghee_ammount GHEEA,powder_ammount POWDERA,ammount Ammount from pur_snf_transactions where gname=$P{GROUP_NAME} and tdate>=TO_DATE($P{START_DATE}, 'yyyy/mm/dd') and tdate<=TO_DATE($P{END_DATE}, 'yyyy/mm/dd') and aname=$P{ANAME} and ammount!=0 order by tdate]]>
+	</queryString>
+	<field name="ANAME" class="java.lang.String"/>
+	<field name="CDATE" class="java.sql.Timestamp"/>
+	<field name="M_MILK" class="java.math.BigDecimal"/>
+	<field name="MFAT" class="java.math.BigDecimal"/>
+	<field name="MSNF" class="java.math.BigDecimal"/>
+	<field name="E_MILK" class="java.math.BigDecimal"/>
+	<field name="EFAT" class="java.math.BigDecimal"/>
+	<field name="ESNF" class="java.math.BigDecimal"/>
+	<field name="GHEE" class="java.math.BigDecimal"/>
+	<field name="POWDER" class="java.math.BigDecimal"/>
+	<field name="GHEEA" class="java.math.BigDecimal"/>
+	<field name="POWDERA" class="java.math.BigDecimal"/>
+	<field name="AMMOUNT" class="java.math.BigDecimal"/>
+	<variable name="SUM_MOR_MILK" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{M_MILK}]]></variableExpression>
+	</variable>
+	<variable name="SUM_EVE_MILK" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{E_MILK}]]></variableExpression>
+	</variable>
+	<variable name="SUM_GHEE" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{GHEE}]]></variableExpression>
+	</variable>
+	<variable name="SUM_AMMOUNT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{AMMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="SUM_GHEEA" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{GHEEA}]]></variableExpression>
+	</variable>
+	<variable name="SUM_POWDERA" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{POWDERA}]]></variableExpression>
+	</variable>
+	<variable name="SUM_POWDER" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{POWDER}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ca8473af-aefb-4a6e-86e3-0d98135cf90a" x="456" y="10" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[9464189532]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="00406cec-aaf6-4e24-9034-b4c3cfda47e7" x="39" y="30" width="428" height="52"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAJESH MILK CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e5b3076a-5b8e-4054-9fe5-1d64693b09da" x="381" y="10" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rajesh]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e974f1b9-c201-4abc-bbcb-1d218dcde013" x="215" y="17" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ANAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="be7ab145-dafd-4418-8ea9-080259814302" x="490" y="20" width="47" height="16"/>
+				<textElement/>
+				<text><![CDATA[Ammount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d52cdfb-b1f4-4edd-b2fc-5abafba40fe5" x="234" y="20" width="38" height="16"/>
+				<textElement/>
+				<text><![CDATA[FAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e44dda05-c00b-4066-b6ab-3ca6ab74c513" x="53" y="20" width="47" height="16"/>
+				<textElement/>
+				<text><![CDATA[Mor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ae1be1d6-d665-40b0-8a89-b5f36fd4388b" x="100" y="20" width="44" height="17"/>
+				<textElement/>
+				<text><![CDATA[FAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1fe833ea-6735-4fc3-baed-0e735000c9a9" x="188" y="20" width="46" height="16"/>
+				<textElement/>
+				<text><![CDATA[Eve]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2d24dc8-809d-437c-ab9d-6ec108f060c8" x="310" y="20" width="51" height="16"/>
+				<textElement/>
+				<text><![CDATA[GHEE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="30885ca4-594f-4a2a-bf9e-09c23e69d66a" x="18" y="20" width="35" height="16"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda04714-8f6f-4979-80c3-52ff468ed5e5" x="144" y="20" width="44" height="17"/>
+				<textElement/>
+				<text><![CDATA[SNF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec7f6028-986a-4598-8914-06daee878e1e" x="272" y="20" width="38" height="16"/>
+				<textElement/>
+				<text><![CDATA[SNF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2cc70f63-effc-49f2-8418-fc8457728f20" x="360" y="20" width="46" height="17"/>
+				<textElement/>
+				<text><![CDATA[POWDER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8c1ce27-d3c6-4d6b-9de2-c4723a96be72" x="406" y="20" width="42" height="16"/>
+				<textElement/>
+				<text><![CDATA[GA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d452d75b-0993-4bd6-a3e6-07f50fa6eb98" x="446" y="20" width="44" height="17"/>
+				<textElement/>
+				<text><![CDATA[PA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField pattern="###0.0">
+				<reportElement uuid="b492722d-ced5-4cd3-aaa8-02254a2a803f" x="53" y="2" width="47" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{M_MILK}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="b039fe8e-f6f5-463c-b3c8-e813a930df6d" x="310" y="3" width="51" height="21"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GHEE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f0309fc3-425b-4618-9e4c-e836c641f676" x="100" y="1" width="44" height="23"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{MFAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc787f44-56c9-4da2-858d-a8d9d9fd95cd" x="272" y="3" width="38" height="21"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ESNF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="176a8086-2bc4-4001-8d55-272d1574bbbf" x="448" y="1" width="42" height="23"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{POWDERA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33cfc77a-193f-4681-89b2-eb77cd34adb7" x="407" y="1" width="41" height="23"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GHEEA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cb5d3320-2cb9-42ce-b1e1-8e198bced6ba" x="361" y="2" width="46" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{POWDER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4eab9fbe-1aa9-4256-b2f4-691fb7629278" x="144" y="1" width="44" height="23"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{MSNF}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="bccd106c-8bf8-45d9-9019-a76b0f0ea101" x="490" y="1" width="47" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="8f82dd73-58bc-45dd-a3ca-ff5f0f062f2e" x="7" y="1" width="530" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="e2f634fd-9553-4926-b170-199770806cda" x="18" y="2" width="35" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CDATE}.getDate()+'-'+($F{CDATE}.getMonth()+1)]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="e9123046-983e-4dde-bc23-174b124fe095" x="234" y="1" width="38" height="23"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EFAT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="ec0430c6-8747-4829-9695-ffd3520c7972" x="188" y="2" width="46" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{E_MILK}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="77" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c74711af-9015-4cbb-90d8-a6ca0032b017" x="209" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="9e8e9b6b-dc40-4c3f-8625-b6384b052bed" x="289" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement uuid="b0fc54a1-dd4e-458e-bb2d-b6f794efea00" x="425" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement uuid="b02b0b8b-5249-40af-af0e-da7b47dfac1a" x="7" y="2" width="530" height="1"/>
+			</line>
+			<textField pattern="###0.0">
+				<reportElement uuid="d7aaffc3-97e7-4950-8c9f-e00c15f5a506" x="53" y="3" width="47" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_MOR_MILK}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="7de4164b-33a2-4f3d-8c7c-1a829be372aa" x="188" y="3" width="46" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_EVE_MILK}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="453c3c8e-94b0-4fdc-a09a-5e9c496ff172" x="18" y="3" width="35" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="###0.0">
+				<reportElement uuid="c4a0bd8c-fe9b-4cb3-80ad-5bf245484078" x="310" y="3" width="50" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_GHEE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="322becc1-458e-4733-abb4-75ca32bb3339" x="407" y="3" width="41" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_GHEEA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="55ef4a73-ced3-4c52-9aa9-6d90764389a2" x="448" y="3" width="42" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_POWDERA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement uuid="6c8b671e-d6b4-493c-ae9d-1316bbe08a88" x="490" y="3" width="45" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="667e2fb8-deac-497d-ba95-7ed24a89dfe0" x="361" y="3" width="45" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_POWDER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

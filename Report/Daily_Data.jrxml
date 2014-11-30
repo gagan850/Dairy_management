@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="groups" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ce33b8e-8ecb-45d4-99c9-b991ca71fb62">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="81fd45a4-777b-4f73-8bb4-b9662d13095d"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select gid,sale_milk,pur_milk,sale_ammount,pur_ammount,(select gname from groups where gid=d.gid) gname,NVL((select milk from cash where tdate=to_date($P{tdate},'yyyy-mm-dd')),0) m,NVL((select ammount from cash where tdate=to_date($P{tdate},'yyyy-mm-dd')),0) a,NVL((select ammount from spend where tdate=to_date($P{tdate},'yyyy-mm-dd')),0) spend from daily_data d]]>
+	</queryString>
+	<field name="GID" class="java.math.BigDecimal"/>
+	<field name="SALE_MILK" class="java.math.BigDecimal"/>
+	<field name="PUR_MILK" class="java.math.BigDecimal"/>
+	<field name="SALE_AMMOUNT" class="java.math.BigDecimal"/>
+	<field name="PUR_AMMOUNT" class="java.math.BigDecimal"/>
+	<field name="GNAME" class="java.lang.String"/>
+	<field name="M" class="java.math.BigDecimal"/>
+	<field name="A" class="java.math.BigDecimal"/>
+	<field name="SPEND" class="java.math.BigDecimal"/>
+	<variable name="sum_sale_milk" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SALE_MILK}]]></variableExpression>
+	</variable>
+	<variable name="sum_purchase_milk" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{PUR_MILK}]]></variableExpression>
+	</variable>
+	<variable name="sum_sale_ammount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SALE_AMMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="sum_purchase_ammount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{PUR_AMMOUNT}]]></variableExpression>
+	</variable>
+	<variable name="sum_sale_net_ammount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_sale_ammount}+$F{A}]]></variableExpression>
+	</variable>
+	<variable name="profit" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_sale_net_ammount}-$V{sum_purchase_ammount}]]></variableExpression>
+	</variable>
+	<variable name="sum_sale_net_milk" class="java.lang.String"/>
+	<variable name="sum_purchase_net_ammount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="52ffd3f5-54ea-4854-91a7-264f9aecf92d" x="470" y="8" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[9464189532]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39477325-ff40-4cb5-8982-59b7e0d0b349" x="34" y="28" width="428" height="52"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAJESH MILK CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9bf188b-4eb8-4844-9a79-857b854d168d" x="395" y="8" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rajesh]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="761b92d6-9e1e-4235-97b5-2ac9170fe50c" x="240" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DAILY DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a4626064-759e-4d71-b0b3-6c0c803dae29" x="102" y="17" width="87" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40f4a11c-160f-43f7-ae41-79fc10439fc5" x="411" y="17" width="87" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PURCHASE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9c6f81a3-9a17-45c9-bc9b-1b7db232f6f6" x="308" y="1" width="81" height="24"/>
+				<textElement/>
+				<text><![CDATA[GNAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac2c52f7-b102-4bf1-9031-4b9f8a4facc5" x="0" y="0" width="87" height="25"/>
+				<textElement/>
+				<text><![CDATA[GNAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a471c72c-19b4-403a-9322-7d06cd3bdf9a" x="165" y="0" width="85" height="25"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[AMMOUNT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="3f2eda37-1cd8-42c1-a691-ec70f3f052fe" x="281" y="0" width="1" height="25"/>
+			</line>
+			<staticText>
+				<reportElement uuid="2579eb8f-59c5-49b2-a8ef-5a1c0d1aed6b" x="87" y="1" width="78" height="24"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MILK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e1b9113-cbde-454b-b120-e146d10f5a6b" x="465" y="0" width="90" height="25"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[AMMOUNT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ada740c4-1cd0-43d1-8f26-aef8dec7160a" x="0" y="24" width="250" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="38d81982-3e21-4dd5-8ec1-175f9ae13993" x="308" y="24" width="247" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="fa21129f-621c-42a2-92be-cfbaea448c5a" x="389" y="0" width="76" height="23"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MILK]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement uuid="44f6d621-4922-4972-a3d4-4c10eadc1b7a" x="281" y="0" width="1" height="25"/>
+			</line>
+			<textField>
+				<reportElement uuid="6eeb4ac5-8975-4f47-9c9d-e93c7da0ee2a" x="0" y="0" width="87" height="26"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="98fd2da8-efe5-494d-8c5c-a3bd79f3474e" x="87" y="1" width="78" height="25"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{SALE_MILK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2f5d433b-492b-4156-884d-6bba8cecf9da" x="165" y="0" width="85" height="26"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{SALE_AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a8a84c48-e5f9-4697-874e-1fca539a9b7c" x="308" y="0" width="81" height="26"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{GNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5cbbe268-d4bd-4fa6-ae02-a66b87466b58" x="465" y="0" width="90" height="26"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PUR_AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6a4c8057-5b28-4f77-b92b-b82a25120655" x="389" y="0" width="76" height="26"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PUR_MILK}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="44" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7b46be80-5b87-4d70-b684-aeb79f3dc706" x="312" y="62" width="60" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profit]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0a80fb72-377c-4257-80cf-4c7425f6505f" x="77" y="1" width="192" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="02bf9245-6594-4d78-b1b3-d3a3c69f26df" x="382" y="1" width="166" height="1"/>
+			</line>
+			<textField pattern="#,##0.0">
+				<reportElement uuid="ae45eb8f-a9b0-4768-9020-be53ac857769" x="87" y="22" width="78" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{M}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="9b5d5fa7-d816-42b1-8d8d-8b3ad36d71e1" x="165" y="23" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{A}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0c310777-4d18-427f-9317-b7ff77a253db" x="77" y="42" width="192" height="1"/>
+			</line>
+			<textField pattern="#,##0.0">
+				<reportElement uuid="a90029b3-5a64-4671-ac62-534e318d8c4a" x="87" y="0" width="78" height="23"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_sale_milk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="0bbd7fa8-21ed-442e-a314-e5ae5c17f642" x="165" y="2" width="100" height="21"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_sale_ammount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0">
+				<reportElement uuid="ce2b7205-71a0-4b69-a125-f1a9e95abfb9" x="389" y="0" width="76" height="23"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_purchase_milk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="f81953a0-18d8-484b-a66c-0bfbb7e422fa" x="465" y="2" width="90" height="21"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_purchase_ammount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="673b7d86-4166-45ca-a3e1-adaf3552e965" x="165" y="43" width="100" height="23"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_sale_ammount}+$F{A}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="45c719ff-27f1-4a5a-b9fb-70873fe623bd" x="465" y="63" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[($V{sum_sale_ammount}+$F{A})-($V{sum_purchase_ammount}+$F{SPEND})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="19859a70-b435-43b1-9e2d-fd67731e8ec0" x="34" y="22" width="36" height="25"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cash]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8efb8cad-2376-4ad0-91e1-8be25570f0ed" x="281" y="0" width="1" height="66"/>
+			</line>
+			<textField pattern="#,##0.0">
+				<reportElement uuid="3474abb8-e091-4070-9269-cfebfa5e765f" x="87" y="43" width="78" height="23"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{sum_sale_milk}+$F{M}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="030ef11a-f761-45dc-811b-7410cfbb2556" x="311" y="22" width="60" height="25"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Spend]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1d360599-d5a6-4ab0-acd7-ba413e94dd4f" x="465" y="23" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{SPEND}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d7baf6b9-5d2c-4630-a1b7-68515372416d" x="465" y="43" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{SPEND}+$V{sum_purchase_ammount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="1ee69c2f-8c52-4cf3-9a20-26f0141b4e95" x="385" y="42" width="161" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="97f3d196-33e3-4c40-960d-9552fa71e38a" x="385" y="62" width="161" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

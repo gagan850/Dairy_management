@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="groups" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ce33b8e-8ecb-45d4-99c9-b991ca71fb62">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="81fd45a4-777b-4f73-8bb4-b9662d13095d"/>
+	<queryString>
+		<![CDATA[select * from groups]]>
+	</queryString>
+	<field name="GNAME" class="java.lang.String"/>
+	<field name="GPHONE" class="java.lang.String"/>
+	<field name="GADDRESS" class="java.lang.String"/>
+	<field name="GCITY" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="96d25018-e10a-4cab-8dc0-4bb351e62f92" x="475" y="6" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[9464189532]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8bc7cdd5-09d7-4dc2-a0e4-1deb5e4b37c4" x="47" y="26" width="428" height="52"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAJESH MILK CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abe1a72b-1bf4-4586-9597-1056763b4758" x="400" y="6" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rajesh]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="11b09d6d-4d4f-4012-b96a-2877f7b2a821" x="213" y="0" width="100" height="20" forecolor="#000000"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GROUPS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="67a1eb3c-6f30-4fd9-b6c3-7f8fa7d7028e" x="19" y="5" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[GNAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4c2fa252-f1cf-4d0b-83a9-d1eed1d12dee" x="142" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[GPHONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28391fe4-8f0e-4e08-8032-18d8eb0f5c8d" x="271" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[GADDRESS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bfa0919a-d6b8-4d94-95d6-95d1e0d4bb05" x="399" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[GCITY]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c082d090-fe44-4b57-a5ab-934055027b50" x="19" y="3" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="514aca76-9409-4d80-af84-07c77e1256c4" x="142" y="3" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GPHONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="207acb9d-8e21-4064-8016-7354d7b7549f" x="271" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3e2f4d7e-1a14-4824-bf0b-bcd3ecaa836f" x="399" y="3" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCITY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
