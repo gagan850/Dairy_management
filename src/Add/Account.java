@@ -13,7 +13,7 @@ import javax.swing.*;
 
 /**
  *
- * @author bansal
+ * @author gaganbansal
  */
 public class Account
         extends javax.swing.JInternalFrame {
