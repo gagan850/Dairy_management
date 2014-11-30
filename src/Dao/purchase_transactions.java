@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -105,8 +106,8 @@ public class purchase_transactions {
     public static void save(ArrayList<purchase_transactions> a) throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             Iterator<purchase_transactions> it = a.iterator();
             purchase_transactions aa = new purchase_transactions();
@@ -114,7 +115,7 @@ public class purchase_transactions {
             while (it.hasNext()) {
                 aa = it.next();
                 System.out.println("Save date:" + aa.getTdate());
-                String ss = "insert into "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+"(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount) values(?,?,?,?,?,?,?,?,?)";
+                String ss = "insert into "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+"(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount) values(?,?,?,?,?,?,?,?,?)";
                 ps = connection.prepareStatement(ss);
                 ps.setInt(1, aa.getGid());
                 ps.setString(2, aa.getAid());
@@ -138,8 +139,8 @@ public class purchase_transactions {
     public static void update(ArrayList<purchase_transactions> a) throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             Iterator<purchase_transactions> it = a.iterator();
             purchase_transactions aa = new purchase_transactions();
@@ -147,7 +148,7 @@ public class purchase_transactions {
             while (it.hasNext()) {
                 aa = it.next();
 
-                String ss = "update "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=? where gid=? and aid=? and tdate=? ";
+                String ss = "update "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=? where gid=? and aid=? and tdate=? ";
                 ps = connection.prepareStatement(ss);
                 ps.setDouble(1, aa.getMb_milk());
                 ps.setDouble(2, aa.getEb_milk());
@@ -172,10 +173,10 @@ public class purchase_transactions {
     public void save() throws Exception {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "insert into "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+"(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount) values(?,?,?,?,?,?,?,?,?)";
+            String ss = "insert into "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+"(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -198,10 +199,10 @@ public class purchase_transactions {
     public void update(purchase_transactions a) throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "update "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=? where gid=? and aid=? and tdate=? ";
+            String ss = "update "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=? where gid=? and aid=? and tdate=? ";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setDouble(1, this.getMb_milk());
             ps.setDouble(2, this.getEb_milk());
@@ -224,10 +225,10 @@ public class purchase_transactions {
         Connection connection = null;
         ArrayList<purchase_transactions> aa = new ArrayList<purchase_transactions>();
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
+            String ss = "select * from "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -272,10 +273,10 @@ public class purchase_transactions {
 
         purchase_transactions a = new purchase_transactions();
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -313,14 +314,14 @@ public class purchase_transactions {
         Connection connection = null;
 
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             Iterator<purchase_transactions> iterator = entries.iterator();
             while (iterator.hasNext()) {
                 purchase_transactions entry = iterator.next();
 
-                String ss = "select * from "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+                String ss = "select * from "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setInt(1, entry.getGid());
                 ps.setString(2, entry.getAid());
@@ -350,10 +351,10 @@ public class purchase_transactions {
 
         boolean result = false;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+Enum.DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+ DBTableEnum.PURCHASE_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());

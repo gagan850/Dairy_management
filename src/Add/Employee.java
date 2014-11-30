@@ -5,6 +5,7 @@
  */
 package Add;
 
+import Enum.*;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class Employee
     public Employee(JDesktopPane desktopPane)
             throws ClassNotFoundException, Exception {
         initComponents();
-        this.setTitle(MessageFormat.format(constants.MessageEnum.ADD.getMessage(), constants.Constant.EMPLOYEE));
+        this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.EMPLOYEE));
         fillEmployeeCacheNUI();
         desktopPane.add(this);
     }
@@ -39,7 +40,7 @@ public class Employee
         for (int index = 0; index < employee_list.size(); index++) {
             elist.add(employee_list.get(index).getEname());
         }
-        employeeCount.setText(MessageFormat.format(constants.MessageEnum.COUNT.getMessage(), constants.Constant.EMPLOYEE, employee_list.size()));
+        employeeCount.setText(MessageFormat.format(MessageEnum.COUNT.getMessage(), constant.Constant.EMPLOYEE, employee_list.size()));
     }
 
     /**
@@ -284,7 +285,7 @@ public class Employee
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
 
-        if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
+        if (evt.getActionCommand().equals(constant.Constant.UPDATE)) {
             String nameToBeUpdated = gname.getText();
             Dao.employees employee = new Dao.employees();
             employee.setEid(employee_list.get(elist.getSelectedIndex()).getEid());
@@ -294,16 +295,16 @@ public class Employee
             employee.setEaddress(gaddress.getText());
             employee.setEsalary(validateInt(gsalary.getText()));
             if (employee.update()) {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_SUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeUpdated), constants.MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeUpdated), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                 fillEmployeeCacheNUI();
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_UNSUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeUpdated), constants.MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeUpdated), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
             }
             reset.doClick();
-            save.setText(constants.Constant.SAVE);
+            save.setText(constant.Constant.SAVE);
         } else if (gname.getText() == null || gname.getText().equals("")) {
-            JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+            JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
         } else {
             String nameToBeSaved = gname.getText();
@@ -314,11 +315,11 @@ public class Employee
             employee.setEcity(gcity.getText());
             employee.setEsalary(validateInt(gsalary.getText()));
             if (employee.add()) {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_SUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeSaved), constants.MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
 
                 fillEmployeeCacheNUI();
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_UNSUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeSaved), constants.MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
             }
         }
@@ -329,7 +330,7 @@ public class Employee
     public int validateInt(String text) {
         if (text == null) {
             return 0;
-        } else if (!text.matches("\\d*")) {
+        } else if (!text.matches("\\d*")||text.equals("")) {
             return 0;
         } else {
             return Integer.valueOf(text);
@@ -386,7 +387,7 @@ public class Employee
         gcity.setEditable(true);
         gphone.setEditable(true);
         gsalary.setEditable(true);
-        save.setText(constants.Constant.UPDATE);
+        save.setText(constant.Constant.UPDATE);
         save.setEnabled(true);
         delete.setEnabled(false);
 // TODO add your handling code here:
@@ -394,14 +395,14 @@ public class Employee
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted = elist.getSelectedItem();
-        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
+        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(ImageEnum.CONFIRM.getImageName())) == 0) {
             Dao.employees a = new Dao.employees();
             a.setEid(employee_list.get(elist.getSelectedIndex()).getEid());
             if (a.delete()) {
                 fillEmployeeCacheNUI();
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_SUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeDeleted), constants.MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_SUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeDeleted), MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_UNSUCCESS.getMessage(), constants.Constant.EMPLOYEE, nameToBeDeleted), constants.MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_UNSUCCESS.getMessage(), constant.Constant.EMPLOYEE, nameToBeDeleted), MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
             }
         }
 

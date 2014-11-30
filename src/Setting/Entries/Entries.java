@@ -36,7 +36,7 @@ public class Entries extends javax.swing.JInternalFrame {
         int j=0;
         while(iterator.hasNext()){
             Dao.entries entry=iterator.next();
-            table.setValueAt(constants.Account_type.getString(entry.getAccount_type_id()), j, 0);
+            table.setValueAt(constant.AccountType.getString(entry.getAccount_type_id()), j, 0);
             table.setValueAt(entry.getEntries(), j, 1);
             j++;
         }
@@ -164,7 +164,7 @@ try{
 
 for(int i=0;i<table.getRowCount();i++){
     Dao.entries entry=new Dao.entries();
-    entry.setAccount_type_id(constants.Account_type.getInt((String)table.getValueAt(i, 0)));
+    entry.setAccount_type_id(constant.AccountType.getInt((String)table.getValueAt(i, 0)));
     entry.setEntries((int)table.getValueAt(i, 1));
     entriesList.add(entry);
 }

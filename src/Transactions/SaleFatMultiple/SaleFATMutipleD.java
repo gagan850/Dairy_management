@@ -17,7 +17,7 @@ import javax.swing.JDesktopPane;
  * @author bansal
  */
 public class SaleFATMutipleD extends javax.swing.JInternalFrame {
-static int account_typeid=constants.Account_type.FAT_SALE_MULTIPLE;
+static int account_typeid=constant.AccountType.FAT_SALE_MULTIPLE;
 public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
 public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane pane=null;    
@@ -163,7 +163,7 @@ this.dispose();
             
           Transactions.SaleFatMultiple.SaleFATMultipleDaily a=new Transactions.SaleFatMultiple.SaleFATMultipleDaily(account_list.get(alist.getSelectedIndex()),new Date(),pane);
           a.setVisible(true);
-          a.setSize(constants.Constant.width,constants.Constant.height);
+          a.setSize(constant.Constant.width,constant.Constant.height);
           a.setIconifiable(true);
         } catch (Exception ex) {
             ex.printStackTrace();

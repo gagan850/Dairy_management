@@ -147,7 +147,7 @@ Dao.accounts selectedAccount=null;
         calendar.set(Calendar.YEAR, d.getYear());
         calendar.set(Calendar.MONTH, d.getMonth());
         Dao.entries entry=new Dao.entries();
-        entry.setAccount_type_id(constants.Account_type.FAT_SALE_MULTIPLE);
+        entry.setAccount_type_id(constant.AccountType.FAT_SALE_MULTIPLE);
         int numDays=0;
         try{
             numDays = entry.getEntryForAccount();
@@ -355,7 +355,7 @@ Calendar calendar = Calendar.getInstance();
 calendar.set(Calendar.YEAR, d.getYear());
 calendar.set(Calendar.MONTH, d.getMonth());
 Dao.entries entry=new Dao.entries();
-entry.setAccount_type_id(constants.Account_type.FAT_SALE_MULTIPLE);
+entry.setAccount_type_id(constant.AccountType.FAT_SALE_MULTIPLE);
 int numDays=0;
 try{
 numDays = entry.getEntryForAccount();

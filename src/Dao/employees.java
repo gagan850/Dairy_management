@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -78,10 +79,10 @@ public class employees {
        
         try {
         Connection connection = null;
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" order by eid";
+            String query = "select * from "+ DBTableEnum.EMPLOYEES.getTableName()+" order by eid";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -96,43 +97,43 @@ public class employees {
             }
             connection.close();
   } catch (Exception exception) {
-                JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
       } 
         return employee_list;
     }
 
     public boolean add(){
-        int result=constants.Constant.INTEGER_ZERO;
+        int result=constant.Constant.INTEGER_ZERO;
         try {
         Connection connection = null;
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "insert into "+Enum.DBTableEnum.EMPLOYEES.getTableName()+"(eid,ename,ephone,eaddress,ecity,esalary) values(?,?,?,?,?,?)";
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "insert into "+ DBTableEnum.EMPLOYEES.getTableName()+"(eid,ename,ephone,eaddress,ecity,esalary) values(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getEid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getEname());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getEphone());
-            statement.setString(constants.Constant.INTEGER_FOUR, this.getEaddress());
-            statement.setString(constants.Constant.INTEGER_FIVE, this.getEcity());
-            statement.setInt(constants.Constant.INTEGER_SIX, this.getEsalary());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getEid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getEname());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getEphone());
+            statement.setString(constant.Constant.INTEGER_FOUR, this.getEaddress());
+            statement.setString(constant.Constant.INTEGER_FIVE, this.getEcity());
+            statement.setInt(constant.Constant.INTEGER_SIX, this.getEsalary());
 
             result=statement.executeUpdate();
 connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
          } 
-        return (result==constants.Constant.INTEGER_ONE)?true:false;
+        return (result==constant.Constant.INTEGER_ONE)?true:false;
     }
 
     public employees get() {
         
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from "+ DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getEid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getEid());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 this.setEname(resultSet.getString("ename"));
@@ -145,66 +146,66 @@ connection.close();
             }
             connection.close();
         } catch (Exception exception) {
-           JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
          } 
         return this;
     }
 
     public int search(){
-        int a = constants.Constant.INTEGER_ZERO;
+        int a = constant.Constant.INTEGER_ZERO;
         try {
         Connection connection = null;
         
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "select * from "+ DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
-            ps.setInt(constants.Constant.INTEGER_ONE, this.getEid());
+            ps.setInt(constant.Constant.INTEGER_ONE, this.getEid());
             a = ps.executeUpdate();
         connection.close();
         } catch (Exception exception) {
-           JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
          } 
         return a;
     }
 
     public boolean update() {
-        int result = constants.Constant.INTEGER_ZERO;
+        int result = constant.Constant.INTEGER_ZERO;
         try {
         Connection connection = null;
         
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" set eaddress=?,ecity=?,ephone=?,ename=?,esalary=? where eid=?";
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "update "+ DBTableEnum.EMPLOYEES.getTableName()+" set eaddress=?,ecity=?,ephone=?,ename=?,esalary=? where eid=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(constants.Constant.INTEGER_ONE, this.getEaddress());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getEcity());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getEphone());
-            statement.setString(constants.Constant.INTEGER_FOUR, this.getEname());
-            statement.setInt(constants.Constant.INTEGER_FIVE, this.getEsalary());
-            statement.setInt(constants.Constant.INTEGER_SIX, this.getEid());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getEaddress());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getEcity());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getEphone());
+            statement.setString(constant.Constant.INTEGER_FOUR, this.getEname());
+            statement.setInt(constant.Constant.INTEGER_FIVE, this.getEsalary());
+            statement.setInt(constant.Constant.INTEGER_SIX, this.getEid());
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
-        return (result==constants.Constant.INTEGER_ONE)?true:false;
+        return (result==constant.Constant.INTEGER_ONE)?true:false;
     }
 
     public boolean delete()  {
-        int result=constants.Constant.INTEGER_ZERO;
+        int result=constant.Constant.INTEGER_ZERO;
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "delete from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "delete from "+ DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
-            ps.setInt(constants.Constant.INTEGER_ONE, this.getEid());
+            ps.setInt(constant.Constant.INTEGER_ONE, this.getEid());
             result=ps.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
-        return (result==constants.Constant.INTEGER_ONE)?true:false;
+        return (result==constant.Constant.INTEGER_ONE)?true:false;
     }
 }

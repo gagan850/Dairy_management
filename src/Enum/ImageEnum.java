@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package constants;
+package Enum;
 
 /**
  *
@@ -25,7 +25,7 @@ EMPLOYEE(ImageName.EMPLOYEE);
 public String imageName;
 
     public String getImageName() {
-        return constants.Constant.IMAGE_FOLDER_NAME+constants.Constant.DOUBLE_BWD_SLASH+imageName;
+        return constant.Constant.IMAGE_FOLDER_NAME+constant.Constant.DOUBLE_BWD_SLASH+imageName;
     }
 
     private ImageEnum(String imageName) {

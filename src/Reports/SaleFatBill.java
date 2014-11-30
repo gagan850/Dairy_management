@@ -283,7 +283,7 @@ static int no_of_accounts=0;
    if(g_list.getSelectedIndex()!=0){
        Dao.accounts accounts=new Dao.accounts();
        accounts.setGid(group_list.get(g_list.getSelectedIndex()).getGid());
-       accounts.setAccount_typeid(constants.Account_type.SALE_FAT);
+       accounts.setAccount_typeid(constant.AccountType.SALE_FAT);
        
        account_list=accounts.get_All_Accounts_under_group_N_Account_Type();
        no_of_accounts=account_list.size();

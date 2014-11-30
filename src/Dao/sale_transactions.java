@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import Transactions.Sale.Sale;
 import java.sql.Connection;
 
@@ -128,26 +129,26 @@ public class sale_transactions {
             throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             Iterator<sale_transactions> iterator = sale_transaction_list.iterator();
             sale_transactions sale_transacion = new sale_transactions();
             PreparedStatement statement = null;
             while (iterator.hasNext()) {
                 sale_transacion = iterator.next();
                 System.out.println("Save date:" + sale_transacion.getTdate());
-                String query = "insert into " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?,?)";
+                String query = "insert into " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?,?)";
                 statement = connection.prepareStatement(query);
-                statement.setInt(constants.Constant.INTEGER_ONE, sale_transacion.getGid());
-                statement.setString(constants.Constant.INTEGER_TWO, sale_transacion.getAid());
-                statement.setDate(constants.Constant.INTEGER_THREE, sale_transacion.getTdate());
-                statement.setDouble(constants.Constant.INTEGER_FOUR, sale_transacion.getMb_milk());
-                statement.setDouble(constants.Constant.INTEGER_FIVE, sale_transacion.getEb_milk());
-                statement.setDouble(constants.Constant.INTEGER_SIX, sale_transacion.getMc_milk());
-                statement.setDouble(constants.Constant.INTEGER_SEVEN, sale_transacion.getEc_milk());
-                statement.setDouble(constants.Constant.INTEGER_EIGHT, sale_transacion.getReceive());
-                statement.setDouble(constants.Constant.INTEGER_NINE, sale_transacion.getAmmount());
-                statement.setString(constants.Constant.INTEGER_TEN, sale_transacion.getReceive_by());
+                statement.setInt(constant.Constant.INTEGER_ONE, sale_transacion.getGid());
+                statement.setString(constant.Constant.INTEGER_TWO, sale_transacion.getAid());
+                statement.setDate(constant.Constant.INTEGER_THREE, sale_transacion.getTdate());
+                statement.setDouble(constant.Constant.INTEGER_FOUR, sale_transacion.getMb_milk());
+                statement.setDouble(constant.Constant.INTEGER_FIVE, sale_transacion.getEb_milk());
+                statement.setDouble(constant.Constant.INTEGER_SIX, sale_transacion.getMc_milk());
+                statement.setDouble(constant.Constant.INTEGER_SEVEN, sale_transacion.getEc_milk());
+                statement.setDouble(constant.Constant.INTEGER_EIGHT, sale_transacion.getReceive());
+                statement.setDouble(constant.Constant.INTEGER_NINE, sale_transacion.getAmmount());
+                statement.setString(constant.Constant.INTEGER_TEN, sale_transacion.getReceive_by());
                 statement.execute();
             }
 
@@ -163,8 +164,8 @@ public class sale_transactions {
         Connection connection = null;
 
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             Iterator<sale_transactions> iterator = sale_transacion_list.iterator();
             sale_transactions sale_transacion = new sale_transactions();
@@ -172,18 +173,18 @@ public class sale_transactions {
             while (iterator.hasNext()) {
                 sale_transacion = iterator.next();
 
-                String query = "update " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
+                String query = "update " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
                 statement = connection.prepareStatement(query);
-                statement.setDouble(constants.Constant.INTEGER_ONE, sale_transacion.getMb_milk());
-                statement.setDouble(constants.Constant.INTEGER_TWO, sale_transacion.getEb_milk());
-                statement.setDouble(constants.Constant.INTEGER_THREE, sale_transacion.getMc_milk());
-                statement.setDouble(constants.Constant.INTEGER_FOUR, sale_transacion.getEc_milk());
-                statement.setDouble(constants.Constant.INTEGER_FIVE, sale_transacion.getReceive());
-                statement.setDouble(constants.Constant.INTEGER_SIX, sale_transacion.getAmmount());
-                statement.setString(constants.Constant.INTEGER_SEVEN, sale_transacion.getReceive_by());
-                statement.setInt(constants.Constant.INTEGER_EIGHT, sale_transacion.getGid());
-                statement.setString(constants.Constant.INTEGER_NINE, sale_transacion.getAid());
-                statement.setDate(constants.Constant.INTEGER_TEN, sale_transacion.getTdate());
+                statement.setDouble(constant.Constant.INTEGER_ONE, sale_transacion.getMb_milk());
+                statement.setDouble(constant.Constant.INTEGER_TWO, sale_transacion.getEb_milk());
+                statement.setDouble(constant.Constant.INTEGER_THREE, sale_transacion.getMc_milk());
+                statement.setDouble(constant.Constant.INTEGER_FOUR, sale_transacion.getEc_milk());
+                statement.setDouble(constant.Constant.INTEGER_FIVE, sale_transacion.getReceive());
+                statement.setDouble(constant.Constant.INTEGER_SIX, sale_transacion.getAmmount());
+                statement.setString(constant.Constant.INTEGER_SEVEN, sale_transacion.getReceive_by());
+                statement.setInt(constant.Constant.INTEGER_EIGHT, sale_transacion.getGid());
+                statement.setString(constant.Constant.INTEGER_NINE, sale_transacion.getAid());
+                statement.setDate(constant.Constant.INTEGER_TEN, sale_transacion.getTdate());
                 statement.execute();
             }
 
@@ -201,21 +202,21 @@ public class sale_transactions {
 
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "insert into " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?)";
+            String query = "insert into " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
-            statement.setDate(constants.Constant.INTEGER_THREE, this.getTdate());
-            statement.setDouble(constants.Constant.INTEGER_FOUR, this.getMb_milk());
-            statement.setDouble(constants.Constant.INTEGER_FIVE, this.getEb_milk());
-            statement.setDouble(constants.Constant.INTEGER_SIX, this.getMc_milk());
-            statement.setDouble(constants.Constant.INTEGER_SEVEN, this.getEc_milk());
-            statement.setDouble(constants.Constant.INTEGER_EIGHT, this.getReceive());
-            statement.setDouble(constants.Constant.INTEGER_NINE, this.getAmmount());
-            statement.setString(constants.Constant.INTEGER_TEN, this.getReceive_by());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAid());
+            statement.setDate(constant.Constant.INTEGER_THREE, this.getTdate());
+            statement.setDouble(constant.Constant.INTEGER_FOUR, this.getMb_milk());
+            statement.setDouble(constant.Constant.INTEGER_FIVE, this.getEb_milk());
+            statement.setDouble(constant.Constant.INTEGER_SIX, this.getMc_milk());
+            statement.setDouble(constant.Constant.INTEGER_SEVEN, this.getEc_milk());
+            statement.setDouble(constant.Constant.INTEGER_EIGHT, this.getReceive());
+            statement.setDouble(constant.Constant.INTEGER_NINE, this.getAmmount());
+            statement.setString(constant.Constant.INTEGER_TEN, this.getReceive_by());
             statement.executeQuery();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -231,21 +232,21 @@ public class sale_transactions {
 
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
+            String query = "update " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setDouble(constants.Constant.INTEGER_ONE, this.getMb_milk());
-            statement.setDouble(constants.Constant.INTEGER_TWO, this.getEb_milk());
-            statement.setDouble(constants.Constant.INTEGER_THREE, this.getMc_milk());
-            statement.setDouble(constants.Constant.INTEGER_FOUR, this.getEc_milk());
-            statement.setDouble(constants.Constant.INTEGER_FIVE, this.getReceive());
-            statement.setDouble(constants.Constant.INTEGER_SIX, this.getAmmount());
-            statement.setString(constants.Constant.INTEGER_SEVEN, this.getReceive_by());
-            statement.setInt(constants.Constant.INTEGER_EIGHT, this.getGid());
-            statement.setString(constants.Constant.INTEGER_NINE, this.getAid());
-            statement.setDate(constants.Constant.INTEGER_TEN, this.getTdate());
+            statement.setDouble(constant.Constant.INTEGER_ONE, this.getMb_milk());
+            statement.setDouble(constant.Constant.INTEGER_TWO, this.getEb_milk());
+            statement.setDouble(constant.Constant.INTEGER_THREE, this.getMc_milk());
+            statement.setDouble(constant.Constant.INTEGER_FOUR, this.getEc_milk());
+            statement.setDouble(constant.Constant.INTEGER_FIVE, this.getReceive());
+            statement.setDouble(constant.Constant.INTEGER_SIX, this.getAmmount());
+            statement.setString(constant.Constant.INTEGER_SEVEN, this.getReceive_by());
+            statement.setInt(constant.Constant.INTEGER_EIGHT, this.getGid());
+            statement.setString(constant.Constant.INTEGER_NINE, this.getAid());
+            statement.setDate(constant.Constant.INTEGER_TEN, this.getTdate());
             statement.executeQuery();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -261,21 +262,21 @@ public class sale_transactions {
         ArrayList<sale_transactions> sale_transaction_list = new ArrayList<sale_transactions>();
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
+            String query = "select * from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAid());
             Date d = this.getTdate();
-            d.setDate(constants.Constant.INTEGER_ONE);
-            statement.setString(constants.Constant.INTEGER_THREE, d.toString());
+            d.setDate(constant.Constant.INTEGER_ONE);
+            statement.setString(constant.Constant.INTEGER_THREE, d.toString());
 
             Date dd = d;
-            dd.setMonth(dd.getMonth() + constants.Constant.INTEGER_ONE);
+            dd.setMonth(dd.getMonth() + constant.Constant.INTEGER_ONE);
 
-            statement.setString(constants.Constant.INTEGER_FOUR, dd.toString());
+            statement.setString(constant.Constant.INTEGER_FOUR, dd.toString());
             //
 
             ResultSet resultSet = statement.executeQuery();
@@ -308,17 +309,17 @@ public class sale_transactions {
             throws SQLException {
         Connection connection = null;
 
-        int amm = constants.Constant.INTEGER_ZERO;
+        int amm = constant.Constant.INTEGER_ZERO;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select sum(receive) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and tdate=? and receive_by=?";
+            String query = "select sum(receive) from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and tdate=? and receive_by=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, gid1);
+            statement.setInt(constant.Constant.INTEGER_ONE, gid1);
 
-            statement.setDate(constants.Constant.INTEGER_TWO, tdate1);
-            statement.setString(constants.Constant.INTEGER_THREE, receive_by1);
+            statement.setDate(constant.Constant.INTEGER_TWO, tdate1);
+            statement.setString(constant.Constant.INTEGER_THREE, receive_by1);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -342,17 +343,17 @@ public class sale_transactions {
         Connection connection = null;
         ArrayList<sale_transactions> last = new ArrayList<sale_transactions>();
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             Iterator<sale_transactions> it = sst.iterator();
             while (it.hasNext()) {
                 sale_transactions sss = it.next();
 
-                String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=? ";
+                String query = "select * from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=? ";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, sss.getGid());
-                statement.setString(constants.Constant.INTEGER_TWO, sss.getAid());
-                statement.setDate(constants.Constant.INTEGER_THREE, sss.getTdate());
+                statement.setString(constant.Constant.INTEGER_TWO, sss.getAid());
+                statement.setDate(constant.Constant.INTEGER_THREE, sss.getTdate());
 
                 ResultSet resultSet = statement.executeQuery();
 
@@ -393,29 +394,29 @@ public class sale_transactions {
         sale_transactions a = new sale_transactions();
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select mb_milk,eb_milk,ammount,ec_milk,mc_milk,receive,gid,aid,tdate,receive_by,NVL(NVL((select sum(ammount) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=s.aid),0),0) balance from sale_transactions s where s.gid=? and s.aid=? and s.tdate=to_date(?,'yyyy-mm-dd')";
+            String query = "select mb_milk,eb_milk,ammount,ec_milk,mc_milk,receive,gid,aid,tdate,receive_by,NVL(NVL((select sum(ammount) from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=s.aid),0),0) balance from sale_transactions s where s.gid=? and s.aid=? and s.tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(constants.Constant.INTEGER_THREE, this.getGid());
-            statement.setString(constants.Constant.INTEGER_FOUR, this.getAid());
-            String da = constants.Constant.EMPTY_STRING + (this.getTdate().getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + (this.getTdate().getMonth() + constants.Constant.INTEGER_ONE) + constants.Constant.HYPHEN + this.getTdate().getDate();
+            statement.setInt(constant.Constant.INTEGER_THREE, this.getGid());
+            statement.setString(constant.Constant.INTEGER_FOUR, this.getAid());
+            String da = constant.Constant.EMPTY_STRING + (this.getTdate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + (this.getTdate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.HYPHEN + this.getTdate().getDate();
             System.out.println(da);
-            statement.setString(constants.Constant.INTEGER_FIVE, da);
+            statement.setString(constant.Constant.INTEGER_FIVE, da);
             Date d = this.getTdate();
 
-            d.setMonth(d.getMonth() - constants.Constant.INTEGER_ONE);
+            d.setMonth(d.getMonth() - constant.Constant.INTEGER_ONE);
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, d.getYear());
             calendar.set(Calendar.MONTH, d.getMonth());
             int day = calendar.getActualMaximum(calendar.DATE);
             d.setDate(day);
-            da = constants.Constant.EMPTY_STRING + (d.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + (d.getMonth() + constants.Constant.INTEGER_ONE) + constants.Constant.HYPHEN + d.getDate();
-            statement.setString(constants.Constant.INTEGER_ONE, da);
-            statement.setString(constants.Constant.INTEGER_TWO, da);
-            System.out.println("new fn" + da + constants.Constant.NEW_LINE);
+            da = constant.Constant.EMPTY_STRING + (d.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + (d.getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.HYPHEN + d.getDate();
+            statement.setString(constant.Constant.INTEGER_ONE, da);
+            statement.setString(constant.Constant.INTEGER_TWO, da);
+            System.out.println("new fn" + da + constant.Constant.NEW_LINE);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -449,28 +450,28 @@ public class sale_transactions {
             throws SQLException {
         Connection connection = null;
         ArrayList<Integer> balan = new ArrayList<Integer>();
-        int balance = constants.Constant.INTEGER_ZERO;
+        int balance = constant.Constant.INTEGER_ZERO;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             Iterator<Dao.accounts> iterator = acc.iterator();
             while (iterator.hasNext()) {
                 Dao.accounts account = iterator.next();
-                String query = "select NVL(NVL((select sum(ammount) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=?),0),0) balance from dual";
+                String query = "select NVL(NVL((select sum(ammount) from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=?),0),0) balance from dual";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(constants.Constant.INTEGER_ONE, account.getAid());
-                statement.setString(constants.Constant.INTEGER_THREE, account.getAid());
-                statement.setString(constants.Constant.INTEGER_FIVE, account.getAid());
-                int month = (current.getMonth() + constants.Constant.INTEGER_ONE);
-                String curr = constants.Constant.EMPTY_STRING + (current.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + month + constants.Constant.HYPHEN + current.getDate();
-                statement.setString(constants.Constant.INTEGER_FOUR, curr);
-                int days = Transactions.Cal.getMaxDays((month - constants.Constant.INTEGER_ONE), (current.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED));
-                String da = constants.Constant.EMPTY_STRING + (current.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + (month - constants.Constant.INTEGER_ONE) + constants.Constant.HYPHEN + days;
-                statement.setString(constants.Constant.INTEGER_TWO, da);
+                statement.setString(constant.Constant.INTEGER_ONE, account.getAid());
+                statement.setString(constant.Constant.INTEGER_THREE, account.getAid());
+                statement.setString(constant.Constant.INTEGER_FIVE, account.getAid());
+                int month = (current.getMonth() + constant.Constant.INTEGER_ONE);
+                String curr = constant.Constant.EMPTY_STRING + (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + month + constant.Constant.HYPHEN + current.getDate();
+                statement.setString(constant.Constant.INTEGER_FOUR, curr);
+                int days = Transactions.Cal.getMaxDays((month - constant.Constant.INTEGER_ONE), (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED));
+                String da = constant.Constant.EMPTY_STRING + (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + (month - constant.Constant.INTEGER_ONE) + constant.Constant.HYPHEN + days;
+                statement.setString(constant.Constant.INTEGER_TWO, da);
                 System.out.println(curr + "  " + da);
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
-                    balance = resultSet.getInt(constants.Constant.INTEGER_ONE);
+                    balance = resultSet.getInt(constant.Constant.INTEGER_ONE);
                     balan.add(balance);
                 }
             }
@@ -486,16 +487,16 @@ public class sale_transactions {
             throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             Iterator<sale_transactions> iterator = entries.iterator();
             while (iterator.hasNext()) {
                 sale_transactions entry = iterator.next();
-                String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
+                String query = "select * from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
                 PreparedStatement statement = connection.prepareStatement(query);
-                statement.setInt(constants.Constant.INTEGER_ONE, entry.getGid());
-                statement.setString(constants.Constant.INTEGER_TWO, entry.getAid());
-                statement.setDate(constants.Constant.INTEGER_THREE, entry.getTdate());
+                statement.setInt(constant.Constant.INTEGER_ONE, entry.getGid());
+                statement.setString(constant.Constant.INTEGER_TWO, entry.getAid());
+                statement.setDate(constant.Constant.INTEGER_THREE, entry.getTdate());
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     Sale.saved_enteries.add(entry);
@@ -518,13 +519,13 @@ public class sale_transactions {
 
         boolean result = false;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
-            statement.setDate(constants.Constant.INTEGER_THREE, this.getTdate());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAid());
+            statement.setDate(constant.Constant.INTEGER_THREE, this.getTdate());
             ResultSet resultSet = statement.executeQuery();
             result = resultSet.next();
         } catch (Exception exception) {

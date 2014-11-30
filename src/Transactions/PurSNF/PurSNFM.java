@@ -16,7 +16,7 @@ import javax.swing.JDesktopPane;
  * @author bansal
  */
 public class PurSNFM extends javax.swing.JInternalFrame {
-static int account_typeid=constants.Account_type.PURCHASE_SNF;
+static int account_typeid=constant.AccountType.PURCHASE_SNF;
 public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
 public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane pane=null;   
@@ -166,7 +166,7 @@ this.dispose();
             
           PurSNFMonthly a=new PurSNFMonthly(account_list.get(alist.getSelectedIndex()),new Date(),pane);
           a.setVisible(true);
-          a.setSize(constants.Constant.width,constants.Constant.height);
+          a.setSize(constant.Constant.width,constant.Constant.height);
           a.setIconifiable(true);
         } catch (Exception ex) {
             ex.printStackTrace();

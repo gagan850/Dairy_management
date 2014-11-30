@@ -15,7 +15,7 @@ import javax.swing.JDesktopPane;
  * @author bansal
  */
 public class PurSNFD extends javax.swing.JInternalFrame {
-static int account_typeid=constants.Account_type.PURCHASE_SNF;
+static int account_typeid=constant.AccountType.PURCHASE_SNF;
 static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
 static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane d;
@@ -149,7 +149,7 @@ this.dispose();
             
           PurSNFDaily a=new PurSNFDaily((String)glist.getSelectedItem(),group_list.get(glist.getSelectedIndex()).getGid(),account_typeid,d,tot_accounts);
           a.setVisible(true);
-          a.setSize(constants.Constant.width,constants.Constant.height);
+          a.setSize(constant.Constant.width,constant.Constant.height);
           a.setIconifiable(true);
         } catch (Exception ex) {
             ex.printStackTrace();

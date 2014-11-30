@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -77,10 +78,10 @@ public class order_transactions {
         Connection connection = null;
         ArrayList<order_transactions> a = new ArrayList<order_transactions>();
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" where aname=? order by item_no";
+            String ss = "select * from "+ DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" where aname=? order by item_no";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setString(1, this.getAname());
             ResultSet rs = ps.executeQuery();
@@ -108,13 +109,13 @@ public class order_transactions {
         Connection connection = null;
 
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             Iterator<order_transactions> iterator = transactions.iterator();
             while (iterator.hasNext()) {
                 order_transactions transaction = iterator.next();
-                String ss = "update "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" set item_name=?, quantity=?, ammount=?, rate=? where aname=? and item_no=?";
+                String ss = "update "+ DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" set item_name=?, quantity=?, ammount=?, rate=? where aname=? and item_no=?";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setString(1, transaction.getItem_name());
                 ps.setFloat(2, transaction.getQuantity());
@@ -136,12 +137,12 @@ public class order_transactions {
     public static void addEmptyInTransactions(String name) throws Exception {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
             for (int i = 0; i < 20; i++) {
 
-                String ss = "insert into "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" (item_name,item_no,quantity,ammount,rate,aname) values(?,?,?,?,?,?)";
+                String ss = "insert into "+ DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" (item_name,item_no,quantity,ammount,rate,aname) values(?,?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setString(1, "");
                 ps.setFloat(2, (i + 1));

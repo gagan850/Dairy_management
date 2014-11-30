@@ -285,7 +285,7 @@ static int no_of_accounts=0;
    
        Dao.accounts accounts=new Dao.accounts();
        accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
-       accounts.setAccount_typeid(constants.Account_type.SALE_SNF);
+       accounts.setAccount_typeid(constant.AccountType.SALE_SNF);
        account_list=accounts.get_All_Accounts_under_group_N_Account_Type();
        no_of_accounts=account_list.size();
        fillTable(account_list);

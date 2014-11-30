@@ -548,14 +548,14 @@ String searchText=searchName.getText().trim();
          
         
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            Connection connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            Connection connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\sale_miss.jrxml");
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
          
             HashMap parameter=new HashMap();
             parameter.put("GID",SaleDaily.gid);
-            parameter.put("TDATE",SaleDaily.date.getDate().getDate()+constants.Constant.HYPHEN+(SaleDaily.date.getDate().getMonth()+1)+constants.Constant.HYPHEN+(SaleDaily.date.getDate().getYear()+constants.Constant.INTEGER_NINETEEN_HUNDRED));
+            parameter.put("TDATE",SaleDaily.date.getDate().getDate()+constant.Constant.HYPHEN+(SaleDaily.date.getDate().getMonth()+1)+constant.Constant.HYPHEN+(SaleDaily.date.getDate().getYear()+constant.Constant.INTEGER_NINETEEN_HUNDRED));
             parameter.put("GNAME",SaleDaily.gname);
             JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
             JasperViewer.viewReport(Print,false);

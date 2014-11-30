@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package constants;
+package constant;
 
 /**
  *
  * @author gagandeepbansal
  */
-public class Account_type {
+public class AccountType {
   
 public static final int SALE=1;
 public static final int PURCHASE=2;

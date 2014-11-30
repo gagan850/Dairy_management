@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -136,16 +137,16 @@ public class accounts {
         int a = 0;
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+Enum.DBTableEnum.ACCOUNTS.getTableName()+" where aid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "select * from "+DBTableEnum.ACCOUNTS.getTableName()+" where aid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
 
-            ps.setString(constants.Constant.INTEGER_ONE, this.aid);
+            ps.setString(constant.Constant.INTEGER_ONE, this.aid);
             a = ps.executeUpdate();
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -157,13 +158,13 @@ public class accounts {
         ArrayList<accounts> accounts = new ArrayList<accounts>();
         try {
         Connection connection = null;
-         Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+         Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(constants.Constant.INTEGER_ONE, this.gid);
-            statement.setInt(constants.Constant.INTEGER_TWO, this.account_typeid);
+            statement.setInt(constant.Constant.INTEGER_ONE, this.gid);
+            statement.setInt(constant.Constant.INTEGER_TWO, this.account_typeid);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 accounts account = new accounts();
@@ -183,7 +184,7 @@ public class accounts {
           connection.close();
        
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
        return accounts;
     }
@@ -192,26 +193,26 @@ public class accounts {
         int result=0;
         try {
         Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "insert into " + Enum.DBTableEnum.ACCOUNTS.getTableName() + "(aid,aname,gid,account_typeid,aphone,aaddress,acity,abalance,acow_rate,abfl_rate,adate,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "insert into " + DBTableEnum.ACCOUNTS.getTableName() + "(aid,aname,gid,account_typeid,aphone,aaddress,acity,abalance,acow_rate,abfl_rate,adate,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAname());
-            statement.setInt(constants.Constant.INTEGER_THREE, this.getGid());
-            statement.setInt(constants.Constant.INTEGER_FOUR, this.getAccount_typeid());
-            statement.setString(constants.Constant.INTEGER_FIVE, this.getAphone());
-            statement.setString(constants.Constant.INTEGER_SIX, this.getAaddress());
-            statement.setString(constants.Constant.INTEGER_SEVEN, this.getAcity());
-            statement.setInt(constants.Constant.INTEGER_EIGHT, this.getAbalance());
-            statement.setDouble(constants.Constant.INTEGER_NINE, this.getAcow_rate());
-            statement.setDouble(constants.Constant.INTEGER_TEN, this.getAbfl_rate());
-            statement.setDate(constants.Constant.INTEGER_ELEVEN, this.getAdate());
-            statement.setInt(constants.Constant.INTEGER_TWELVE, this.getId());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAname());
+            statement.setInt(constant.Constant.INTEGER_THREE, this.getGid());
+            statement.setInt(constant.Constant.INTEGER_FOUR, this.getAccount_typeid());
+            statement.setString(constant.Constant.INTEGER_FIVE, this.getAphone());
+            statement.setString(constant.Constant.INTEGER_SIX, this.getAaddress());
+            statement.setString(constant.Constant.INTEGER_SEVEN, this.getAcity());
+            statement.setInt(constant.Constant.INTEGER_EIGHT, this.getAbalance());
+            statement.setDouble(constant.Constant.INTEGER_NINE, this.getAcow_rate());
+            statement.setDouble(constant.Constant.INTEGER_TEN, this.getAbfl_rate());
+            statement.setDate(constant.Constant.INTEGER_ELEVEN, this.getAdate());
+            statement.setInt(constant.Constant.INTEGER_TWELVE, this.getId());
             result=statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
         return (result==1)?true:false;
     }
@@ -219,12 +220,12 @@ public class accounts {
     public accounts get(){
         try {
         Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAid());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 this.aname = resultSet.getString("aname");
@@ -242,7 +243,7 @@ public class accounts {
             }
              connection.close();
        } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
         return this;
     }
@@ -251,17 +252,17 @@ public class accounts {
         Connection connection = null;
         int val = -1;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "select account_id_add.nextval from dual";
             PreparedStatement statement = connection.prepareStatement(query);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                val = resultSet.getInt(constants.Constant.INTEGER_ONE);
+                val = resultSet.getInt(constant.Constant.INTEGER_ONE);
             }
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -272,17 +273,17 @@ public class accounts {
         Connection connection = null;
         int val = -1;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             String query = "select aid_add.nextval from dual";
             PreparedStatement statement = connection.prepareStatement(query);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                val = resultSet.getInt(constants.Constant.INTEGER_ONE);
+                val = resultSet.getInt(constant.Constant.INTEGER_ONE);
             }
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -293,15 +294,15 @@ public class accounts {
         int result=0;
         try {
         Connection connection = null;
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "delete from " + DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAid());
             result=statement.executeUpdate();
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
         return (result==1)?true:false;
 }
@@ -311,24 +312,24 @@ public class accounts {
         int result = 0;
         try {
         Connection connection = null;
-        Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set aphone=?,aaddress=?,acity=?,abalance=?,acow_rate=?,abfl_rate=?,adate=?,aname=? where aid=?";
+        Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "update " + DBTableEnum.ACCOUNTS.getTableName() + " set aphone=?,aaddress=?,acity=?,abalance=?,acow_rate=?,abfl_rate=?,adate=?,aname=? where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAphone());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAaddress());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getAcity());
-            statement.setInt(constants.Constant.INTEGER_FOUR, this.getAbalance());
-            statement.setDouble(constants.Constant.INTEGER_FIVE, this.getAcow_rate());
-            statement.setDouble(constants.Constant.INTEGER_SIX, this.getAbfl_rate());
-            statement.setDate(constants.Constant.INTEGER_SEVEN, this.getAdate());
-            statement.setString(constants.Constant.INTEGER_EIGHT, this.getAname());
-            statement.setString(constants.Constant.INTEGER_NINE, this.getAid());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAphone());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAaddress());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getAcity());
+            statement.setInt(constant.Constant.INTEGER_FOUR, this.getAbalance());
+            statement.setDouble(constant.Constant.INTEGER_FIVE, this.getAcow_rate());
+            statement.setDouble(constant.Constant.INTEGER_SIX, this.getAbfl_rate());
+            statement.setDate(constant.Constant.INTEGER_SEVEN, this.getAdate());
+            statement.setString(constant.Constant.INTEGER_EIGHT, this.getAname());
+            statement.setString(constant.Constant.INTEGER_NINE, this.getAid());
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
         return (result==1)?true:false;
     }
@@ -337,21 +338,21 @@ public class accounts {
         Connection connection = null;
         int count = 0;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select count(*) from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select count(*) from " + DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setInt(constants.Constant.INTEGER_TWO, this.getAccount_typeid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setInt(constant.Constant.INTEGER_TWO, this.getAccount_typeid());
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                count = resultSet.getInt(constants.Constant.INTEGER_ONE);
+                count = resultSet.getInt(constant.Constant.INTEGER_ONE);
             }
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -363,14 +364,14 @@ public class accounts {
         ArrayList<accounts> accounts = new ArrayList<accounts>();
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
 
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setInt(constants.Constant.INTEGER_TWO, this.getAccount_typeid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setInt(constant.Constant.INTEGER_TWO, this.getAccount_typeid());
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -389,7 +390,7 @@ public class accounts {
             }
             connection.close();
          } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
         return accounts;
     }
@@ -400,13 +401,13 @@ public class accounts {
         Map<String, String> accounts = new HashMap<String, String>();
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setInt(constants.Constant.INTEGER_TWO, this.getAccount_typeid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setInt(constant.Constant.INTEGER_TWO, this.getAccount_typeid());
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -414,7 +415,7 @@ public class accounts {
             }
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -426,19 +427,19 @@ public class accounts {
         Connection connection = null;
         int id = 0;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select id from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and aid=? and account_typeid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select id from " + DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and aid=? and account_typeid=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
-            statement.setInt(constants.Constant.INTEGER_THREE, this.getAccount_typeid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getGid());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAid());
+            statement.setInt(constant.Constant.INTEGER_THREE, this.getAccount_typeid());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -449,18 +450,18 @@ public class accounts {
 
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set id=?  where gid=? and aid=? and account_typeid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "update " + DBTableEnum.ACCOUNTS.getTableName() + " set id=?  where gid=? and aid=? and account_typeid=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getId());
-            statement.setInt(constants.Constant.INTEGER_TWO, this.getGid());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getAid());
-            statement.setInt(constants.Constant.INTEGER_FOUR, this.getAccount_typeid());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getId());
+            statement.setInt(constant.Constant.INTEGER_TWO, this.getGid());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getAid());
+            statement.setInt(constant.Constant.INTEGER_FOUR, this.getAccount_typeid());
             ResultSet resultSet = statement.executeQuery();
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -470,42 +471,42 @@ public class accounts {
         try {
             Connection connection = null;
             Iterator<Dao.accounts> iterator = acc.iterator();
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set id=? where aid=?";
+            String query = "update " + DBTableEnum.ACCOUNTS.getTableName() + " set id=? where aid=?";
             PreparedStatement   statement = connection.prepareStatement(query);
 
             while (iterator.hasNext()) {
                 Dao.accounts account = iterator.next();
-                statement.setInt(constants.Constant.INTEGER_ONE, account.getId());
-                statement.setString(constants.Constant.INTEGER_TWO, account.getAid());
+                statement.setInt(constant.Constant.INTEGER_ONE, account.getId());
+                statement.setString(constant.Constant.INTEGER_TWO, account.getAid());
                 statement.addBatch();
             }
             statement.executeBatch();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void update_rates(ArrayList accounts) throws SQLException {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "update  " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set abfl_rate=?,acow_rate=? where aid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "update  " + DBTableEnum.ACCOUNTS.getTableName() + " set abfl_rate=?,acow_rate=? where aid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             for (int i = 0; i < accounts.size(); i++) {
                 Dao.accounts account = (Dao.accounts) accounts.get(i);
-                ps.setDouble(constants.Constant.INTEGER_ONE, account.getAbfl_rate());
-                ps.setDouble(constants.Constant.INTEGER_TWO, account.getAcow_rate());
-                ps.setString(constants.Constant.INTEGER_THREE, account.getAid());
+                ps.setDouble(constant.Constant.INTEGER_ONE, account.getAbfl_rate());
+                ps.setDouble(constant.Constant.INTEGER_TWO, account.getAcow_rate());
+                ps.setString(constant.Constant.INTEGER_THREE, account.getAid());
                 ps.addBatch();
             }
             ps.executeBatch();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -515,21 +516,21 @@ public class accounts {
        
         try {
              Connection connection = null;
-             Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set abalance=? where aid=?";
+             Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "update " + DBTableEnum.ACCOUNTS.getTableName() + " set abalance=? where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             for (int index = 0; index < accounts.size(); index++) {
                 Dao.accounts account = (Dao.accounts) accounts.get(index);
-                statement.setInt(constants.Constant.INTEGER_ONE, account.getAbalance());
-                statement.setString(constants.Constant.INTEGER_TWO, account.getAid());
+                statement.setInt(constant.Constant.INTEGER_ONE, account.getAbalance());
+                statement.setString(constant.Constant.INTEGER_TWO, account.getAid());
 
                 statement.addBatch();
             }
             statement.executeBatch();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } 
     }
 

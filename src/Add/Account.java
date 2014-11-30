@@ -5,6 +5,7 @@
  */
 package Add;
 
+import Enum.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.sql.Date;
@@ -29,7 +30,7 @@ public class Account
     public Account(JDesktopPane desktopPane) {
 
         initComponents();
-        this.setTitle(MessageFormat.format(constants.MessageEnum.ADD.getMessage(), constants.Constant.ACCOUNT));
+        this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.ACCOUNT));
         fillGroupCacheNUI();
         fillAccountTypeCacheNUI();
         adate.setDate((new java.util.Date()));
@@ -43,7 +44,7 @@ public class Account
         for (int index = 0; index < group_list.size(); index++) {
             glist.add(group_list.get(index).getGname());
         }
-        groupCount.setText(MessageFormat.format(constants.MessageEnum.COUNT.getMessage(), constants.Constant.GROUP, group_list.size()));
+        groupCount.setText(MessageFormat.format(MessageEnum.COUNT.getMessage(), constant.Constant.GROUP, group_list.size()));
     }
 
     //It fills the cache account_list
@@ -54,13 +55,13 @@ public class Account
         Dao.accounts account = new Dao.accounts();
         account.setAccount_typeid(account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
 
-        if (glist.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE) {
+        if (glist.getSelectedIndex() > constant.Constant.INTEGER_MINUS_ONE) {
             account.setGid((group_list.get(glist.getSelectedIndex())).getGid());
             account_list = account.returnAccounts();
-            for (int index = constants.Constant.INTEGER_ZERO; index < account_list.size(); index++) {
+            for (int index = constant.Constant.INTEGER_ZERO; index < account_list.size(); index++) {
                 alist.add(account_list.get(index).getAname());
             }
-            acountCount.setText(MessageFormat.format(constants.MessageEnum.COUNT.getMessage(), constants.Constant.ACCOUNT, account_list.size()));
+            acountCount.setText(MessageFormat.format(MessageEnum.COUNT.getMessage(), constant.Constant.ACCOUNT, account_list.size()));
         }
     }
 
@@ -451,7 +452,7 @@ delete.setEnabled(false);
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         try {
-if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
+if (evt.getActionCommand().equals(constant.Constant.UPDATE)) {
                 String nameToBeUpdated = aname.getText();
                 Dao.accounts account = new Dao.accounts();
                 account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
@@ -472,17 +473,17 @@ if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
                 Date date = new Date(adate.getDate().getTime());
                 account.setAdate(date);
                 if (account.update()) {
-                    JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_SUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeUpdated), constants.MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeUpdated), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                 } else {
-                    JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_UNSUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeUpdated), constants.MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeUpdated), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
                 }
                 reset.doClick();
                 fillAccountCacheNUI();
-                save.setText(constants.Constant.SAVE);
+                save.setText(constant.Constant.SAVE);
 
             } else if (aname.getText() == null || aname.getText().equals("")) {
-                JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
             } else {
                 String nameToBeSaved = aname.getText();
@@ -506,11 +507,11 @@ if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
                 Date dd = new Date(adate.getDate().getTime());
                 account.setAdate(dd);
                 if (account.add()) {
-                    JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_SUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeSaved), constants.MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
 
                     fillAccountCacheNUI();
                 } else {
-                    JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_UNSUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeSaved), constants.MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                    JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
                 }
 
@@ -524,7 +525,7 @@ if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
 
     public int validateInt(String text){
         if(text==null)  return 0;
-        else if(!text.matches("\\d*")){
+        else if(!text.matches("\\d*")||text.equals("")){
             return 0;
         }else{
             return Integer.valueOf(text);
@@ -534,7 +535,7 @@ if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
     
     public float validateDouble(String text){
         if(text==null)  return 0f;
-        else if(!text.matches("\\d*")){
+        else if(!text.matches("\\d*")||text.equals("")){
             return 0f;
         }else{
             return Float.valueOf(text);
@@ -580,7 +581,7 @@ adate.setEditable(true);
         cow_rate_txt.setEditable(true);
         abalance.setEditable(true);
         adate.setEditable(true);
-        save.setText(constants.Constant.UPDATE);
+        save.setText(constant.Constant.UPDATE);
 save.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_editActionPerformed
@@ -589,14 +590,14 @@ save.setEnabled(true);
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
 System.out.println("In delete"+alist.getSelectedIndex());
 String nameToBeDeleted = alist.getSelectedItem();
-        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
+        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(ImageEnum.CONFIRM.getImageName())) == 0) {
             Dao.accounts a = new Dao.accounts();
             a.setAid(account_list.get(alist.getSelectedIndex()).getAid());
             if (a.delete()) {
                 fillAccountCacheNUI();
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_SUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeDeleted), constants.MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_SUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeDeleted), MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_UNSUCCESS.getMessage(), constants.Constant.ACCOUNT, nameToBeDeleted), constants.MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_UNSUCCESS.getMessage(), constant.Constant.ACCOUNT, nameToBeDeleted), MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
             }
         }
 

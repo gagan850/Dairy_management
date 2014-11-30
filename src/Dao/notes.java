@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,10 +68,10 @@ public class notes {
         Connection connection = null;
         ArrayList<notes> a = new ArrayList<notes>();
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+Enum.DBTableEnum.NOTES.getTableName()+" order by id";
+            String ss = "select * from "+ DBTableEnum.NOTES.getTableName()+" order by id";
             PreparedStatement ps = connection.prepareStatement(ss);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -96,10 +97,10 @@ public class notes {
     public void add() throws Exception {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "update "+Enum.DBTableEnum.NOTES.getTableName()+" set red=?,green=?,blue=?,data=? where id=?";
+            String ss = "update "+ DBTableEnum.NOTES.getTableName()+" set red=?,green=?,blue=?,data=? where id=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getRed());
             ps.setInt(2, this.getGreen());

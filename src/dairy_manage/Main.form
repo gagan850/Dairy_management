@@ -27,7 +27,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(icon)"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="icon = new ImageIcon(constants.ImageEnum.GROUPS.getImageName());"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="icon = new ImageIcon(ImageEnum.GROUPS.getImageName());"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="accounts">
@@ -39,7 +39,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accountsActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.ACCOUNTS.getImageName()))&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ACCOUNTS.getImageName()))&#xa;"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="arrange_accounts">
@@ -50,7 +50,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrange_accountsActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.ARRANGE_ACCOUNTS.getImageName()))"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ARRANGE_ACCOUNTS.getImageName()))"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="change_rate">
@@ -88,7 +88,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.EMPLOYEE.getImageName()))"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JMenuItem(new ImageIcon(ImageEnum.EMPLOYEE.getImageName()))"/>
               </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exit">

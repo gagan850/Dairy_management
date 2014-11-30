@@ -6,6 +6,7 @@
 
 package dairy_manage;
 import Add.*;
+import Enum.*;
 import Misc.Notes.Notes;
 import Transactions.Purchase.PurchaseReport;
 import Transactions.Sale.SaleReport;
@@ -73,15 +74,15 @@ static{
             back_ground = new javax.swing.JLabel(new ImageIcon("Img\\wall.jpg"));
             menuBar = new javax.swing.JMenuBar();
             addMenu = new javax.swing.JMenu();
-            icon = new ImageIcon(constants.ImageEnum.GROUPS.getImageName());
+            icon = new ImageIcon(ImageEnum.GROUPS.getImageName());
             groups = new javax.swing.JMenuItem(icon);
-            accounts = new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.ACCOUNTS.getImageName()))
+            accounts = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ACCOUNTS.getImageName()))
             ;
-            arrange_accounts = new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.ARRANGE_ACCOUNTS.getImageName()));
+            arrange_accounts = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ARRANGE_ACCOUNTS.getImageName()));
             change_rate = new javax.swing.JMenuItem();
             add_balance = new javax.swing.JMenuItem();
             add_order_account = new javax.swing.JMenuItem();
-            jMenuItem3 = new javax.swing.JMenuItem(new ImageIcon(constants.ImageEnum.EMPLOYEE.getImageName()));
+            jMenuItem3 = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.EMPLOYEE.getImageName()));
             exit = new javax.swing.JMenuItem();
             monthlyTransactionMenu = new javax.swing.JMenu();
             sale_monthly = new javax.swing.JMenuItem();

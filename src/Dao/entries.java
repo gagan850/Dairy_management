@@ -5,8 +5,8 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,18 +44,18 @@ public class entries {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
 
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             Iterator<entries> iterator = entriesList.iterator();
 
-            String query = "update " + Enum.DBTableEnum.ENTRIES.getTableName() + " set entries=? where account_type_id=?";
+            String query = "update " + DBTableEnum.ENTRIES.getTableName() + " set entries=? where account_type_id=?";
             statement = connection.prepareStatement(query);
             while (iterator.hasNext()) {
                 entries entry = iterator.next();
-                statement.setInt(constants.Constant.INTEGER_ONE, entry.getEntries());
+                statement.setInt(constant.Constant.INTEGER_ONE, entry.getEntries());
 
-                statement.setInt(constants.Constant.INTEGER_TWO, entry.getAccount_type_id());
+                statement.setInt(constant.Constant.INTEGER_TWO, entry.getAccount_type_id());
                 statement.addBatch();
 
             }
@@ -63,7 +63,7 @@ public class entries {
             connection.close();
 
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
         } finally {
             connection.close();
         }
@@ -73,9 +73,9 @@ public class entries {
         ArrayList<entries> entriesList = new ArrayList<entries>();
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + Enum.DBTableEnum.ENTRIES.getTableName() + " order by account_type_id";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select * from " + DBTableEnum.ENTRIES.getTableName() + " order by account_type_id";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -87,7 +87,7 @@ public class entries {
 
             return entriesList;
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             connection.close();
@@ -99,18 +99,18 @@ public class entries {
         int result = 0;
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select entries from " + Enum.DBTableEnum.ENTRIES.getTableName() + " where account_type_id=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "select entries from " + DBTableEnum.ENTRIES.getTableName() + " where account_type_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(constants.Constant.INTEGER_ONE, this.getAccount_type_id());
+            statement.setInt(constant.Constant.INTEGER_ONE, this.getAccount_type_id());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                result = resultSet.getInt(constants.Constant.INTEGER_ONE);
+                result = resultSet.getInt(constant.Constant.INTEGER_ONE);
             }
             return result;
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
             return 0;
         } finally {
             connection.close();

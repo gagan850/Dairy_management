@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package constants;
+package constant;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

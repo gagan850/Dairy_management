@@ -5,6 +5,7 @@
  */
 package Add;
 
+import Enum.*;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.*;
@@ -40,7 +41,7 @@ public class AddNChangeBalance
     public AddNChangeBalance(JDesktopPane desktopPane)
             throws Exception {
         initComponents();
-        this.setTitle(MessageFormat.format(constants.MessageEnum.ADD_N_CHAANGE.getMessage(), constants.Constant.BALANCE));
+        this.setTitle(MessageFormat.format(MessageEnum.ADD_N_CHAANGE.getMessage(), constant.Constant.BALANCE));
         fillGroupCacheNUI();
         fillAccountTypeCacheNUI();
         desktopPane.add(this);
@@ -267,7 +268,7 @@ public class AddNChangeBalance
 
     //It fills the table if group & acccount type is selected
     private void glistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_glistActionPerformed
-        if (accountTypeList.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE) {
+        if (accountTypeList.getSelectedIndex() > constant.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constant.Constant.INTEGER_MINUS_ONE) {
             Dao.accounts account = new Dao.accounts();
             account.setGid(group_list.get(glist.getSelectedIndex()).getGid());
             gid = account.getGid();
@@ -291,7 +292,7 @@ public class AddNChangeBalance
 
     //It fills the table if group & acccount type is selected
     private void accountTypeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountTypeListActionPerformed
-        if (accountTypeList.getSelectedIndex() > constants.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constants.Constant.INTEGER_ONE) {
+        if (accountTypeList.getSelectedIndex() > constant.Constant.INTEGER_MINUS_ONE && glist.getSelectedIndex() > constant.Constant.INTEGER_ONE) {
 
             Dao.accounts acc = new Dao.accounts();
             acc.setGid(group_list.get(glist.getSelectedIndex()).getGid());
@@ -368,7 +369,7 @@ public class AddNChangeBalance
     public void fillGroupCacheNUI() {
         Dao.groups g = new Dao.groups();
         group_list = g.returnGroups();
-        for (int index = constants.Constant.INTEGER_ZERO; index < group_list.size(); index++) {
+        for (int index = constant.Constant.INTEGER_ZERO; index < group_list.size(); index++) {
             glist.addItem((group_list.get(index)).getGname());
 
         }
@@ -377,7 +378,7 @@ public class AddNChangeBalance
     //It fills the account_type cache and UI combo
     private void fillAccountTypeCacheNUI() {
         account_type_list = (new Dao.account_type()).returnAccount_type();
-        for (int index = constants.Constant.INTEGER_ZERO; index < account_type_list.size(); index++) {
+        for (int index = constant.Constant.INTEGER_ZERO; index < account_type_list.size(); index++) {
             accountTypeList.addItem(account_type_list.get(index).getAccount_type());
         }
 

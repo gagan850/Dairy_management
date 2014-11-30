@@ -15,7 +15,7 @@ import javax.swing.JDesktopPane;
  * @author bansal
  */
 public class PurFATM extends javax.swing.JInternalFrame {
-static int account_typeid=constants.Account_type.PURCHASE_FAT;
+static int account_typeid=constant.AccountType.PURCHASE_FAT;
 public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
 public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
 JDesktopPane pane=null;    
@@ -161,7 +161,7 @@ this.dispose();
             
           PurFATMonthly a=new PurFATMonthly(account_list.get(alist.getSelectedIndex()),new Date(),pane);
           a.setVisible(true);
-          a.setSize(constants.Constant.width,constants.Constant.height);
+          a.setSize(constant.Constant.width,constant.Constant.height);
           a.setIconifiable(true);
         } catch (Exception ex) {
             ex.printStackTrace();

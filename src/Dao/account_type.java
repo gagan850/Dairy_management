@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.DBTableEnum;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -41,9 +42,9 @@ public class account_type {
         ArrayList<account_type> account_type_list = new ArrayList<account_type>();
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+Enum.DBTableEnum.ACCOUNT_TYPE+" order by account_typeid";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "select * from "+DBTableEnum.ACCOUNT_TYPE+" order by account_typeid";
             PreparedStatement ps = connection.prepareStatement(ss);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -53,7 +54,7 @@ public class account_type {
                 account_type_list.add(account_type);
             }
          } catch (Exception exception) {
-               JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
          }
         return account_type_list;
     }
@@ -61,9 +62,9 @@ public class account_type {
     public String getAccount() {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select "+Enum.DBTableEnum.ACCOUNT_TYPE+" from account_type where account_typeid=?";
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String ss = "select "+DBTableEnum.ACCOUNT_TYPE+" from account_type where account_typeid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getAccount_typeid());
             ResultSet rs = ps.executeQuery();

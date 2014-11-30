@@ -5,6 +5,7 @@
  */
 package Add;
 
+import Enum.*;
 import java.sql.SQLException;
 import java.text.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Group
     public Group(JDesktopPane desktopPane)
             throws ClassNotFoundException, SQLException {
         initComponents();
-        this.setTitle(MessageFormat.format(constants.MessageEnum.ADD.getMessage(), constants.Constant.GROUP));
+        this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.GROUP));
         //fills the cache for groups, and left group list
         fillCacheNUiList();
         desktopPane.add(this);
@@ -43,7 +44,7 @@ public class Group
             glist.add(groups.get(index).getGname());
             groups_cache.add(groups.get(index));
         }
-        groupsCount.setText( MessageFormat.format(constants.MessageEnum.COUNT.getMessage(), constants.Constant.GROUP, groups_cache.size()));
+        groupsCount.setText( MessageFormat.format(MessageEnum.COUNT.getMessage(), constant.Constant.GROUP, groups_cache.size()));
     }
 
     /**
@@ -274,7 +275,7 @@ public class Group
 //It saves the group or update the existing group.
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         //UPDATE CASE      //MANDATORY FIELD CASE   //SAVE CASE
-        if (evt.getActionCommand().equals(constants.Constant.UPDATE)) {
+        if (evt.getActionCommand().equals(constant.Constant.UPDATE)) {
             String nameToBeUpdated = gname.getText();
             Dao.groups group = new Dao.groups();
             group.setGid(groups_cache.get(glist.getSelectedIndex()).getGid());
@@ -283,16 +284,16 @@ public class Group
             group.setGcity(gcity.getText());
             group.setGaddress(gaddress.getText());
             if (group.update()) {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_SUCCESS.getMessage(), constants.Constant.GROUP, nameToBeUpdated), constants.MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.GROUP, nameToBeUpdated), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                 fillCacheNUiList();
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_UNSUCCESS.getMessage(), constants.Constant.GROUP, nameToBeUpdated), constants.MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.GROUP, nameToBeUpdated), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
 
             }
             reset.doClick();
-            save.setText(constants.Constant.SAVE);
-        } else if (gname.getText() == null || gname.getText().equals(constants.Constant.EMPTY_STRING)) {
-            JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+            save.setText(constant.Constant.SAVE);
+        } else if (gname.getText() == null || gname.getText().equals(constant.Constant.EMPTY_STRING)) {
+            JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
         } else {
             String nameToBeSaved = gname.getText();
             Dao.groups group = new Dao.groups();
@@ -301,10 +302,10 @@ public class Group
             group.setGphone(gphone.getText());
             group.setGcity(gcity.getText());
             if (group.add()) {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_SUCCESS.getMessage(), constants.Constant.GROUP, nameToBeSaved), constants.MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.GROUP, nameToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                 fillCacheNUiList();
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_UNSUCCESS.getMessage(), constants.Constant.GROUP, nameToBeSaved), constants.MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.GROUP, nameToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
             }
         }
 
@@ -333,7 +334,7 @@ public class Group
         edit.setEnabled(true);
         delete.setEnabled(true);
         save.setEnabled(false);
-        save.setText(constants.Constant.SAVE);
+        save.setText(constant.Constant.SAVE);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_glistItemStateChanged
@@ -360,21 +361,21 @@ public class Group
         gcity.setEditable(true);
         gphone.setEditable(true);
         save.setEnabled(true);
-        save.setText(constants.Constant.UPDATE);
+        save.setText(constant.Constant.UPDATE);
     }//GEN-LAST:event_editActionPerformed
 
 //It deletes the selected group, Nut if it conains further accounts It will not be deleted 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted = gname.getText();
-        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
+        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(ImageEnum.CONFIRM.getImageName())) == 0) {
             Dao.groups group = new Dao.groups();
             group.setGid(groups_cache.get(glist.getSelectedIndex()).getGid());
             if (group.delete()) {
                 reset.doClick();
                 fillCacheNUiList();
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_SUCCESS.getMessage(), constants.Constant.GROUP, nameToBeDeleted), constants.MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_SUCCESS.getMessage(), constant.Constant.GROUP, nameToBeDeleted), MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
             } else {
-                JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_UNSUCCESS.getMessage(), constants.Constant.GROUP, nameToBeDeleted), constants.MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_UNSUCCESS.getMessage(), constant.Constant.GROUP, nameToBeDeleted), MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
             }
         }
         save.setEnabled(false);

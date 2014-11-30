@@ -7,6 +7,7 @@
 package Add;
 
 
+import Enum.*;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
@@ -24,7 +25,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
    
     public ArrangeAccounts(JDesktopPane desktopPane) {
     initComponents();
-    this.setTitle(MessageFormat.format(constants.MessageEnum.ARRANGE.getMessage(), constants.Constant.ACCOUNT));
+    this.setTitle(MessageFormat.format(MessageEnum.ARRANGE.getMessage(), constant.Constant.ACCOUNT));
     fillGroupCacheNUI();
     fillAccountTypeCacheNUI();
     this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -38,7 +39,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
     public void  fillGroupCacheNUI(){
         Dao.groups g=new Dao.groups();
         group_list=g.returnGroups();
-        for(int index=constants.Constant.INTEGER_ZERO;index<group_list.size();index++){
+        for(int index=constant.Constant.INTEGER_ZERO;index<group_list.size();index++){
             glist.add(group_list.get(index).getGname());
         } 
     }
@@ -49,7 +50,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
     //It fills the accountType cache and UI
      private void fillAccountTypeCacheNUI() {
          account_type_list=(new Dao.account_type()).returnAccount_type();
-     for(int index=constants.Constant.INTEGER_ZERO;index<account_type_list.size();index++){
+     for(int index=constant.Constant.INTEGER_ZERO;index<account_type_list.size();index++){
          aaccount_type.addItem(account_type_list.get(index).getAccount_type());
      }
      }
@@ -280,7 +281,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             //If before is selected there are 3 cases
             //
             if(before_account_list.getSelectedIndex()==after_account_list.getSelectedIndex()){
-                JOptionPane.showMessageDialog(null,constants.MessageEnum.WRONG_CHOICE.getMessage());
+                JOptionPane.showMessageDialog(null,MessageEnum.WRONG_CHOICE.getMessage());
             }
             else if(before_account_list.getSelectedIndex()<after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
@@ -303,7 +304,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
         else if(after.isSelected()){
             //If after is selected there are 3 cases
             if(before_account_list.getSelectedIndex()==after_account_list.getSelectedIndex()){
-                JOptionPane.showMessageDialog(null,constants.MessageEnum.WRONG_CHOICE.getMessage());
+                JOptionPane.showMessageDialog(null,MessageEnum.WRONG_CHOICE.getMessage());
             }
             else if(before_account_list.getSelectedIndex()<after_account_list.getSelectedIndex()){
                 int account_list_afters_selected_index=after_account_list.getSelectedIndex();
@@ -324,7 +325,7 @@ public class ArrangeAccounts extends javax.swing.JInternalFrame {
             SortIds();
         }
         else{
-                JOptionPane.showMessageDialog(null,MessageFormat.format(constants.MessageEnum.SELECT_NO_CHOICE.getMessage(),constants.Constant.BEFORE,constants.Constant.AFTER));
+                JOptionPane.showMessageDialog(null,MessageFormat.format(MessageEnum.SELECT_NO_CHOICE.getMessage(),constant.Constant.BEFORE,constant.Constant.AFTER));
         }
         
         

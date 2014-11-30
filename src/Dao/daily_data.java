@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -81,15 +82,15 @@ public class daily_data {
 
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + Enum.DBTableEnum.DAILY_DATA.getTableName();
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "delete from " + DBTableEnum.DAILY_DATA.getTableName();
             statement = connection.prepareStatement(query);
             statement.executeQuery();
             Iterator<Dao.groups> iterator = group_ids.iterator();
             while (iterator.hasNext()) {
                 int id = iterator.next().getGid();
-                String curr = (date.getYear() + constants.Constant.INTEGER_NINETEEN_HUNDRED) + constants.Constant.HYPHEN + (date.getMonth() + constants.Constant.INTEGER_ONE) + constants.Constant.HYPHEN + date.getDate();
+                String curr = (date.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + (date.getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.HYPHEN + date.getDate();
                 query = "select (select sum(ammount) from sale_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) samount,(select sum(mb_milk+eb_milk+ec_milk+mc_milk) from sale_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) smilk,"
                         + "(select sum(total_ammount) from sale_fat_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) sfamount,(select sum(mor_milk+eve_milk) from sale_fat_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) sfmilk,"
                         + "(select sum(total_ammount) from sale_snf_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) ssamount,(select sum(mor_milk+eve_milk) from sale_snf_transactions where tdate=to_date(?,'yyyy-mm-dd') and gid=?) ssmilk,"
@@ -130,7 +131,7 @@ public class daily_data {
                     data.setPur_milk(rs.getFloat(8) + rs.getFloat(10) + rs.getFloat(12));
                     data.setSale_ammount(rs.getFloat(1) + rs.getFloat(3) + rs.getFloat(5));
                     data.setPur_ammount(rs.getFloat(7) + rs.getFloat(9) + rs.getFloat(11));
-                    query = "insert into " + Enum.DBTableEnum.DAILY_DATA.getTableName() + " (gid,sale_milk,sale_ammount,pur_milk,pur_ammount) values(?,?,?,?,?)";
+                    query = "insert into " + DBTableEnum.DAILY_DATA.getTableName() + " (gid,sale_milk,sale_ammount,pur_milk,pur_ammount) values(?,?,?,?,?)";
                     statement = connection.prepareStatement(query);
                     statement.setInt(1, data.getGid());
                     statement.setFloat(2, data.getSale_milk());
@@ -143,7 +144,7 @@ public class daily_data {
 
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
 
         }
 
@@ -153,14 +154,14 @@ public class daily_data {
         Connection connection;
         try {
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + Enum.DBTableEnum.DAILY_DATA.getTableName();
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            String query = "delete from " + DBTableEnum.DAILY_DATA.getTableName();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.executeQuery();
             connection.close();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, exception.getMessage(), constants.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
 
         }
     }

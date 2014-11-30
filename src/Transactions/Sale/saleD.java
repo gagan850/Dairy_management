@@ -14,7 +14,7 @@ import javax.swing.JDesktopPane;
  * @author bansal
  */
 public class saleD extends javax.swing.JInternalFrame {
-static public int account_typeid=constants.Account_type.SALE;
+static public int account_typeid=constant.AccountType.SALE;
 JDesktopPane d;
 static int no_of_accounts=0;
 static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
@@ -146,7 +146,7 @@ this.dispose();
             
           SaleDaily a=new SaleDaily(glist.getSelectedItem(),group_list.get(glist.getSelectedIndex()).getGid(),account_typeid,d,no_of_accounts);
           a.setVisible(true);
-          a.setSize(constants.Constant.width,constants.Constant.height);
+          a.setSize(constant.Constant.width,constant.Constant.height);
           a.setIconifiable(true);
         } catch (Exception ex) {
             ex.printStackTrace();

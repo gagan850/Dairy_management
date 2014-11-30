@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Enum.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,23 +78,23 @@ public class order_account {
 
     public boolean search() {
 
-        int result = constants.Constant.INTEGER_ZERO;
+        int result = constant.Constant.INTEGER_ZERO;
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "select * from " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.aname);
+            statement.setString(constant.Constant.INTEGER_ONE, this.aname);
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
 
         }
-        return (result == constants.Constant.INTEGER_ONE) ? true : false;
+        return (result == constant.Constant.INTEGER_ONE) ? true : false;
 
     }
 
@@ -102,10 +103,10 @@ public class order_account {
         ArrayList<order_account> order_list = new ArrayList<order_account>();
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " order by adate";
+            String query = "select * from " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " order by adate";
             PreparedStatement statement = connection.prepareStatement(query);
 
             ResultSet resultSet = statement.executeQuery();
@@ -129,38 +130,38 @@ public class order_account {
     }
 
     public boolean add() {
-        int result = constants.Constant.INTEGER_ZERO;
+        int result = constant.Constant.INTEGER_ZERO;
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "insert into " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " values(?,?,?,?,?,?)";
+            String query = "insert into " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " values(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAphone());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getAaddress());
-            statement.setString(constants.Constant.INTEGER_FOUR, this.getAcity());
-            statement.setDate(constants.Constant.INTEGER_FIVE, this.getAdate());
-            statement.setInt(constants.Constant.INTEGER_SIX, this.getAdvance());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAname());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAphone());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getAaddress());
+            statement.setString(constant.Constant.INTEGER_FOUR, this.getAcity());
+            statement.setDate(constant.Constant.INTEGER_FIVE, this.getAdate());
+            statement.setInt(constant.Constant.INTEGER_SIX, this.getAdvance());
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        return (result == constants.Constant.INTEGER_ONE) ? true : false;
+        return (result == constant.Constant.INTEGER_ONE) ? true : false;
     }
 
     public order_account get() {
         Connection connection = null;
         try {
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "select * from " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAname());
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -182,52 +183,52 @@ public class order_account {
 
     public boolean delete()
              {
-        int result = constants.Constant.INTEGER_ZERO;
+        int result = constant.Constant.INTEGER_ZERO;
         try {
             Connection connection = null;
 
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "delete from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "delete from " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAname());
 
             result = statement.executeUpdate();
             connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        return (result == constants.Constant.INTEGER_ONE) ? true : false;
+        return (result == constant.Constant.INTEGER_ONE) ? true : false;
     }
 
     public boolean update()
             throws SQLException {
 
-        int result = constants.Constant.INTEGER_ZERO;
+        int result = constant.Constant.INTEGER_ZERO;
         try {
             Connection connection = null;
-            Class.forName(DataBase.DBConstant.DRIVER_NAME);
-            connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update  " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " set aphone=?,aaddress=?,acity=?,advance=?,adate=? where aname=?";
+            String query = "update  " + DBTableEnum.ORDER_ACCOUNT.getTableName() + " set aphone=?,aaddress=?,acity=?,advance=?,adate=? where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setString(constants.Constant.INTEGER_ONE, this.getAphone());
-            statement.setString(constants.Constant.INTEGER_TWO, this.getAaddress());
-            statement.setString(constants.Constant.INTEGER_THREE, this.getAcity());
-            statement.setInt(constants.Constant.INTEGER_FOUR, this.getAdvance());
+            statement.setString(constant.Constant.INTEGER_ONE, this.getAphone());
+            statement.setString(constant.Constant.INTEGER_TWO, this.getAaddress());
+            statement.setString(constant.Constant.INTEGER_THREE, this.getAcity());
+            statement.setInt(constant.Constant.INTEGER_FOUR, this.getAdvance());
 
-            statement.setDate(constants.Constant.INTEGER_FIVE, this.getAdate());
-            statement.setString(constants.Constant.INTEGER_SIX, this.getAname());
+            statement.setDate(constant.Constant.INTEGER_FIVE, this.getAdate());
+            statement.setString(constant.Constant.INTEGER_SIX, this.getAname());
             result = statement.executeUpdate();
             connection.close();
 
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        return (result == constants.Constant.INTEGER_ONE) ? true : false;
+        return (result == constant.Constant.INTEGER_ONE) ? true : false;
     }
 
 }

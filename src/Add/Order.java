@@ -6,6 +6,7 @@
 
 package Add;
 
+import Enum.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.sql.Date;
@@ -26,7 +27,7 @@ public class Order extends javax.swing.JInternalFrame {
     public Order(JDesktopPane desktopPane) {
          
         initComponents();
-        this.setTitle(MessageFormat.format(constants.MessageEnum.ADD.getMessage(), constants.Constant.ORDER));
+        this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.ORDER));
         fillOrderCacheNUI();
         adate.setDate((new java.util.Date()));
         desktopPane.add(this);
@@ -287,14 +288,14 @@ public class Order extends javax.swing.JInternalFrame {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         String nameToBeDeleted=aname.getText();
-        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), constants.MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(constants.ImageEnum.CONFIRM.getImageName())) == 0) {
+        if (JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.DELETE_CONFIRM.getMessage(), nameToBeDeleted), MessageEnum.DELETE_CONFIRM.getMessageType(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(ImageEnum.CONFIRM.getImageName())) == 0) {
                 Dao.order_account order_account =new Dao.order_account();
                 order_account.setAname(olist.getSelectedItem());
                 if(order_account.delete()){
-                  JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_SUCCESS.getMessage(), constants.Constant.ORDER, nameToBeDeleted), constants.MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                  JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_SUCCESS.getMessage(), constant.Constant.ORDER, nameToBeDeleted), MessageEnum.DELETE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
               fillOrderCacheNUI();    
                 }else{
-                       JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.DELETE_UNSUCCESS.getMessage(), constants.Constant.ORDER, nameToBeDeleted), constants.MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                       JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.DELETE_UNSUCCESS.getMessage(), constant.Constant.ORDER, nameToBeDeleted), MessageEnum.DELETE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
               }
         }
        
@@ -311,7 +312,7 @@ public class Order extends javax.swing.JInternalFrame {
         acity.setEditable(true);
         advance.setEditable(true);
         adate.setEditable(true);
-        save.setText(constants.Constant.UPDATE);
+        save.setText(constant.Constant.UPDATE);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_editActionPerformed
@@ -322,7 +323,7 @@ public class Order extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-save.setText(constants.Constant.SAVE);
+save.setText(constant.Constant.SAVE);
         aname.setEditable(true);
         aphone.setEditable(true);
         aaddress.setEditable(true);
@@ -340,7 +341,7 @@ save.setText(constants.Constant.SAVE);
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         try{
 
-            if(evt.getActionCommand().equals(constants.Constant.UPDATE)){
+            if(evt.getActionCommand().equals(constant.Constant.UPDATE)){
                 String nameToBeUpdated=aname.getText();
                 Dao.order_account order_account =new Dao.order_account();
                
@@ -352,18 +353,18 @@ save.setText(constants.Constant.SAVE);
                 Date date=new Date(adate.getDate().getTime());
                 order_account.setAdate(date);
                 if(order_account.update()){
-                          JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_SUCCESS.getMessage(), constants.Constant.ORDER, nameToBeUpdated), constants.MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                          JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_SUCCESS.getMessage(), constant.Constant.ORDER, nameToBeUpdated), MessageEnum.UPDATE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                 fillOrderCacheNUI();
                 
                 }else{
-             JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.UPDATE_UNSUCCESS.getMessage(), constants.Constant.ORDER, nameToBeUpdated), constants.MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+             JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.UPDATE_UNSUCCESS.getMessage(), constant.Constant.ORDER, nameToBeUpdated), MessageEnum.UPDATE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
           
                 }
                 reset.doClick();
-                save.setText(constants.Constant.SAVE);
+                save.setText(constant.Constant.SAVE);
 
             }else if(aname.getText()==null||aname.getText().equals("")){
-              JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), constants.MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+              JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.MANDATORY_FIELD.getMessage(), "Name"), MessageEnum.MANDATORY_FIELD.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
           }else{
                 Dao.order_account order_account=new Dao.order_account();
                 
@@ -374,17 +375,17 @@ save.setText(constants.Constant.SAVE);
                 Date date=new Date(adate.getDate().getTime());
                 order_account.setAdate(date);
                 if(order_account.search())
-              JOptionPane.showConfirmDialog(this, MessageFormat.format(constants.MessageEnum.ALREADY_EXIST.getMessage(), constants.Constant.ORDER, aname.getText()), constants.MessageEnum.ALREADY_EXIST.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+              JOptionPane.showConfirmDialog(this, MessageFormat.format(MessageEnum.ALREADY_EXIST.getMessage(), constant.Constant.ORDER, aname.getText()), MessageEnum.ALREADY_EXIST.getMessageType(), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
                 else
                 {
                String nameToBeSaved=aname.getText();
                         if(order_account.add()){
                  Dao.order_transactions.addEmptyInTransactions(order_account.getAname());
                     fillOrderCacheNUI();
-                            JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_SUCCESS.getMessage(), constants.Constant.ORDER, nameToBeSaved), constants.MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.SUCCESS.getImageName()));
+                            JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_SUCCESS.getMessage(), constant.Constant.ORDER, nameToBeSaved), MessageEnum.SAVE_SUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.SUCCESS.getImageName()));
                   }
                     else{
-                         JOptionPane.showMessageDialog(this, MessageFormat.format(constants.MessageEnum.SAVE_UNSUCCESS.getMessage(), constants.Constant.ORDER, nameToBeSaved), constants.MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(constants.ImageEnum.UNSUCCESS.getImageName()));
+                         JOptionPane.showMessageDialog(this, MessageFormat.format(MessageEnum.SAVE_UNSUCCESS.getMessage(), constant.Constant.ORDER, nameToBeSaved), MessageEnum.SAVE_UNSUCCESS.getMessageType(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(ImageEnum.UNSUCCESS.getImageName()));
                     }
                         reset.doClick();
                 }
@@ -393,7 +394,7 @@ save.setText(constants.Constant.SAVE);
 
       public int validateInt(String text){
         if(text==null)  return 0;
-        else if(!text.matches("\\d*")){
+        else if(!text.matches("\\d*")||text.equals("")){
             return 0;
         }else{
             return Integer.valueOf(text);
