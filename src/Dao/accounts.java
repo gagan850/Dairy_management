@@ -138,7 +138,7 @@ public class accounts {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+DataBase.DBTableEnum.ACCOUNTS.getTableName()+" where aid=?";
+            String ss = "select * from "+Enum.DBTableEnum.ACCOUNTS.getTableName()+" where aid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
 
             ps.setString(constants.Constant.INTEGER_ONE, this.aid);
@@ -159,7 +159,7 @@ public class accounts {
         Connection connection = null;
          Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(constants.Constant.INTEGER_ONE, this.gid);
@@ -194,7 +194,7 @@ public class accounts {
         Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "insert into " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + "(aid,aname,gid,account_typeid,aphone,aaddress,acity,abalance,acow_rate,abfl_rate,adate,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query = "insert into " + Enum.DBTableEnum.ACCOUNTS.getTableName() + "(aid,aname,gid,account_typeid,aphone,aaddress,acity,abalance,acow_rate,abfl_rate,adate,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAname());
@@ -221,7 +221,7 @@ public class accounts {
         Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
+            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
@@ -295,7 +295,7 @@ public class accounts {
         Connection connection = null;
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
+            String query = "delete from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(constants.Constant.INTEGER_ONE, this.getAid());
             result=statement.executeUpdate();
@@ -313,7 +313,7 @@ public class accounts {
         Connection connection = null;
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set aphone=?,aaddress=?,acity=?,abalance=?,acow_rate=?,abfl_rate=?,adate=?,aname=? where aid=?";
+            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set aphone=?,aaddress=?,acity=?,abalance=?,acow_rate=?,abfl_rate=?,adate=?,aname=? where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.getAphone());
@@ -339,7 +339,7 @@ public class accounts {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select count(*) from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            String query = "select count(*) from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
@@ -365,7 +365,7 @@ public class accounts {
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
 
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -402,7 +402,7 @@ public class accounts {
 
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
+            String query = "select * from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and account_typeid=? order by id";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
@@ -428,7 +428,7 @@ public class accounts {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select id from " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and aid=? and account_typeid=?";
+            String query = "select id from " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " where gid=? and aid=? and account_typeid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
@@ -451,7 +451,7 @@ public class accounts {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set id=?  where gid=? and aid=? and account_typeid=?";
+            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set id=?  where gid=? and aid=? and account_typeid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getId());
             statement.setInt(constants.Constant.INTEGER_TWO, this.getGid());
@@ -473,7 +473,7 @@ public class accounts {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set id=? where aid=?";
+            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set id=? where aid=?";
             PreparedStatement   statement = connection.prepareStatement(query);
 
             while (iterator.hasNext()) {
@@ -494,7 +494,7 @@ public class accounts {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "update  " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set abfl_rate=?,acow_rate=? where aid=?";
+            String ss = "update  " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set abfl_rate=?,acow_rate=? where aid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             for (int i = 0; i < accounts.size(); i++) {
                 Dao.accounts account = (Dao.accounts) accounts.get(i);
@@ -517,7 +517,7 @@ public class accounts {
              Connection connection = null;
              Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update " + DataBase.DBTableEnum.ACCOUNTS.getTableName() + " set abalance=? where aid=?";
+            String query = "update " + Enum.DBTableEnum.ACCOUNTS.getTableName() + " set abalance=? where aid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             for (int index = 0; index < accounts.size(); index++) {
                 Dao.accounts account = (Dao.accounts) accounts.get(index);

@@ -81,7 +81,7 @@ public class employees {
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+" order by eid";
+            String query = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" order by eid";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -107,7 +107,7 @@ public class employees {
         Connection connection = null;
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "insert into "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+"(eid,ename,ephone,eaddress,ecity,esalary) values(?,?,?,?,?,?)";
+            String query = "insert into "+Enum.DBTableEnum.EMPLOYEES.getTableName()+"(eid,ename,ephone,eaddress,ecity,esalary) values(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getEid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getEname());
@@ -130,7 +130,7 @@ connection.close();
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+            String query = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getEid());
             ResultSet resultSet = statement.executeQuery();
@@ -157,7 +157,7 @@ connection.close();
         
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+            String ss = "select * from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(constants.Constant.INTEGER_ONE, this.getEid());
             a = ps.executeUpdate();
@@ -175,7 +175,7 @@ connection.close();
         
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+" set eaddress=?,ecity=?,ephone=?,ename=?,esalary=? where eid=?";
+            String query = "update "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" set eaddress=?,ecity=?,ephone=?,ename=?,esalary=? where eid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(constants.Constant.INTEGER_ONE, this.getEaddress());
             statement.setString(constants.Constant.INTEGER_TWO, this.getEcity());
@@ -197,7 +197,7 @@ connection.close();
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "delete from "+DataBase.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
+            String ss = "delete from "+Enum.DBTableEnum.EMPLOYEES.getTableName()+" where eid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(constants.Constant.INTEGER_ONE, this.getEid());
             result=ps.executeUpdate();

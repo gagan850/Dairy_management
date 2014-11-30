@@ -71,7 +71,7 @@ public class groups {
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.GROUPS.getTableName() + " order by gid";
+            String query = "select * from " + Enum.DBTableEnum.GROUPS.getTableName() + " order by gid";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -98,7 +98,7 @@ public class groups {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "insert into " + DataBase.DBTableEnum.GROUPS.getTableName() + " values(?,?,?,?,?)";
+            String query = "insert into " + Enum.DBTableEnum.GROUPS.getTableName() + " values(?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getGname());
@@ -120,7 +120,7 @@ public class groups {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.GROUPS.getTableName() + " where gid=?";
+            String query = "select * from " + Enum.DBTableEnum.GROUPS.getTableName() + " where gid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             ResultSet resultSet = statement.executeQuery();
@@ -149,7 +149,7 @@ public class groups {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.GROUPS.getTableName() + " where gid=?";
+            String query = "select * from " + Enum.DBTableEnum.GROUPS.getTableName() + " where gid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             flag = statement.executeUpdate();
@@ -171,7 +171,7 @@ public class groups {
         Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update " + DataBase.DBTableEnum.GROUPS.getTableName() + " set gaddress=?,gcity=?,gphone=?,gname=? where gid=?";
+            String query = "update " + Enum.DBTableEnum.GROUPS.getTableName() + " set gaddress=?,gcity=?,gphone=?,gname=? where gid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(constants.Constant.INTEGER_ONE, this.getGaddress());
             statement.setString(constants.Constant.INTEGER_TWO, this.getGcity());
@@ -193,7 +193,7 @@ public class groups {
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + DataBase.DBTableEnum.GROUPS.getTableName() + " where gid=?";
+            String query = "delete from " + Enum.DBTableEnum.GROUPS.getTableName() + " where gid=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             result=statement.executeUpdate();

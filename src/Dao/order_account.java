@@ -83,7 +83,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.aname);
@@ -105,7 +105,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " order by adate";
+            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " order by adate";
             PreparedStatement statement = connection.prepareStatement(query);
 
             ResultSet resultSet = statement.executeQuery();
@@ -135,7 +135,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "insert into " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " values(?,?,?,?,?,?)";
+            String query = "insert into " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " values(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAphone());
@@ -157,7 +157,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "select * from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
@@ -189,7 +189,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "delete from " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
+            String query = "delete from " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.getAname());
@@ -211,7 +211,7 @@ public class order_account {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update  " + DataBase.DBTableEnum.ORDER_ACCOUNT.getTableName() + " set aphone=?,aaddress=?,acity=?,advance=?,adate=? where aname=?";
+            String query = "update  " + Enum.DBTableEnum.ORDER_ACCOUNT.getTableName() + " set aphone=?,aaddress=?,acity=?,advance=?,adate=? where aname=?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(constants.Constant.INTEGER_ONE, this.getAphone());

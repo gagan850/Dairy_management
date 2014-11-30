@@ -5,7 +5,7 @@
  */
 package Dao;
 
-import DataBase.DBTableEnum;
+import Enum.DBTableEnum;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;

@@ -42,7 +42,7 @@ public class spend {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from "+DataBase.DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
+            String query = "select * from "+Enum.DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
             String date = (this.getTdate().getYear() + 1900) + "-" + (this.getTdate().getMonth() + 1) + "-" + this.getTdate().getDate();
             statement.setString(1, date);
@@ -65,7 +65,7 @@ public class spend {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "update "+DataBase.DBTableEnum.SPEND+" set ammount=? where tdate=to_date(?,'yyyy-mm-dd')";
+            String query = "update "+Enum.DBTableEnum.SPEND+" set ammount=? where tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
             String date = (this.getTdate().getYear() + 1900) + "-" + (this.getTdate().getMonth() + 1) + "-" + this.getTdate().getDate();
             statement.setInt(1, this.getAmmount());
@@ -84,7 +84,7 @@ public class spend {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "insert into "+DataBase.DBTableEnum.SPEND+"(tdate,ammount) values(to_date(?,'yyyy-mm-dd'),?)";
+            String query = "insert into "+Enum.DBTableEnum.SPEND+"(tdate,ammount) values(to_date(?,'yyyy-mm-dd'),?)";
             PreparedStatement statement = connection.prepareStatement(query);
             String date = (this.getTdate().getYear() + 1900) + "-" + (this.getTdate().getMonth() + 1) + "-" + this.getTdate().getDate();
             statement.setString(1, date);
@@ -103,7 +103,7 @@ public class spend {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from "+DataBase.DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
+            String query = "select * from "+Enum.DBTableEnum.SPEND+" where tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
             String date = (this.getTdate().getYear() + 1900) + "-" + (this.getTdate().getMonth() + 1) + "-" + this.getTdate().getDate();
             statement.setString(1, date);

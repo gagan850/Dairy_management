@@ -43,7 +43,7 @@ public class account_type {
             Connection connection = null;
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select * from "+DataBase.DBTableEnum.ACCOUNT_TYPE+" order by account_typeid";
+            String ss = "select * from "+Enum.DBTableEnum.ACCOUNT_TYPE+" order by account_typeid";
             PreparedStatement ps = connection.prepareStatement(ss);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -63,7 +63,7 @@ public class account_type {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String ss = "select "+DataBase.DBTableEnum.ACCOUNT_TYPE+" from account_type where account_typeid=?";
+            String ss = "select "+Enum.DBTableEnum.ACCOUNT_TYPE+" from account_type where account_typeid=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getAccount_typeid());
             ResultSet rs = ps.executeQuery();

@@ -160,7 +160,7 @@ public class pur_fat_transactions {
             while (it.hasNext()) {
                 aa = it.next();
                 System.out.println("Save date:" + aa.getTdate());
-                String ss = "insert into "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+"(gid,aid,mor_milk,mor_fat,mor_fat_rate,mor_ghee,mor_ammount,tdate,eve_milk,eve_fat,eve_fat_rate,eve_ghee,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String ss = "insert into "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+"(gid,aid,mor_milk,mor_fat,mor_fat_rate,mor_ghee,mor_ammount,tdate,eve_milk,eve_fat,eve_fat_rate,eve_ghee,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 ps = connection.prepareStatement(ss);
                 ps.setInt(1, aa.getGid());
                 ps.setString(2, aa.getAid());
@@ -200,7 +200,7 @@ public class pur_fat_transactions {
             while (it.hasNext()) {
                 aa = it.next();
 
-                String ss = "update "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_fat_rate=?,mor_ghee=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_fat_rate=?,eve_ghee=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
+                String ss = "update "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_fat_rate=?,mor_ghee=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_fat_rate=?,eve_ghee=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=? ";
                 ps = connection.prepareStatement(ss);
 
                 ps.setDouble(1, aa.getMor_milk());
@@ -236,7 +236,7 @@ public class pur_fat_transactions {
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
             PreparedStatement ps = null;
-            String ss = "insert into "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+"(gid,aid,mor_milk,mor_fat,mor_fat_rate,mor_ghee,mor_ammount,tdate,eve_milk,eve_fat,eve_fat_rate,eve_ghee,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String ss = "insert into "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+"(gid,aid,mor_milk,mor_fat,mor_fat_rate,mor_ghee,mor_ammount,tdate,eve_milk,eve_fat,eve_fat_rate,eve_ghee,eve_ammount,total_ammount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -271,7 +271,7 @@ public class pur_fat_transactions {
             System.out.println(this.getMor_ghee());
             System.out.println(this.getEve_ghee());
             PreparedStatement ps = null;
-            String ss = "update "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_fat_rate=?,mor_ghee=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_fat_rate=?,eve_ghee=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=?";
+            String ss = "update "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" set mor_milk=?,mor_fat=?,mor_fat_rate=?,mor_ghee=?,mor_ammount=?,eve_milk=?,eve_fat=?,eve_fat_rate=?,eve_ghee=?,eve_ammount=?,total_ammount=? where gid=? and aid=? and tdate=?";
             ps = connection.prepareStatement(ss);
 
             ps.setDouble(1, a.getMor_milk());
@@ -304,7 +304,7 @@ public class pur_fat_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
+            String ss = "select * from "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -358,7 +358,7 @@ public class pur_fat_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());
@@ -405,7 +405,7 @@ public class pur_fat_transactions {
             while (iterator.hasNext()) {
                 pur_fat_transactions entry = iterator.next();
 
-                String ss = "select * from "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+                String ss = "select * from "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setInt(1, entry.getGid());
                 ps.setString(2, entry.getAid());
@@ -437,7 +437,7 @@ public class pur_fat_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
+            String ss = "select * from "+Enum.DBTableEnum.PUR_FAT_TRANSACTIONS.getTableName()+" where gid=? and aid=? and tdate=?";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setInt(1, this.getGid());
             ps.setString(2, this.getAid());

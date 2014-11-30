@@ -83,7 +83,7 @@ public class daily_data {
 
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + DataBase.DBTableEnum.DAILY_DATA.getTableName();
+            String query = "delete from " + Enum.DBTableEnum.DAILY_DATA.getTableName();
             statement = connection.prepareStatement(query);
             statement.executeQuery();
             Iterator<Dao.groups> iterator = group_ids.iterator();
@@ -130,7 +130,7 @@ public class daily_data {
                     data.setPur_milk(rs.getFloat(8) + rs.getFloat(10) + rs.getFloat(12));
                     data.setSale_ammount(rs.getFloat(1) + rs.getFloat(3) + rs.getFloat(5));
                     data.setPur_ammount(rs.getFloat(7) + rs.getFloat(9) + rs.getFloat(11));
-                    query = "insert into " + DataBase.DBTableEnum.DAILY_DATA.getTableName() + " (gid,sale_milk,sale_ammount,pur_milk,pur_ammount) values(?,?,?,?,?)";
+                    query = "insert into " + Enum.DBTableEnum.DAILY_DATA.getTableName() + " (gid,sale_milk,sale_ammount,pur_milk,pur_ammount) values(?,?,?,?,?)";
                     statement = connection.prepareStatement(query);
                     statement.setInt(1, data.getGid());
                     statement.setFloat(2, data.getSale_milk());
@@ -155,7 +155,7 @@ public class daily_data {
 
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "delete from " + DataBase.DBTableEnum.DAILY_DATA.getTableName();
+            String query = "delete from " + Enum.DBTableEnum.DAILY_DATA.getTableName();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.executeQuery();
             connection.close();

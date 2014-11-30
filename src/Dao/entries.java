@@ -49,7 +49,7 @@ public class entries {
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
             Iterator<entries> iterator = entriesList.iterator();
 
-            String query = "update " + DataBase.DBTableEnum.ENTRIES.getTableName() + " set entries=? where account_type_id=?";
+            String query = "update " + Enum.DBTableEnum.ENTRIES.getTableName() + " set entries=? where account_type_id=?";
             statement = connection.prepareStatement(query);
             while (iterator.hasNext()) {
                 entries entry = iterator.next();
@@ -75,7 +75,7 @@ public class entries {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.ENTRIES.getTableName() + " order by account_type_id";
+            String query = "select * from " + Enum.DBTableEnum.ENTRIES.getTableName() + " order by account_type_id";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -101,7 +101,7 @@ public class entries {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select entries from " + DataBase.DBTableEnum.ENTRIES.getTableName() + " where account_type_id=?";
+            String query = "select entries from " + Enum.DBTableEnum.ENTRIES.getTableName() + " where account_type_id=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getAccount_type_id());
             ResultSet resultSet = statement.executeQuery();

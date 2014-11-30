@@ -136,7 +136,7 @@ public class sale_transactions {
             while (iterator.hasNext()) {
                 sale_transacion = iterator.next();
                 System.out.println("Save date:" + sale_transacion.getTdate());
-                String query = "insert into " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?,?)";
+                String query = "insert into " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?,?)";
                 statement = connection.prepareStatement(query);
                 statement.setInt(constants.Constant.INTEGER_ONE, sale_transacion.getGid());
                 statement.setString(constants.Constant.INTEGER_TWO, sale_transacion.getAid());
@@ -172,7 +172,7 @@ public class sale_transactions {
             while (iterator.hasNext()) {
                 sale_transacion = iterator.next();
 
-                String query = "update " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
+                String query = "update " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
                 statement = connection.prepareStatement(query);
                 statement.setDouble(constants.Constant.INTEGER_ONE, sale_transacion.getMb_milk());
                 statement.setDouble(constants.Constant.INTEGER_TWO, sale_transacion.getEb_milk());
@@ -204,7 +204,7 @@ public class sale_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "insert into " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?)";
+            String query = "insert into " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + "(gid,aid,tdate,mb_milk,eb_milk,mc_milk,ec_milk,receive,ammount,receive_by) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
@@ -234,7 +234,7 @@ public class sale_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "update " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
+            String query = "update " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " set  mb_milk=?,eb_milk=?,mc_milk=?,ec_milk=?,receive=?,ammount=?,receive_by=? where gid=? and aid=? and tdate=? ";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setDouble(constants.Constant.INTEGER_ONE, this.getMb_milk());
             statement.setDouble(constants.Constant.INTEGER_TWO, this.getEb_milk());
@@ -264,7 +264,7 @@ public class sale_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select * from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
+            String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate>=to_date(?,'yyyy-mm-dd') and tdate<to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAid());
@@ -313,7 +313,7 @@ public class sale_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select sum(receive) from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and tdate=? and receive_by=?";
+            String query = "select sum(receive) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and tdate=? and receive_by=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, gid1);
 
@@ -348,7 +348,7 @@ public class sale_transactions {
             while (it.hasNext()) {
                 sale_transactions sss = it.next();
 
-                String query = "select * from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=? ";
+                String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=? ";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, sss.getGid());
                 statement.setString(constants.Constant.INTEGER_TWO, sss.getAid());
@@ -396,7 +396,7 @@ public class sale_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String query = "select mb_milk,eb_milk,ammount,ec_milk,mc_milk,receive,gid,aid,tdate,receive_by,NVL(NVL((select sum(ammount) from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=s.aid),0),0) balance from sale_transactions s where s.gid=? and s.aid=? and s.tdate=to_date(?,'yyyy-mm-dd')";
+            String query = "select mb_milk,eb_milk,ammount,ec_milk,mc_milk,receive,gid,aid,tdate,receive_by,NVL(NVL((select sum(ammount) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=s.aid and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=s.aid),0),0) balance from sale_transactions s where s.gid=? and s.aid=? and s.tdate=to_date(?,'yyyy-mm-dd')";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(constants.Constant.INTEGER_THREE, this.getGid());
@@ -456,7 +456,7 @@ public class sale_transactions {
             Iterator<Dao.accounts> iterator = acc.iterator();
             while (iterator.hasNext()) {
                 Dao.accounts account = iterator.next();
-                String query = "select NVL(NVL((select sum(ammount) from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=?),0),0) balance from dual";
+                String query = "select NVL(NVL((select sum(ammount) from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)-NVL((select sum(receive) from sale_transactions where aid=? and tdate<=to_date(?,'yyyy-mm-dd')),0)+NVL((select abalance from accounts where aid=?),0),0) balance from dual";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setString(constants.Constant.INTEGER_ONE, account.getAid());
                 statement.setString(constants.Constant.INTEGER_THREE, account.getAid());
@@ -491,7 +491,7 @@ public class sale_transactions {
             Iterator<sale_transactions> iterator = entries.iterator();
             while (iterator.hasNext()) {
                 sale_transactions entry = iterator.next();
-                String query = "select * from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
+                String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(constants.Constant.INTEGER_ONE, entry.getGid());
                 statement.setString(constants.Constant.INTEGER_TWO, entry.getAid());
@@ -520,7 +520,7 @@ public class sale_transactions {
         try {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
-            String query = "select * from " + DataBase.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
+            String query = "select * from " + Enum.DBTableEnum.SALE_TRANSACTIONS.getTableName() + " where gid=? and aid=? and tdate=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(constants.Constant.INTEGER_ONE, this.getGid());
             statement.setString(constants.Constant.INTEGER_TWO, this.getAid());

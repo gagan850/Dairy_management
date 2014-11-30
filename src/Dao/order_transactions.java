@@ -80,7 +80,7 @@ public class order_transactions {
             Class.forName(DataBase.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(DataBase.DBConstant.CONNECTION_STRING, DataBase.DBConstant.SCHEMA_NAME, DataBase.DBConstant.SCHEMA_PASSWORD);
 
-            String ss = "select * from "+DataBase.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" where aname=? order by item_no";
+            String ss = "select * from "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" where aname=? order by item_no";
             PreparedStatement ps = connection.prepareStatement(ss);
             ps.setString(1, this.getAname());
             ResultSet rs = ps.executeQuery();
@@ -114,7 +114,7 @@ public class order_transactions {
             Iterator<order_transactions> iterator = transactions.iterator();
             while (iterator.hasNext()) {
                 order_transactions transaction = iterator.next();
-                String ss = "update "+DataBase.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" set item_name=?, quantity=?, ammount=?, rate=? where aname=? and item_no=?";
+                String ss = "update "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" set item_name=?, quantity=?, ammount=?, rate=? where aname=? and item_no=?";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setString(1, transaction.getItem_name());
                 ps.setFloat(2, transaction.getQuantity());
@@ -141,7 +141,7 @@ public class order_transactions {
 
             for (int i = 0; i < 20; i++) {
 
-                String ss = "insert into "+DataBase.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" (item_name,item_no,quantity,ammount,rate,aname) values(?,?,?,?,?,?)";
+                String ss = "insert into "+Enum.DBTableEnum.ORDER_TRANSACTIONS.getTableName()+" (item_name,item_no,quantity,ammount,rate,aname) values(?,?,?,?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(ss);
                 ps.setString(1, "");
                 ps.setFloat(2, (i + 1));
