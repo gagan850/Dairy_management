@@ -6,12 +6,13 @@
 
 package Reports;
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -28,38 +29,26 @@ public class PurchaseFat {
     
     
      public PurchaseFat(int gid,String start_date,String end_date,ArrayList<Dao.accounts> accs) {
-
-        
-           try {
-         String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-          
-              
+         try {
+            Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
             HashMap parameter=new HashMap();
             parameter.put("GID",gid);
             parameter.put("START_DATE",start_date);
             parameter.put("END_DATE",end_date);
+            for(int index=0;index<accs.size();index++){
+                parameter.put("AID",accs.get(index).getAid());    
             
-            for(int i=0;i<accs.size();i++){
-                parameter.put("AID",accs.get(i).getAid());    
-            
-            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\purchase_fat.jrxml");
+            JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath()+ReportEnum.PURCHASE_FAT.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
-
             JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
             JasperViewer.viewReport(Print,false);
+            connection.close();
             
             }
-            
-           
-                   
-            
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }   
+        } catch (Exception exception) {
+             JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+       }   
     
 }}

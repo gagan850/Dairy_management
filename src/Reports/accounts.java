@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Reports;
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JDesktopPane;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -24,41 +24,47 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author bansal
  */
-public class accounts extends javax.swing.JInternalFrame {
-public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
-public static ArrayList<Dao.account_type> account_type_list=new ArrayList<Dao.account_type>();
-    /**.
+public class accounts
+        extends javax.swing.JInternalFrame {
+
+    public static ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
+    public static ArrayList<Dao.account_type> account_type_list = new ArrayList<Dao.account_type>();
+
+    /**
+     * .
      * Creates new form accounts
      */
     public accounts(JDesktopPane d) {
         initComponents();
-                this.setTitle("Account Reports");
-        try{fillGList();
-        fillAList();}catch(Exception e){
+        this.setTitle("Account Reports");
+        try {
+            fillGList();
+            fillAList();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-         d.add(this);
+        d.add(this);
     }
 
-    
-    public static void  fillGList() throws Exception{
-        Dao.groups g=new Dao.groups();
-       group_list=g.returnGroups();
-        for(int i=0;i<group_list.size();i++){
+    public static void fillGList()
+            throws Exception {
+        Dao.groups g = new Dao.groups();
+        group_list = g.returnGroups();
+        for (int i = 0; i < group_list.size(); i++) {
             glist.addItem(group_list.get(i).getGname());
-            
-        } 
-     }
-    
-     public static void  fillAList(){
-     Dao.account_type acc=new Dao.account_type();
-     account_type_list=acc.returnAccount_type();
-     for(int i=0;i<account_type_list.size();i++){
+
+        }
+    }
+
+    public static void fillAList() {
+        Dao.account_type acc = new Dao.account_type();
+        account_type_list = acc.returnAccount_type();
+        for (int i = 0; i < account_type_list.size(); i++) {
             aaccount_type.addItem(account_type_list.get(i).getAccount_type());
-            
-        } 
-     }
-     
+
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,33 +160,30 @@ public static ArrayList<Dao.account_type> account_type_list=new ArrayList<Dao.ac
     }// </editor-fold>//GEN-END:initComponents
 
     private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
- 
-        
         try {
-           String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-                     JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\accounts.jrxml");
+            Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath() + ReportEnum.ACCOUNTS.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
-         
-            HashMap parameter=new HashMap();
-            parameter.put("GID",group_list.get(glist.getSelectedIndex()).getGid());
-            parameter.put("ACCOUNT_TYPEID",account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
-            parameter.put("GNAME",group_list.get(glist.getSelectedIndex()).getGname());
-            JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
-            JasperViewer.viewReport(Print,false);
-           
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            
-        }   
-    
-        
+
+            HashMap parameter = new HashMap();
+            parameter.put("GID", group_list.get(glist.getSelectedIndex()).getGid());
+            parameter.put("ACCOUNT_TYPEID", account_type_list.get(aaccount_type.getSelectedIndex()).getAccount_typeid());
+            parameter.put("GNAME", group_list.get(glist.getSelectedIndex()).getGname());
+            JasperPrint Print = JasperFillManager.fillReport(jasReport, parameter, connection);
+            JasperViewer.viewReport(Print, false);
+connection.close();
+        } catch (Exception exception) {
+       JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+     
+        }
+
 // TODO add your handling code here:
     }//GEN-LAST:event_reportActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-this.dispose();
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_exitActionPerformed
 
@@ -188,7 +191,7 @@ this.dispose();
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

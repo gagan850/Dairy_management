@@ -6,11 +6,13 @@
 
 package Reports;
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -30,12 +32,10 @@ public class PurchaseMonthly {
 
         
            try {
-          String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-          
+        Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            
               
             HashMap parameter=new HashMap();
             parameter.put("GID",gid);
@@ -45,20 +45,16 @@ public class PurchaseMonthly {
             for(int i=0;i<accs.size();i++){
                 parameter.put("AID",accs.get(i).getAid());    
             
-            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\purchase_monthly.jrxml");
+            JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath()+ReportEnum.PURCHASE_MONTHLY.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
 
             JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
             JasperViewer.viewReport(Print,false);
+            connection.close();
             
             }
-            
-           
-                   
-            
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }   
+        } catch (Exception exception) {
+          JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+          }   
     
 }}

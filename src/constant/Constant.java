@@ -35,8 +35,9 @@ public class Constant {
     public static final String EMPTY_STRING = "";
     public static final String NEW_LINE = "\n";
     public static final String SPACE = " ";
+    public static final String DOT = ".";
     public static final String DOUBLE_BWD_SLASH = "\\";
-
+    public static final String FORWARD_SLASH = "/";
     public static final String GROUP = "Group";
     public static final String ACCOUNT = "Account";
     public static final String EMPLOYEE = "Employee";
@@ -47,11 +48,17 @@ public class Constant {
     public static final String RATE = "Rate";
     public static final String BEFORE = "Before";
     public static final String AFTER = "After";
-
+    public static final String START = "start";
+    public static final String END = "end";
     public static final String SALE = "Sale";
     public static final String PURCHASE = "Purchase";
     public static final String CASH = "Cash";
+    public static final String SALE_FAT = "Sale Fat";
+    public static final String SALE_SNF = "Sale SNF";
+    public static final String PURCHASE_FAT = "Purchase Fat";
+    public static final String PURCHASE_SNF = "Purchase SNF";
 
+    public static final String RECEIVE = "Receive";
     public static final String SPEND = "Spend";
     public static final String DAILY_DATA = "Daily Data";
     public static final String REPORT = "Report";

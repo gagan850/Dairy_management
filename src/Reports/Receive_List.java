@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Reports;
 
-
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JDesktopPane;
@@ -26,30 +26,22 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author bansal
  */
-public class Receive_List extends javax.swing.JInternalFrame {
-  public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();  
-  public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();      
-       
+public class Receive_List
+        extends javax.swing.JInternalFrame {
 
+    public static ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
+    public static ArrayList<Dao.accounts> account_list = new ArrayList<Dao.accounts>();
 
-static int no_of_accounts=0;
+    static int no_of_accounts = 0;
+
     /**
      * Creates new form SaleFatSnf
      */
-    public Receive_List(JDesktopPane d) {    
-    try{
-       
+    public Receive_List(JDesktopPane desktopPane) {
         initComponents();
-                this.setTitle("Receive List");
-         fill_group_name_list();
-       
-         d.add(this);}
-    catch(Exception e){
-        e.printStackTrace();
-    }
-    
-    
-    
+        this.setTitle(MessageFormat.format(MessageEnum.LIST.getMessage(), constant.Constant.RECEIVE));
+        fillGroupCacheNUI();
+        desktopPane.add(this);
     }
 
     /**
@@ -63,16 +55,16 @@ static int no_of_accounts=0;
 
         jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
         jPanel1 = new javax.swing.JPanel();
-        label_group_name = new javax.swing.JLabel();
-        exit = new javax.swing.JButton();
-        g_list = new java.awt.Choice();
+        receiveListLbl = new javax.swing.JLabel();
+        exitBtn = new javax.swing.JButton();
+        glist = new java.awt.Choice();
         GROUP = new java.awt.Label();
-        print = new javax.swing.JButton();
-        e_date = new org.jdesktop.swingx.JXDatePicker();
+        receiveListBtn = new javax.swing.JButton();
+        endDate = new org.jdesktop.swingx.JXDatePicker();
         start_date = new java.awt.Label();
         end_date = new java.awt.Label();
-        s_date = new org.jdesktop.swingx.JXDatePicker();
-        jButton1 = new javax.swing.JButton();
+        startDate = new org.jdesktop.swingx.JXDatePicker();
+        compReceiveListBtn = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -80,31 +72,31 @@ static int no_of_accounts=0;
 
         jPanel1.setBackground(new java.awt.Color(255, 228, 196));
 
-        label_group_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        label_group_name.setText("RECEIVE LIST");
+        receiveListLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        receiveListLbl.setText("RECEIVE LIST");
 
-        exit.setText("Exit");
-        exit.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
 
-        g_list.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        g_list.setForeground(new java.awt.Color(102, 102, 102));
-        g_list.addItemListener(new java.awt.event.ItemListener() {
+        glist.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        glist.setForeground(new java.awt.Color(102, 102, 102));
+        glist.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                g_listItemStateChanged(evt);
+                glistItemStateChanged(evt);
             }
         });
 
         GROUP.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         GROUP.setText("Group");
 
-        print.setText("Receive List");
-        print.addActionListener(new java.awt.event.ActionListener() {
+        receiveListBtn.setText("Receive List");
+        receiveListBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printActionPerformed(evt);
+                receiveListBtnActionPerformed(evt);
             }
         });
 
@@ -114,10 +106,10 @@ static int no_of_accounts=0;
         end_date.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         end_date.setText("End Date");
 
-        jButton1.setText("Compacted Receive List");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        compReceiveListBtn.setText("Compacted Receive List");
+        compReceiveListBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                compReceiveListBtnActionPerformed(evt);
             }
         });
 
@@ -129,17 +121,17 @@ static int no_of_accounts=0;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(g_list, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(glist, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(GROUP, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(print)))
+                        .addComponent(receiveListBtn)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(receiveListLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,20 +141,20 @@ static int no_of_accounts=0;
                                 .addGap(90, 90, 90)
                                 .addComponent(end_date, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(64, 64, 64)
-                                .addComponent(e_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(exit)
-                                .addGap(40, 40, 40))
-                            .addComponent(jButton1))))
+                                .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(compReceiveListBtn)
+                                .addGap(46, 46, 46)
+                                .addComponent(exitBtn)))))
                 .addGap(19, 160, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(receiveListLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,17 +162,16 @@ static int no_of_accounts=0;
                     .addComponent(GROUP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(g_list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(glist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(e_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
-                .addComponent(exit)
-                .addGap(2, 2, 2)
+                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(print)
-                    .addComponent(jButton1))
-                .addContainerGap(223, Short.MAX_VALUE))
+                    .addComponent(receiveListBtn)
+                    .addComponent(compReceiveListBtn)
+                    .addComponent(exitBtn))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,185 +188,110 @@ static int no_of_accounts=0;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-    g_list.removeAll();
-
-    no_of_accounts=0;
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        glist.removeAll();
+        no_of_accounts = 0;
         this.dispose();
-    
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
-    private void g_listItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_g_listItemStateChanged
-
+    private void glistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_glistItemStateChanged
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_g_listItemStateChanged
+    }//GEN-LAST:event_glistItemStateChanged
 
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+    private void receiveListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiveListBtnActionPerformed
 
-        if(s_date==null)
-            JOptionPane.showMessageDialog(null, "select start date");
-        else if(e_date==null) 
-            JOptionPane.showMessageDialog(null, "select end date");
-        else
-        {
-            
-            
-String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
-String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();
-            
-            
-            
-        
-           try {
-           
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-          
-              String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-            HashMap parameter=new HashMap();
-            parameter.put("GID",group_list.get(g_list.getSelectedIndex()).getGid());
-            parameter.put("START_DATE",start_d);
-            parameter.put("END_DATE",end_d);
-            
-              
-            
-            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\Receive_List.jrxml");
-            JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+        if (startDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.START));
+        } else if (endDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.END));
+        } else {
+            String start_date = startDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (startDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + startDate.getDate().getDate();
+            String end_date = endDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (endDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + endDate.getDate().getDate();
 
-            JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
-            JasperViewer.viewReport(Print,false);
-            
-                       
-           
-                   
-            
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }   
-    
+            try {
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                Connection connection = null;
+                Class.forName(constant.DBConstant.DRIVER_NAME);
+                connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+                HashMap parameter = new HashMap();
+                parameter.put("GID", group_list.get(glist.getSelectedIndex()).getGid());
+                parameter.put("START_DATE", start_date);
+                parameter.put("END_DATE", end_date);
+                JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath() + ReportEnum.RECEIVE_LIST.getReportName());
+                JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+                JasperPrint Print = JasperFillManager.fillReport(jasReport, parameter, connection);
+                JasperViewer.viewReport(Print, false);
+                connection.close();
+            } catch (Exception exception) {
+             JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+           }
+
         }
-   // TODO add your handling code here:
-    }//GEN-LAST:event_printActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_receiveListBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void compReceiveListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compReceiveListBtnActionPerformed
 
-        if(s_date==null)
-            JOptionPane.showMessageDialog(null, "select start date");
-        else if(e_date==null) 
-            JOptionPane.showMessageDialog(null, "select end date");
-        else
-        {
-            
-            
-String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
-String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();
-            
-            
-            
-        
-           try {
-           
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-          
-              String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-            HashMap parameter=new HashMap();
-          
-            parameter.put("START_DATE",start_d);
-            parameter.put("END_DATE",end_d);
-            
-              
-            
-            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\Receive_list_compact.jrxml");
-            JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+        if (startDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.START));
+        } else if (endDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.END));
+        } else {
 
-            JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
-            JasperViewer.viewReport(Print,false);
-            
-                       
-           
-                   
-            
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }   
-    
+            String start_d = startDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (startDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + startDate.getDate().getDate();
+            String end_d = endDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (endDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + endDate.getDate().getDate();
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            try {
+                Connection connection = null;
+                Class.forName(constant.DBConstant.DRIVER_NAME);
+                connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+                HashMap parameter = new HashMap();
+
+                parameter.put("START_DATE", start_d);
+                parameter.put("END_DATE", end_d);
+
+                JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath() + ReportEnum.RECEIVE_LIST_COMPACT.getReportName());
+                JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+
+                JasperPrint Print = JasperFillManager.fillReport(jasReport, parameter, connection);
+                JasperViewer.viewReport(Print, false);
+              connection.close();
+            } catch (Exception exception) {
+             JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+                  }
+
         }
-   // TODO a        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        // TODO a        // TODO add your handling code here:
+    }//GEN-LAST:event_compReceiveListBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label GROUP;
-    private org.jdesktop.swingx.JXDatePicker e_date;
+    private javax.swing.JButton compReceiveListBtn;
+    private org.jdesktop.swingx.JXDatePicker endDate;
     private java.awt.Label end_date;
-    private javax.swing.JButton exit;
-    private static java.awt.Choice g_list;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton exitBtn;
+    private static java.awt.Choice glist;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
-    private static javax.swing.JLabel label_group_name;
-    private javax.swing.JButton print;
-    private org.jdesktop.swingx.JXDatePicker s_date;
+    private javax.swing.JButton receiveListBtn;
+    private static javax.swing.JLabel receiveListLbl;
+    private org.jdesktop.swingx.JXDatePicker startDate;
     private java.awt.Label start_date;
     // End of variables declaration//GEN-END:variables
 
-   
-    
+    public static void fillGroupCacheNUI() {
+        Dao.groups group = new Dao.groups();
+        group_list = group.returnGroups();
+        for (int index = 0; index < group_list.size(); index++) {
+            glist.addItem(group_list.get(index).getGname());
+        }
+    }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public static void  fill_group_name_list() throws Exception{
-        Dao.groups g=new Dao.groups();
-        group_list=g.returnGroups();
-       
-        for(int i=0;i<group_list.size();i++){
-            g_list.addItem(group_list.get(i).getGname());
-        } 
-     }
-    
-    
-    
-    
-    
 }

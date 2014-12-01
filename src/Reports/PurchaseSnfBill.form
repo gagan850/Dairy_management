@@ -65,16 +65,16 @@
                           <Component id="jScrollPane1" min="-2" pref="376" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="select_all" min="-2" max="-2" attributes="0"/>
-                              <Component id="deselect_all" min="-2" max="-2" attributes="0"/>
+                              <Component id="selectAllBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="deselectAllBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="s_date" min="-2" max="-2" attributes="0"/>
+                          <Component id="startDate" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="e_date" min="-2" max="-2" attributes="0"/>
+                          <Component id="endDate" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -94,9 +94,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
-                          <Component id="change" min="-2" max="-2" attributes="0"/>
+                          <Component id="printBtn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                          <Component id="exit" min="-2" max="-2" attributes="0"/>
+                          <Component id="exitBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -119,9 +119,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="select_all" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectAllBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="deselect_all" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deselectAllBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -133,13 +133,13 @@
                   </Group>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="e_date" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="s_date" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="endDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="startDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="change" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="exit" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="printBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="exitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -187,12 +187,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="exit">
+        <Component class="javax.swing.JButton" name="exitBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Exit"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="java.awt.Choice" name="glist">
@@ -216,31 +216,31 @@
             <Property name="text" type="java.lang.String" value="Group"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="select_all">
+        <Component class="javax.swing.JButton" name="selectAllBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Select All"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="select_allActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectAllBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="deselect_all">
+        <Component class="javax.swing.JButton" name="deselectAllBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Deselect All"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deselect_allActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deselectAllBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="change">
+        <Component class="javax.swing.JButton" name="printBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Print"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="e_date">
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="endDate">
         </Component>
         <Component class="java.awt.Label" name="start_date">
           <Properties>
@@ -252,7 +252,7 @@
             <Property name="text" type="java.lang.String" value="End Date"/>
           </Properties>
         </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="s_date">
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="startDate">
         </Component>
       </SubComponents>
     </Container>

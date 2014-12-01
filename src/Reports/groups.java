@@ -6,11 +6,12 @@
 
 package Reports;
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.HashMap;
-import javax.swing.JDesktopPane;
+import java.text.*;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -28,25 +29,24 @@ public class groups extends javax.swing.JInternalFrame {
     /**
      * Creates new form groups
      */
-    public groups(JDesktopPane d) {
+    public groups(JDesktopPane desktopPane) {
         initComponents();
-        
-        
-          this.setTitle("Group Reports");
+         this.setTitle(MessageFormat.format(MessageEnum.REPORT.getMessage(), constant.Constant.GROUP));
            try {
-     String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-                           JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\groups.jrxml");
+      Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+           JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath()+ReportEnum.GROUPS.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
          
             JasperPrint Print=JasperFillManager.fillReport(jasReport,null,connection);
             JasperViewer.viewReport(Print,false);
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            connection.close();
+        } catch (Exception exception) {
+               JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+     
         }   
-            d.add(this);
+            desktopPane.add(this);
             this.dispose();
     }
 

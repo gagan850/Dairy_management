@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Reports;
 
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -23,32 +24,22 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author gagandeepbansal
  */
 public class order_bill {
-    
-    
-     public order_bill(String aname) {
 
-        
-           try {
-          String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-         String ss="select * from account_type order by account_typeid";
-          
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-          
-            HashMap parameter=new HashMap();
-           
-               parameter.put("ANAME",aname);
-                JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\order_bill.jrxml");
+    public order_bill(String aname) {
+        try {
+            Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            HashMap parameter = new HashMap();
+            parameter.put("ANAME", aname);
+            JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath() + ReportEnum.ORDER_BILL.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+            JasperPrint Print = JasperFillManager.fillReport(jasReport, parameter, connection);
+            JasperViewer.viewReport(Print, false);
+            connection.close();
+        } catch (Exception exception) {
+       JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+     }
 
-               
-               
-            JasperPrint Print=JasperFillManager.fillReport(jasReport,parameter,connection);
-            JasperViewer.viewReport(Print,false);
-          
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }   
-    
-}}
+    }
+}

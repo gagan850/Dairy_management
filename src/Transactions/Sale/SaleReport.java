@@ -241,7 +241,6 @@ Calendar c=Calendar.getInstance();
 c.set(end_date.getDate().getYear()+1900, end_date.getDate().getMonth(), end_date.getDate().getDate());
 
 String last_mon=(end_date.getDate().getYear()+1900)+"-"+(end_date.getDate().getMonth())+"-"+(c.getActualMaximum(c.DATE));
-System.out.println(end_d+"  "+last_mon); 
 SaleListPending sale_list=new SaleListPending(group_list.get(group_name.getSelectedIndex()).getGid(),end_d,last_mon);
 
         

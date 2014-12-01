@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Reports;
 
-
-import java.sql.SQLException;
-import java.text.ParseException;
+import Enum.*;
+import java.text.*;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -17,30 +15,23 @@ import javax.swing.JOptionPane;
  *
  * @author bansal
  */
-public class PurchaseSnfBill extends javax.swing.JInternalFrame {
-  
-static public ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
-static public ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();
+public class PurchaseSnfBill
+        extends javax.swing.JInternalFrame {
+  //cache for groups and accounts
 
+    static public ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
+    static public ArrayList<Dao.accounts> account_list = new ArrayList<Dao.accounts>();
 
-static int no_of_accounts=0;
+    static int no_of_accounts = 0;
+
     /**
      * Creates new form SaleFatSnf
      */
-    public PurchaseSnfBill(JDesktopPane d) {    
-    try{
-       
+    public PurchaseSnfBill(JDesktopPane desktopPane) {
         initComponents();
-                this.setTitle("Purchase SNF Reports");
-         fill_group_name_list();
-      
-       d.add(this);}
-    catch(Exception e){
-        e.printStackTrace();
-    }
-    
-    
-    
+        this.setTitle(MessageFormat.format(MessageEnum.REPORT.getMessage(), constant.Constant.PURCHASE_SNF));
+        fillGroupCacheNUI();
+        desktopPane.add(this);
     }
 
     /**
@@ -78,16 +69,16 @@ static int no_of_accounts=0;
             }
 
         };
-        exit = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
         glist = new java.awt.Choice();
         GROUP = new java.awt.Label();
-        select_all = new javax.swing.JButton();
-        deselect_all = new javax.swing.JButton();
-        change = new javax.swing.JButton();
-        e_date = new org.jdesktop.swingx.JXDatePicker();
+        selectAllBtn = new javax.swing.JButton();
+        deselectAllBtn = new javax.swing.JButton();
+        printBtn = new javax.swing.JButton();
+        endDate = new org.jdesktop.swingx.JXDatePicker();
         start_date = new java.awt.Label();
         end_date = new java.awt.Label();
-        s_date = new org.jdesktop.swingx.JXDatePicker();
+        startDate = new org.jdesktop.swingx.JXDatePicker();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,10 +115,10 @@ static int no_of_accounts=0;
         });
         jScrollPane1.setViewportView(table);
 
-        exit.setText("Exit");
-        exit.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
 
@@ -141,24 +132,24 @@ static int no_of_accounts=0;
 
         GROUP.setText("Group");
 
-        select_all.setText("Select All");
-        select_all.addActionListener(new java.awt.event.ActionListener() {
+        selectAllBtn.setText("Select All");
+        selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                select_allActionPerformed(evt);
+                selectAllBtnActionPerformed(evt);
             }
         });
 
-        deselect_all.setText("Deselect All");
-        deselect_all.addActionListener(new java.awt.event.ActionListener() {
+        deselectAllBtn.setText("Deselect All");
+        deselectAllBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deselect_allActionPerformed(evt);
+                deselectAllBtnActionPerformed(evt);
             }
         });
 
-        change.setText("Print");
-        change.addActionListener(new java.awt.event.ActionListener() {
+        printBtn.setText("Print");
+        printBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeActionPerformed(evt);
+                printBtnActionPerformed(evt);
             }
         });
 
@@ -184,14 +175,14 @@ static int no_of_accounts=0;
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(select_all)
-                            .addComponent(deselect_all))
+                            .addComponent(selectAllBtn)
+                            .addComponent(deselectAllBtn))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)
-                        .addComponent(e_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(189, 189, 189))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -206,9 +197,9 @@ static int no_of_accounts=0;
                         .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(225, 225, 225)
-                        .addComponent(change)
+                        .addComponent(printBtn)
                         .addGap(82, 82, 82)
-                        .addComponent(exit)))
+                        .addComponent(exitBtn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -226,21 +217,21 @@ static int no_of_accounts=0;
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(select_all)
+                                .addComponent(selectAllBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deselect_all)))
+                                .addComponent(deselectAllBtn)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(end_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(e_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(change)
-                    .addComponent(exit))
+                    .addComponent(printBtn)
+                    .addComponent(exitBtn))
                 .addContainerGap())
         );
 
@@ -260,161 +251,113 @@ static int no_of_accounts=0;
 
     private void tablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tablePropertyChange
 
-      
 // TODO add your handling code here:
     }//GEN-LAST:event_tablePropertyChange
 
     private void tableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusLost
 
-
-        
 // TODO add your handling code here:
     }//GEN-LAST:event_tableFocusLost
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-    glist.removeAll();
-
-    no_of_accounts=0;
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        glist.removeAll();
+        no_of_accounts = 0;
         this.dispose();
-    
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     private void glistItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_glistItemStateChanged
-   try{
-   
-       Dao.accounts accounts=new Dao.accounts();
-       accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
-       accounts.setAccount_typeid(constant.AccountType.PURCHASE_SNF);
-       account_list=accounts.get_All_Accounts_under_group_N_Account_Type();
-       no_of_accounts=account_list.size();
-       fillTable(account_list);
-   
-   }catch(Exception e){
-       e.printStackTrace();
-       
-   }
-
+        Dao.accounts accounts = new Dao.accounts();
+        accounts.setGid(group_list.get(glist.getSelectedIndex()).getGid());
+        accounts.setAccount_typeid(constant.AccountType.PURCHASE_SNF);
+        account_list = accounts.get_All_Accounts_under_group_N_Account_Type();
+        no_of_accounts = account_list.size();
+        fillTable(account_list);
 // TODO add your handling code here:
     }//GEN-LAST:event_glistItemStateChanged
 
-    private void select_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_allActionPerformed
-
-        
-for(int i=0;i<no_of_accounts;i++){
-    table.setValueAt(true, i, 0);
-}
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_select_allActionPerformed
-
-    private void deselect_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselect_allActionPerformed
-
-        for(int i=0;i<no_of_accounts;i++){
-    table.setValueAt(false, i, 0);
-}
-// TODO add your handling code here:
-    }//GEN-LAST:event_deselect_allActionPerformed
-
-    private void changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeActionPerformed
-
-        if(s_date==null)
-            JOptionPane.showMessageDialog(null, "select start date");
-        else if(e_date==null) 
-            JOptionPane.showMessageDialog(null, "select end date");
-        else
-        {
-            ArrayList<Dao.accounts> accs=new ArrayList<Dao.accounts>();
-            for(int i=0;i<table.getRowCount();i++){
-                if((Boolean)table.getValueAt(i, 0))accs.add(account_list.get(i));
-            }
-            
-String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
-String end_d=e_date.getDate().getYear()+1900+"/"+(e_date.getDate().getMonth()+1)+"/"+e_date.getDate().getDate();
-            PurchaseSnf sale_snf=new PurchaseSnf(group_list.get(glist.getSelectedIndex()).getGid(),start_d,end_d,accs);
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+    private void selectAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllBtnActionPerformed
+        for (int index = 0; index < no_of_accounts; index++) {
+            table.setValueAt(true, index, 0);
         }
-   // TODO add your handling code here:
-    }//GEN-LAST:event_changeActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_selectAllBtnActionPerformed
+
+    private void deselectAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselectAllBtnActionPerformed
+        for (int index = 0; index < no_of_accounts; index++) {
+            table.setValueAt(false, index, 0);
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_deselectAllBtnActionPerformed
+
+    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+        if (startDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.START));
+        } else if (endDate == null) {
+            JOptionPane.showMessageDialog(null, MessageFormat.format(MessageEnum.SELECT_DATE.getMessage(), constant.Constant.END));
+        } else {
+            ArrayList<Dao.accounts> accs = new ArrayList<Dao.accounts>();
+            for (int index = 0; index < table.getRowCount(); index++) {
+                if ((Boolean) table.getValueAt(index, 0)) {
+                    accs.add(account_list.get(index));
+                }
+            }
+
+            String start_d = startDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (startDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + startDate.getDate().getDate();
+            String end_d = endDate.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (endDate.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + endDate.getDate().getDate();
+            PurchaseSnf sale_snf = new PurchaseSnf(group_list.get(glist.getSelectedIndex()).getGid(), start_d, end_d, accs);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-      
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label GROUP;
-    private javax.swing.JButton change;
-    private javax.swing.JButton deselect_all;
-    private org.jdesktop.swingx.JXDatePicker e_date;
+    private javax.swing.JButton deselectAllBtn;
+    private org.jdesktop.swingx.JXDatePicker endDate;
     private java.awt.Label end_date;
-    private javax.swing.JButton exit;
+    private javax.swing.JButton exitBtn;
     private static java.awt.Choice glist;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
     private static javax.swing.JLabel label_group_name;
-    private org.jdesktop.swingx.JXDatePicker s_date;
-    private javax.swing.JButton select_all;
+    private javax.swing.JButton printBtn;
+    private javax.swing.JButton selectAllBtn;
+    private org.jdesktop.swingx.JXDatePicker startDate;
     private java.awt.Label start_date;
     private static javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
-   
-    
-    private void fillTable(ArrayList acc_list) throws SQLException, ParseException {
-   
-  Object row[][]=new Object[no_of_accounts][];
+    private void fillTable(ArrayList acc_list) {
 
-        for(int i=0;i<no_of_accounts;i++){
-              Dao.accounts acc=(Dao.accounts)acc_list.get(i);
-            row[i]=new Object[]{false,acc.getAname()};
-       }
-table.setModel(new javax.swing.table.DefaultTableModel(
-    row,
-    new String [] {
-        "Check","Name"
-    }
-));
+        Object row[][] = new Object[no_of_accounts][];
 
-        
+        for (int index = 0; index < no_of_accounts; index++) {
+            Dao.accounts acc = (Dao.accounts) acc_list.get(index);
+            row[index] = new Object[]{false, acc.getAname()};
+        }
+        table.setModel(new javax.swing.table.DefaultTableModel(
+                row,
+                new String[]{
+                    "Check", "Name"
+                }
+        ));
+
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public static void  fill_group_name_list() throws Exception{
-        Dao.groups g=new Dao.groups();
-        group_list=g.returnGroups();
-        for(int i=0;i<group_list.size();i++){
-            glist.addItem(group_list.get(i).getGname());
-        } 
-     }
-    
-    
-    
-    
-    
+    public static void fillGroupCacheNUI() {
+        Dao.groups group = new Dao.groups();
+        group_list = group.returnGroups();
+        for (int index = 0; index < group_list.size(); index++) {
+            glist.addItem(group_list.get(index).getGname());
+        }
+    }
+
 }

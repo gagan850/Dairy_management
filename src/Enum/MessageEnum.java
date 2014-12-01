@@ -29,8 +29,11 @@ public enum MessageEnum {
     SELECT_NO_CHOICE(Messages.SELECT_NO_CHOICE, ""),
     MISS(Messages.MISS, ""),
     REPORT(Messages.REPORT, ""),
+    LIST(Messages.LIST, ""),
     TRANSACTION(Messages.TRANSACTION, ""),
-    CHANGE(Messages.CHANGE, "");
+    CHANGE(Messages.CHANGE, ""),
+    SELECT_DATE(Messages.SELECT_DATE, "")
+    ;
     
     
     String message;
@@ -72,7 +75,9 @@ class Messages {
     public static final String SELECT_NO_CHOICE = "Please select {0} or {1}";
     public static final String MISS = "{0} Miss";
     public static final String REPORT = "{0} Report";
+    public static final String LIST = "{0} List";
     public static final String TRANSACTION = "{0} Transaction";
+    public static final String SELECT_DATE = "Select {0} date";
 }
 
 class MessagesType {

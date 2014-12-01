@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Reports;
 
-
+import Enum.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.*;
 import java.util.ArrayList;
-import javax.swing.JDesktopPane;
+import javax.swing.*;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -24,28 +24,22 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author bansal
  */
-public class Daily_Data extends javax.swing.JInternalFrame {
-  public static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();  
-  public static ArrayList<Dao.accounts> account_list=new ArrayList<Dao.accounts>();      
-       
+public class Daily_Data
+        extends javax.swing.JInternalFrame {
+//Cache for groups and accounts
+    public static ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
+    public static ArrayList<Dao.accounts> account_list = new ArrayList<Dao.accounts>();
 
+    static int no_of_accounts = 0;
 
-static int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
      */
-    public Daily_Data(JDesktopPane d) throws Exception {    
-    try{
-       
-        initComponents();
-             
-         d.add(this);}
-    catch(Exception e){
-        e.printStackTrace();
-    }
-    
-    
-    
+    public Daily_Data(JDesktopPane desktopPane)
+            {
+                this.setTitle(MessageFormat.format(MessageEnum.REPORT.getMessage(), constant.Constant.DAILY_DATA));
+            initComponents();
+    desktopPane.add(this);
     }
 
     /**
@@ -59,10 +53,10 @@ static int no_of_accounts=0;
 
         jXDatePicker3 = new org.jdesktop.swingx.JXDatePicker();
         jPanel1 = new javax.swing.JPanel();
-        label_group_name = new javax.swing.JLabel();
-        s_date = new org.jdesktop.swingx.JXDatePicker();
+        dailyDataLbl = new javax.swing.JLabel();
+        date = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
-        daily_data = new javax.swing.JButton();
+        dailyDataBtn = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,22 +64,22 @@ static int no_of_accounts=0;
 
         jPanel1.setBackground(new java.awt.Color(255, 228, 196));
 
-        label_group_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        label_group_name.setText("DAILY DATA");
+        dailyDataLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        dailyDataLbl.setText("DAILY DATA");
 
-        s_date.addActionListener(new java.awt.event.ActionListener() {
+        date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                s_dateActionPerformed(evt);
+                dateActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("SELECT DATE");
 
-        daily_data.setText("Daily Data");
-        daily_data.addActionListener(new java.awt.event.ActionListener() {
+        dailyDataBtn.setText("Daily Data");
+        dailyDataBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                daily_dataActionPerformed(evt);
+                dailyDataBtnActionPerformed(evt);
             }
         });
 
@@ -97,27 +91,27 @@ static int no_of_accounts=0;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(203, 203, 203)
-                        .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dailyDataLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(s_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(80, 80, 80)
-                        .addComponent(daily_data)))
+                        .addComponent(dailyDataBtn)))
                 .addContainerGap(230, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(label_group_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dailyDataLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(s_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(daily_data))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dailyDataBtn))
                 .addContainerGap(301, Short.MAX_VALUE))
         );
 
@@ -135,72 +129,41 @@ static int no_of_accounts=0;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void daily_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daily_dataActionPerformed
-String start_d=s_date.getDate().getYear()+1900+"/"+(s_date.getDate().getMonth()+1)+"/"+s_date.getDate().getDate();
-        
-           try {
-        String s="jdbc:oracle:thin:@localhost:1521:";
-        Connection connection=DriverManager.getConnection(s,"dairy","bansal");
-        String ss="select * from account_type order by account_typeid";            
-        File f=new File(".");
-        String path=f.getCanonicalPath();
-          
-          
-            
-              
-              JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\Daily_Data.jrxml");
+    private void dailyDataBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyDataBtnActionPerformed
+        String start_d = date.getDate().getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED + constant.Constant.FORWARD_SLASH + (date.getDate().getMonth() + constant.Constant.INTEGER_ONE) + constant.Constant.FORWARD_SLASH + date.getDate().getDate();
+        try {
+            Connection connection = null;
+            Class.forName(constant.DBConstant.DRIVER_NAME);
+            connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
+            JasperDesign jasDesign = JRXmlLoader.load(new File(constant.Constant.DOT).getCanonicalPath() + ReportEnum.DAILY_DATA.getReportName());
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+            JasperPrint Print = JasperFillManager.fillReport(jasReport, null, connection);
+            JasperViewer.viewReport(Print, false);
+            connection.close();
 
-               
-               
-            JasperPrint Print=JasperFillManager.fillReport(jasReport,null,connection);
-            JasperViewer.viewReport(Print,false);
-           
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        } catch (Exception exception) {
+           JOptionPane.showMessageDialog(null, exception.getMessage(), constant.ErrorType.DATABASE_ERROR, JOptionPane.ERROR_MESSAGE);
+         }
+    }//GEN-LAST:event_dailyDataBtnActionPerformed
 
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_daily_dataActionPerformed
-
-    private void s_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s_dateActionPerformed
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_s_dateActionPerformed
+    }//GEN-LAST:event_dateActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-      
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton daily_data;
+    private javax.swing.JButton dailyDataBtn;
+    private static javax.swing.JLabel dailyDataLbl;
+    private org.jdesktop.swingx.JXDatePicker date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker3;
-    private static javax.swing.JLabel label_group_name;
-    private org.jdesktop.swingx.JXDatePicker s_date;
     // End of variables declaration//GEN-END:variables
 
-   
-    
-
-        
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
