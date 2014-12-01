@@ -415,10 +415,10 @@ public class pur_fat_transactions {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Transactions.PurFAT.PurFAT.saved_enteries.add(entry);
+                    Transaction.PurFAT.PurFAT.saved_enteries.add(entry);
 
                 } else {
-                    Transactions.PurFAT.PurFAT.new_enteries.add(entry);
+                    Transaction.PurFAT.PurFAT.new_enteries.add(entry);
 
                 }
             }

@@ -330,10 +330,10 @@ public class purchase_transactions {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Transactions.Purchase.Purchase.saved_enteries.add(entry);
+                    Transaction.Purchase.Purchase.saved_enteries.add(entry);
 
                 } else {
-                    Transactions.Purchase.Purchase.new_enteries.add(entry);
+                    Transaction.Purchase.Purchase.new_enteries.add(entry);
 
                 }
             }

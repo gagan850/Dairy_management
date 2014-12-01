@@ -6,7 +6,6 @@
 
 package Setting.Entries;
 
-import Transactions.Sale.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;

@@ -6,7 +6,7 @@
 package Dao;
 
 import Enum.*;
-import Transactions.Sale.Sale;
+import Transaction.Sale.Sale;
 import java.sql.Connection;
 
 import java.sql.Date;
@@ -465,7 +465,7 @@ public class sale_transactions {
                 int month = (current.getMonth() + constant.Constant.INTEGER_ONE);
                 String curr = constant.Constant.EMPTY_STRING + (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + month + constant.Constant.HYPHEN + current.getDate();
                 statement.setString(constant.Constant.INTEGER_FOUR, curr);
-                int days = Transactions.Cal.getMaxDays((month - constant.Constant.INTEGER_ONE), (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED));
+                int days = Transaction.Cal.getMaxDays((month - constant.Constant.INTEGER_ONE), (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED));
                 String da = constant.Constant.EMPTY_STRING + (current.getYear() + constant.Constant.INTEGER_NINETEEN_HUNDRED) + constant.Constant.HYPHEN + (month - constant.Constant.INTEGER_ONE) + constant.Constant.HYPHEN + days;
                 statement.setString(constant.Constant.INTEGER_TWO, da);
                 System.out.println(curr + "  " + da);

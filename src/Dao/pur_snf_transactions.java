@@ -616,10 +616,10 @@ public class pur_snf_transactions {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Transactions.PurSNF.PurSNF.saved_enteries.add(entry);
+                    Transaction.PurSNF.PurSNF.saved_enteries.add(entry);
 
                 } else {
-                    Transactions.PurSNF.PurSNF.new_enteries.add(entry);
+                    Transaction.PurSNF.PurSNF.new_enteries.add(entry);
 
                 }
             }

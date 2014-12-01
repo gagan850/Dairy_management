@@ -544,10 +544,10 @@ public class sale_snf_transactions {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Transactions.SaleSNF.SaleSNF.saved_enteries.add(entry);
+                    Transaction.SaleSNF.SaleSNF.saved_enteries.add(entry);
 
                 } else {
-                    Transactions.SaleSNF.SaleSNF.new_enteries.add(entry);
+                    Transaction.SaleSNF.SaleSNF.new_enteries.add(entry);
 
                 }
             }

@@ -6,7 +6,7 @@
 package Dao;
 
 import Enum.*;
-import Transactions.SaleFAT.SaleFAT;
+import Transaction.SaleFAT.SaleFAT;
 import java.sql.Connection;
 
 import java.sql.Date;

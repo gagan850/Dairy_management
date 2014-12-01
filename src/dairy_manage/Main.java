@@ -7,8 +7,8 @@ package dairy_manage;
 
 import Add.*;
 import Misc.Note.Notes;
-import Transactions.Purchase.PurchaseReport;
-import Transactions.Sale.SaleReport;
+import Transaction.Purchase.PurchaseReport;
+import Transaction.Sale.SaleReport;
 import java.awt.*;
 import java.awt.image.*;
 import java.util.Date;
@@ -48,7 +48,7 @@ public class Main
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 try {
                     Date date = new Date();
-                    String d = date.getDate() + "-" + Transactions.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
+                    String d = date.getDate() + "-" + Transaction.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
                     Process process = Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_" + d + ".dmp");
 //while(process.)
 
@@ -483,7 +483,7 @@ public class Main
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         try {
             Date date = new Date();
-            String d = date.getDate() + "-" + Transactions.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
+            String d = date.getDate() + "-" + Transaction.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
             Process runTime = Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_" + d + ".dmp");
 
             System.exit(0);
@@ -536,7 +536,7 @@ public class Main
 
     private void saleMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleMonActionPerformed
 
-        Transactions.Sale.saleM saleMon = new Transactions.Sale.saleM(desktopPane);
+        Transaction.Sale.saleM saleMon = new Transaction.Sale.saleM(desktopPane);
         saleMon.setVisible(true);
         saleMon.setSize(500, 500);
         saleMon.setIconifiable(true);
@@ -545,7 +545,7 @@ public class Main
 
     private void purMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purMonActionPerformed
 
-        Transactions.Purchase.PurchaseM purchaseMon = new Transactions.Purchase.PurchaseM(desktopPane);
+        Transaction.Purchase.PurchaseM purchaseMon = new Transaction.Purchase.PurchaseM(desktopPane);
         purchaseMon.setVisible(true);
         purchaseMon.setSize(500, 500);
         purchaseMon.setIconifiable(true);
@@ -554,7 +554,7 @@ public class Main
     }//GEN-LAST:event_purMonActionPerformed
 
     private void saleDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleDalActionPerformed
-        Transactions.Sale.saleD saleDal = new Transactions.Sale.saleD(desktopPane);
+        Transaction.Sale.saleD saleDal = new Transaction.Sale.saleD(desktopPane);
         saleDal.setVisible(true);
         saleDal.setSize(500, 500);
         saleDal.setIconifiable(true);        // TODO add your handling code here:
@@ -586,7 +586,7 @@ public class Main
     }//GEN-LAST:event_changeRateActionPerformed
 
     private void purchaseDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseDalActionPerformed
-        Transactions.Purchase.PurchaseD purchaseDal = new Transactions.Purchase.PurchaseD(desktopPane);
+        Transaction.Purchase.PurchaseD purchaseDal = new Transaction.Purchase.PurchaseD(desktopPane);
         purchaseDal.setVisible(true);
         purchaseDal.setSize(500, 500);
         purchaseDal.setIconifiable(true);
@@ -609,7 +609,7 @@ public class Main
     }//GEN-LAST:event_saleFatRepActionPerformed
 
     private void saleFatMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleFatMonActionPerformed
-        Transactions.SaleFAT.saleFATM saleFatMon = new Transactions.SaleFAT.saleFATM(desktopPane);
+        Transaction.SaleFAT.saleFATM saleFatMon = new Transaction.SaleFAT.saleFATM(desktopPane);
         saleFatMon.setVisible(true);
         saleFatMon.setSize(500, 500);
         saleFatMon.setIconifiable(true);
@@ -617,7 +617,7 @@ public class Main
     }//GEN-LAST:event_saleFatMonActionPerformed
 
     private void purFatMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purFatMonActionPerformed
-        Transactions.PurFAT.PurFATM purFatMon = new Transactions.PurFAT.PurFATM(desktopPane);
+        Transaction.PurFAT.PurFATM purFatMon = new Transaction.PurFAT.PurFATM(desktopPane);
         purFatMon.setVisible(true);
         purFatMon.setSize(500, 500);
         purFatMon.setIconifiable(true);
@@ -625,7 +625,7 @@ public class Main
     }//GEN-LAST:event_purFatMonActionPerformed
 
     private void saleFatDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleFatDalActionPerformed
-        Transactions.SaleFAT.saleFATD saleFatDal = new Transactions.SaleFAT.saleFATD(desktopPane);
+        Transaction.SaleFAT.saleFATD saleFatDal = new Transaction.SaleFAT.saleFATD(desktopPane);
         saleFatDal.setVisible(true);
         saleFatDal.setSize(500, 500);
         saleFatDal.setIconifiable(true);
@@ -633,7 +633,7 @@ public class Main
     }//GEN-LAST:event_saleFatDalActionPerformed
 
     private void purchaseFatDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseFatDalActionPerformed
-        Transactions.PurFAT.PurFATD purFatDal = new Transactions.PurFAT.PurFATD(desktopPane);
+        Transaction.PurFAT.PurFATD purFatDal = new Transaction.PurFAT.PurFATD(desktopPane);
         purFatDal.setVisible(true);
         purFatDal.setSize(500, 500);
         purFatDal.setIconifiable(true);
@@ -650,7 +650,7 @@ public class Main
 
     private void saleSNFMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleSNFMonActionPerformed
 
-        Transactions.SaleSNF.saleSNFM saleSNFMon = new Transactions.SaleSNF.saleSNFM(desktopPane);
+        Transaction.SaleSNF.saleSNFM saleSNFMon = new Transaction.SaleSNF.saleSNFM(desktopPane);
         saleSNFMon.setVisible(true);
         saleSNFMon.setSize(500, 500);
         saleSNFMon.setIconifiable(true);
@@ -659,7 +659,7 @@ public class Main
     }//GEN-LAST:event_saleSNFMonActionPerformed
 
     private void saleSNFDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleSNFDalActionPerformed
-        Transactions.SaleSNF.saleSNFD saleSNFDal = new Transactions.SaleSNF.saleSNFD(desktopPane);
+        Transaction.SaleSNF.saleSNFD saleSNFDal = new Transaction.SaleSNF.saleSNFD(desktopPane);
         saleSNFDal.setVisible(true);
         saleSNFDal.setSize(500, 500);
         saleSNFDal.setIconifiable(true);
@@ -668,7 +668,7 @@ public class Main
     }//GEN-LAST:event_saleSNFDalActionPerformed
 
     private void purSNFMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purSNFMonActionPerformed
-        Transactions.PurSNF.PurSNFM purSNFMon = new Transactions.PurSNF.PurSNFM(desktopPane);
+        Transaction.PurSNF.PurSNFM purSNFMon = new Transaction.PurSNF.PurSNFM(desktopPane);
         purSNFMon.setVisible(true);
         purSNFMon.setSize(500, 500);
         purSNFMon.setIconifiable(true);
@@ -676,7 +676,7 @@ public class Main
     }//GEN-LAST:event_purSNFMonActionPerformed
 
     private void purchaseSNFDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseSNFDalActionPerformed
-        Transactions.PurSNF.PurSNFD purchaseSNFDal = new Transactions.PurSNF.PurSNFD(desktopPane);
+        Transaction.PurSNF.PurSNFD purchaseSNFDal = new Transaction.PurSNF.PurSNFD(desktopPane);
         purchaseSNFDal.setVisible(true);
         purchaseSNFDal.setSize(500, 500);
         purchaseSNFDal.setIconifiable(true);        // TODO add your handling code here:
