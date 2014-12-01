@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Misc.DailyData;
-
 
 import Enum.*;
 import java.io.File;
@@ -28,16 +26,17 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author bansal
  */
-public class DailyData extends javax.swing.JInternalFrame {
+public class DailyData
+        extends javax.swing.JInternalFrame {
 
     //cache for groups
-    static ArrayList<Dao.groups> group_list=new ArrayList<Dao.groups>();
-
+    static ArrayList<Dao.groups> group_list = new ArrayList<Dao.groups>();
 
     /**
      * Creates new form sale
      */
-    public DailyData(JDesktopPane desktopPane) throws Exception{
+    public DailyData(JDesktopPane desktopPane)
+             {
         initComponents();
         this.setTitle(MessageFormat.format(MessageEnum.REPORT.getMessage(), constant.Constant.DAILY_DATA));
         fillGLIST();
@@ -45,11 +44,6 @@ public class DailyData extends javax.swing.JInternalFrame {
         desktopPane.add(this);
     }
 
-    
-   
-    
-   
-     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,39 +138,35 @@ public class DailyData extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_exitActionPerformed
 
     private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
-try{
-        Dao.daily_data daily_data=new Dao.daily_data();
-        daily_data.createDaily_Data(group_list, new java.sql.Date(date.getDate().getTime()));
-         
+        try {
+            Dao.daily_data daily_data = new Dao.daily_data();
+            daily_data.createDaily_Data(group_list, new java.sql.Date(date.getDate().getTime()));
+
             Connection connection = null;
             Class.forName(constant.DBConstant.DRIVER_NAME);
             connection = DriverManager.getConnection(constant.DBConstant.CONNECTION_STRING, constant.DBConstant.SCHEMA_NAME, constant.DBConstant.SCHEMA_PASSWORD);
-            File f=new File(".");
-            String path=f.getCanonicalPath();
-            HashMap parameters=new HashMap();
-            String dat=(date.getDate().getYear()+1900)+"-"+(date.getDate().getMonth()+1)+"-"+(date.getDate().getDate());
-            parameters.put("tdate",dat );
+            File f = new File(".");
+            String path = f.getCanonicalPath();
+            HashMap parameters = new HashMap();
+            String dat = (date.getDate().getYear() + 1900) + "-" + (date.getDate().getMonth() + 1) + "-" + (date.getDate().getDate());
+            parameters.put("tdate", dat);
             System.out.println(dat);
-          
-            
-              
-              JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath()+"\\Report\\Daily_Data.jrxml");
+
+            JasperDesign jasDesign = JRXmlLoader.load(new File(".").getCanonicalPath() + "\\Report\\Daily_Data.jrxml");
             JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
-             JasperPrint Print=JasperFillManager.fillReport(jasReport,parameters,connection);
-            JasperViewer.viewReport(Print,false);
+            JasperPrint Print = JasperFillManager.fillReport(jasReport, parameters, connection);
+            JasperViewer.viewReport(Print, false);
             connection.close();
-}catch(Exception e){e.printStackTrace();
-    
-}
-               
-               
-           
-           
-        
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
     }//GEN-LAST:event_reportActionPerformed
 
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
@@ -187,7 +177,7 @@ try{
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-      
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,8 +188,8 @@ try{
     private javax.swing.JButton report;
     // End of variables declaration//GEN-END:variables
 
-    private void fillGLIST(){
-    Dao.groups groups=new Dao.groups();
-    group_list=groups.returnGroups();
+    private void fillGLIST() {
+        Dao.groups groups = new Dao.groups();
+        group_list = groups.returnGroups();
     }
 }

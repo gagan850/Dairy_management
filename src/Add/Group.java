@@ -6,7 +6,6 @@
 package Add;
 
 import Enum.*;
-import java.sql.SQLException;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -24,7 +23,7 @@ public class Group
     public static ArrayList<Dao.groups> groups_cache = new ArrayList();
 
     public Group(JDesktopPane desktopPane)
-            throws ClassNotFoundException, SQLException {
+             {
         initComponents();
         this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.GROUP));
         //fills the cache for groups, and left group list

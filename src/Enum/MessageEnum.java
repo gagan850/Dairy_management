@@ -29,7 +29,9 @@ public enum MessageEnum {
     SELECT_NO_CHOICE(Messages.SELECT_NO_CHOICE, ""),
     MISS(Messages.MISS, ""),
     REPORT(Messages.REPORT, ""),
-    TRANSACTION(Messages.TRANSACTION, "");
+    TRANSACTION(Messages.TRANSACTION, ""),
+    CHANGE(Messages.CHANGE, "");
+    
     
     String message;
     String messageType;
@@ -60,6 +62,7 @@ class Messages {
     public static final String UPDATE_UNSUCCESS = "{0}: {1} could not be updated";
     public static final String MANDATORY_FIELD = "{0} is a mandatory field";
     public static final String ALREADY_EXIST = "{0}: {1} is already exists";
+    public static final String CHANGE = "Change {0}";
 
     public static final String ADD = "Add {0}";
     public static final String ADD_N_CHANGE = "Add/Change {0}";

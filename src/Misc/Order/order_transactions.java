@@ -10,10 +10,8 @@ import Enum.*;
 import java.awt.Color;
 import java.awt.Component;
 
-import java.sql.SQLException;
 import java.text.*;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JDesktopPane;
@@ -32,7 +30,7 @@ static String aname=null;
   /**
      * Creates new form SaleFatSnf
      */
-    public order_transactions(JDesktopPane desktopPane ) throws SQLException, ParseException {    
+    public order_transactions(JDesktopPane desktopPane ){    
         initComponents();
          this.setTitle(MessageFormat.format(MessageEnum.TRANSACTION.getMessage(), constant.Constant.ORDER));
          fillAList();

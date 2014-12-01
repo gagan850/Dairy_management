@@ -7,12 +7,9 @@
 package Reports;
 
 
-import Add.AddNChangeRate;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JDesktopPane;
@@ -39,7 +36,7 @@ static int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
      */
-    public Receive_List(JDesktopPane d) throws Exception {    
+    public Receive_List(JDesktopPane d) {    
     try{
        
         initComponents();

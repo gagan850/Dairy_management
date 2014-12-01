@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package constant;
+
+package Enum;
 
 /**
  *
- * @author gagandeepbansal
+ * @author Dell
  */
-public class ErrorType {
-
-    public static final String DATABASE_ERROR = "DataBase Error";
+public enum ReportEnum {
+    
 }

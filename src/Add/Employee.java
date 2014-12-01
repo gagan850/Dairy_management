@@ -24,7 +24,7 @@ public class Employee
      * Creates new form groups
      */
     public Employee(JDesktopPane desktopPane)
-            throws ClassNotFoundException, Exception {
+            {
         initComponents();
         this.setTitle(MessageFormat.format(MessageEnum.ADD.getMessage(), constant.Constant.EMPLOYEE));
         fillEmployeeCacheNUI();

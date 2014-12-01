@@ -8,9 +8,11 @@ package Add;
 
 
 import static Add.Account.group_list;
+import Enum.*;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.text.*;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -33,21 +35,13 @@ static int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
      */
-    public AddNChangeRate(JDesktopPane d) throws Exception {    
-    try{
-       
-        initComponents();
-         this.setTitle("Change Rate");
+    public AddNChangeRate(JDesktopPane desktopPane){    
+         initComponents();
+         this.setTitle(MessageFormat.format(MessageEnum.CHANGE.getMessage(), constant.Constant.RATE));
          fillGList();
          fillAccount_type();
-         d.add(this);}
-    catch(Exception e){
-        e.printStackTrace();
-    }
-    
-    
-    
-    }
+         desktopPane.add(this);
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.

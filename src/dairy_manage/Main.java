@@ -3,60 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dairy_manage;
+
 import Add.*;
 import Enum.*;
 import Misc.Note.Notes;
 import Transactions.Purchase.PurchaseReport;
 import Transactions.Sale.SaleReport;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.image.*;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author bansal
  */
-public class Main extends javax.swing.JFrame {
-JDesktopPane d;
-static int width=0;
-static int height=0;
-ImageIcon icon=null;
-static{
- Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+public class Main
+        extends javax.swing.JFrame {
+
+    static int width = 0;
+    static int height = 0;
+    ImageIcon icon = null;
+    Image image = null;
+    BufferedImage bImage = null;
+
+    static {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double w = screenSize.getWidth();
         double h = screenSize.getHeight();
-   width=(int)w;
-   height=(int)h;
-}
+        width = (int) w;
+        height = (int) h;
+    }
+
     /**
      * Creates new form MAin
      */
     public Main() {
         initComponents();
-         d=this.desktopPane;
-         back_ground.setBounds(0, 0, (int)width, (int)height);
+        back_ground.setBounds(0, 0, (int) width, (int) height);
         back_ground.setVisible(true);
-       this.addWindowListener(new java.awt.event.WindowAdapter() {
-    @Override
-    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-        try{
-        Date date=new Date();
-      String d=date.getDate()+"-"+Transactions.Cal.month(date.getMonth()+1)+"-"+(date.getYear()+1900)+"_"+date.getHours()+"-"+date.getMinutes();
-        Process process=Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_"+d+".dmp");
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                try {
+                    Date date = new Date();
+                    String d = date.getDate() + "-" + Transactions.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
+                    Process process = Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_" + d + ".dmp");
 //while(process.)
 
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-}catch(Exception e){e.printStackTrace();
+                }
+            }
 
-        }
-    }
-
-       });
-
+        });
 
     }
 
@@ -74,45 +77,45 @@ static{
             back_ground = new javax.swing.JLabel(new ImageIcon("Img\\wall.jpg"));
             menuBar = new javax.swing.JMenuBar();
             addMenu = new javax.swing.JMenu();
-            icon = new ImageIcon(ImageEnum.GROUPS.getImageName());
-            groups = new javax.swing.JMenuItem(icon);
+            //bImage = (BufferedImage)(new ImageIcon(ImageEnum.GROUPS.getImageName())).getImage();
+            group = new javax.swing.JMenuItem();
             accounts = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ACCOUNTS.getImageName()))
             ;
-            arrange_accounts = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ARRANGE_ACCOUNTS.getImageName()));
-            change_rate = new javax.swing.JMenuItem();
-            add_balance = new javax.swing.JMenuItem();
-            add_order_account = new javax.swing.JMenuItem();
-            jMenuItem3 = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.EMPLOYEE.getImageName()));
+            arrangeAccount = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ARRANGE_ACCOUNTS.getImageName()));
+            changeRate = new javax.swing.JMenuItem();
+            Changebalance = new javax.swing.JMenuItem();
+            order = new javax.swing.JMenuItem();
+            employee = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.EMPLOYEE.getImageName()));
             exit = new javax.swing.JMenuItem();
             monthlyTransactionMenu = new javax.swing.JMenu();
-            sale_monthly = new javax.swing.JMenuItem();
-            purchase_monthly = new javax.swing.JMenuItem();
-            sale_fat_monthly = new javax.swing.JMenuItem();
-            purchase_fat_monthly = new javax.swing.JMenuItem();
-            sale_snf_monthly = new javax.swing.JMenuItem();
-            purchase_snf_monthly = new javax.swing.JMenuItem();
+            saleMon = new javax.swing.JMenuItem();
+            purMon = new javax.swing.JMenuItem();
+            saleFatMon = new javax.swing.JMenuItem();
+            purFatMon = new javax.swing.JMenuItem();
+            saleSNFMon = new javax.swing.JMenuItem();
+            purSNFMon = new javax.swing.JMenuItem();
             reportMenu = new javax.swing.JMenu();
-            account_report = new javax.swing.JMenuItem();
-            group_report = new javax.swing.JMenuItem();
-            sale_report = new javax.swing.JMenuItem();
-            purchase_report = new javax.swing.JMenuItem();
-            sale_fat_reports = new javax.swing.JMenuItem();
-            purchase_fat_reports = new javax.swing.JMenuItem();
-            sale_snf_report = new javax.swing.JMenuItem();
-            purchase_snf_report = new javax.swing.JMenuItem();
+            accountRep = new javax.swing.JMenuItem();
+            groupRep = new javax.swing.JMenuItem();
+            saleRep = new javax.swing.JMenuItem();
+            purchaseRep = new javax.swing.JMenuItem();
+            saleFatRep = new javax.swing.JMenuItem();
+            purchaseFatRep = new javax.swing.JMenuItem();
+            saleSNFRep = new javax.swing.JMenuItem();
+            purchaseSNFRep = new javax.swing.JMenuItem();
             dailyTransactionMenu = new javax.swing.JMenu();
-            sale_daily = new javax.swing.JMenuItem();
-            purchase_daily = new javax.swing.JMenuItem();
-            sale_fat_daily = new javax.swing.JMenuItem();
-            purchase_fat_daily = new javax.swing.JMenuItem();
-            sale_snf_daily = new javax.swing.JMenuItem();
-            purchase_snf_daily = new javax.swing.JMenuItem();
+            saleDal = new javax.swing.JMenuItem();
+            purchaseDal = new javax.swing.JMenuItem();
+            saleFatDal = new javax.swing.JMenuItem();
+            purchaseFatDal = new javax.swing.JMenuItem();
+            saleSNFDal = new javax.swing.JMenuItem();
+            purchaseSNFDal = new javax.swing.JMenuItem();
             jMenu1 = new javax.swing.JMenu();
-            receive_list = new javax.swing.JMenuItem();
-            order_transaction = new javax.swing.JMenuItem();
-            jMenuItem1 = new javax.swing.JMenuItem();
-            jMenuItem4 = new javax.swing.JMenuItem();
-            jMenuItem2 = new javax.swing.JMenuItem();
+            receiveList = new javax.swing.JMenuItem();
+            orderTransaction = new javax.swing.JMenuItem();
+            note = new javax.swing.JMenuItem();
+            cashNSpend = new javax.swing.JMenuItem();
+            dailyData = new javax.swing.JMenuItem();
             setting = new javax.swing.JMenu();
             entries = new javax.swing.JMenuItem();
 
@@ -131,18 +134,18 @@ static{
         addMenu.setText("Add");
         addMenu.setToolTipText("");
 
-        groups.setMnemonic('o');
-        groups.setText("Groups");
-        groups.setSelected(true);
-        groups.addActionListener(new java.awt.event.ActionListener() {
+        group.setMnemonic('o');
+        group.setText("Group");
+        group.setSelected(true);
+        group.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                groupsActionPerformed(evt);
+                groupActionPerformed(evt);
             }
         });
-        addMenu.add(groups);
+        addMenu.add(group);
 
         accounts.setMnemonic('s');
-        accounts.setText("Accounts");
+        accounts.setText("Account");
         accounts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accountsActionPerformed(evt);
@@ -150,46 +153,46 @@ static{
         });
         addMenu.add(accounts);
 
-        arrange_accounts.setText("Arrange Accounts");
-        arrange_accounts.addActionListener(new java.awt.event.ActionListener() {
+        arrangeAccount.setText("Arrange Account");
+        arrangeAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                arrange_accountsActionPerformed(evt);
+                arrangeAccountActionPerformed(evt);
             }
         });
-        addMenu.add(arrange_accounts);
+        addMenu.add(arrangeAccount);
 
-        change_rate.setText("Change Rate");
-        change_rate.addActionListener(new java.awt.event.ActionListener() {
+        changeRate.setText("Change Rate");
+        changeRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                change_rateActionPerformed(evt);
+                changeRateActionPerformed(evt);
             }
         });
-        addMenu.add(change_rate);
+        addMenu.add(changeRate);
         addMenu.addSeparator();
 
-        add_balance.setText("Add Balance");
-        add_balance.addActionListener(new java.awt.event.ActionListener() {
+        Changebalance.setText("Change Balance");
+        Changebalance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_balanceActionPerformed(evt);
+                ChangebalanceActionPerformed(evt);
             }
         });
-        addMenu.add(add_balance);
+        addMenu.add(Changebalance);
 
-        add_order_account.setText("Order");
-        add_order_account.addActionListener(new java.awt.event.ActionListener() {
+        order.setText("Order");
+        order.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_order_accountActionPerformed(evt);
+                orderActionPerformed(evt);
             }
         });
-        addMenu.add(add_order_account);
+        addMenu.add(order);
 
-        jMenuItem3.setText("Employee");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        employee.setText("Employee");
+        employee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                employeeActionPerformed(evt);
             }
         });
-        addMenu.add(jMenuItem3);
+        addMenu.add(employee);
 
         exit.setMnemonic('x');
         exit.setText("Exit");
@@ -211,59 +214,59 @@ static{
             }
         });
 
-        sale_monthly.setMnemonic('t');
-        sale_monthly.setText("Sale");
-        sale_monthly.addActionListener(new java.awt.event.ActionListener() {
+        saleMon.setMnemonic('t');
+        saleMon.setText("Sale");
+        saleMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_monthlyActionPerformed(evt);
+                saleMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(sale_monthly);
+        monthlyTransactionMenu.add(saleMon);
 
-        purchase_monthly.setMnemonic('y');
-        purchase_monthly.setText("Purchase");
-        purchase_monthly.addActionListener(new java.awt.event.ActionListener() {
+        purMon.setMnemonic('y');
+        purMon.setText("Purchase");
+        purMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_monthlyActionPerformed(evt);
+                purMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(purchase_monthly);
+        monthlyTransactionMenu.add(purMon);
         monthlyTransactionMenu.addSeparator();
 
-        sale_fat_monthly.setMnemonic('p');
-        sale_fat_monthly.setText("Sale Fat");
-        sale_fat_monthly.addActionListener(new java.awt.event.ActionListener() {
+        saleFatMon.setMnemonic('p');
+        saleFatMon.setText("Sale Fat");
+        saleFatMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_fat_monthlyActionPerformed(evt);
+                saleFatMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(sale_fat_monthly);
+        monthlyTransactionMenu.add(saleFatMon);
 
-        purchase_fat_monthly.setMnemonic('d');
-        purchase_fat_monthly.setText("Purchase Fat");
-        purchase_fat_monthly.addActionListener(new java.awt.event.ActionListener() {
+        purFatMon.setMnemonic('d');
+        purFatMon.setText("Purchase Fat");
+        purFatMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_fat_monthlyActionPerformed(evt);
+                purFatMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(purchase_fat_monthly);
+        monthlyTransactionMenu.add(purFatMon);
         monthlyTransactionMenu.addSeparator();
 
-        sale_snf_monthly.setText("Sale SNF");
-        sale_snf_monthly.addActionListener(new java.awt.event.ActionListener() {
+        saleSNFMon.setText("Sale SNF");
+        saleSNFMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_snf_monthlyActionPerformed(evt);
+                saleSNFMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(sale_snf_monthly);
+        monthlyTransactionMenu.add(saleSNFMon);
 
-        purchase_snf_monthly.setText("Purchase SNF");
-        purchase_snf_monthly.addActionListener(new java.awt.event.ActionListener() {
+        purSNFMon.setText("Purchase SNF");
+        purSNFMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_snf_monthlyActionPerformed(evt);
+                purSNFMonActionPerformed(evt);
             }
         });
-        monthlyTransactionMenu.add(purchase_snf_monthly);
+        monthlyTransactionMenu.add(purSNFMon);
 
         menuBar.add(monthlyTransactionMenu);
 
@@ -271,74 +274,74 @@ static{
         reportMenu.setText("Reports");
         reportMenu.setToolTipText("");
 
-        account_report.setMnemonic('a');
-        account_report.setText("Accounts");
-        account_report.addActionListener(new java.awt.event.ActionListener() {
+        accountRep.setMnemonic('a');
+        accountRep.setText("Account");
+        accountRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                account_reportActionPerformed(evt);
+                accountRepActionPerformed(evt);
             }
         });
-        reportMenu.add(account_report);
+        reportMenu.add(accountRep);
 
-        group_report.setMnemonic('c');
-        group_report.setText("Groups");
-        group_report.addActionListener(new java.awt.event.ActionListener() {
+        groupRep.setMnemonic('c');
+        groupRep.setText("Group");
+        groupRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                group_reportActionPerformed(evt);
+                groupRepActionPerformed(evt);
             }
         });
-        reportMenu.add(group_report);
+        reportMenu.add(groupRep);
         reportMenu.addSeparator();
 
-        sale_report.setText("Sale");
-        sale_report.addActionListener(new java.awt.event.ActionListener() {
+        saleRep.setText("Sale");
+        saleRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_reportActionPerformed(evt);
+                saleRepActionPerformed(evt);
             }
         });
-        reportMenu.add(sale_report);
+        reportMenu.add(saleRep);
 
-        purchase_report.setText("Purchase");
-        purchase_report.addActionListener(new java.awt.event.ActionListener() {
+        purchaseRep.setText("Purchase");
+        purchaseRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_reportActionPerformed(evt);
+                purchaseRepActionPerformed(evt);
             }
         });
-        reportMenu.add(purchase_report);
+        reportMenu.add(purchaseRep);
         reportMenu.addSeparator();
 
-        sale_fat_reports.setText("Sale Fat");
-        sale_fat_reports.addActionListener(new java.awt.event.ActionListener() {
+        saleFatRep.setText("Sale Fat");
+        saleFatRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_fat_reportsActionPerformed(evt);
+                saleFatRepActionPerformed(evt);
             }
         });
-        reportMenu.add(sale_fat_reports);
+        reportMenu.add(saleFatRep);
 
-        purchase_fat_reports.setText("Purchase Fat");
-        purchase_fat_reports.addActionListener(new java.awt.event.ActionListener() {
+        purchaseFatRep.setText("Purchase Fat");
+        purchaseFatRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_fat_reportsActionPerformed(evt);
+                purchaseFatRepActionPerformed(evt);
             }
         });
-        reportMenu.add(purchase_fat_reports);
+        reportMenu.add(purchaseFatRep);
         reportMenu.addSeparator();
 
-        sale_snf_report.setText("Sale SNF");
-        sale_snf_report.addActionListener(new java.awt.event.ActionListener() {
+        saleSNFRep.setText("Sale SNF");
+        saleSNFRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_snf_reportActionPerformed(evt);
+                saleSNFRepActionPerformed(evt);
             }
         });
-        reportMenu.add(sale_snf_report);
+        reportMenu.add(saleSNFRep);
 
-        purchase_snf_report.setText("Purcahse SNf");
-        purchase_snf_report.addActionListener(new java.awt.event.ActionListener() {
+        purchaseSNFRep.setText("Purcahse SNf");
+        purchaseSNFRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_snf_reportActionPerformed(evt);
+                purchaseSNFRepActionPerformed(evt);
             }
         });
-        reportMenu.add(purchase_snf_report);
+        reportMenu.add(purchaseSNFRep);
 
         menuBar.add(reportMenu);
 
@@ -346,100 +349,100 @@ static{
         dailyTransactionMenu.setText("Daily Transaction");
         dailyTransactionMenu.setToolTipText("");
 
-        sale_daily.setText("Sale");
-        sale_daily.addActionListener(new java.awt.event.ActionListener() {
+        saleDal.setText("Sale");
+        saleDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_dailyActionPerformed(evt);
+                saleDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(sale_daily);
+        dailyTransactionMenu.add(saleDal);
 
-        purchase_daily.setText("Purchase");
-        purchase_daily.addActionListener(new java.awt.event.ActionListener() {
+        purchaseDal.setText("Purchase");
+        purchaseDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_dailyActionPerformed(evt);
+                purchaseDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(purchase_daily);
+        dailyTransactionMenu.add(purchaseDal);
         dailyTransactionMenu.addSeparator();
 
-        sale_fat_daily.setText("Sale Fat");
-        sale_fat_daily.addActionListener(new java.awt.event.ActionListener() {
+        saleFatDal.setText("Sale Fat");
+        saleFatDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_fat_dailyActionPerformed(evt);
+                saleFatDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(sale_fat_daily);
+        dailyTransactionMenu.add(saleFatDal);
 
-        purchase_fat_daily.setText("Purchase Fat");
-        purchase_fat_daily.addActionListener(new java.awt.event.ActionListener() {
+        purchaseFatDal.setText("Purchase Fat");
+        purchaseFatDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_fat_dailyActionPerformed(evt);
+                purchaseFatDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(purchase_fat_daily);
+        dailyTransactionMenu.add(purchaseFatDal);
         dailyTransactionMenu.addSeparator();
 
-        sale_snf_daily.setText("Sale SNF");
-        sale_snf_daily.addActionListener(new java.awt.event.ActionListener() {
+        saleSNFDal.setText("Sale SNF");
+        saleSNFDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sale_snf_dailyActionPerformed(evt);
+                saleSNFDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(sale_snf_daily);
+        dailyTransactionMenu.add(saleSNFDal);
 
-        purchase_snf_daily.setText("Purcahse SNF");
-        purchase_snf_daily.addActionListener(new java.awt.event.ActionListener() {
+        purchaseSNFDal.setText("Purcahse SNF");
+        purchaseSNFDal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_snf_dailyActionPerformed(evt);
+                purchaseSNFDalActionPerformed(evt);
             }
         });
-        dailyTransactionMenu.add(purchase_snf_daily);
+        dailyTransactionMenu.add(purchaseSNFDal);
 
         menuBar.add(dailyTransactionMenu);
 
         jMenu1.setMnemonic('M');
         jMenu1.setText("Misc");
 
-        receive_list.setText("Receive List");
-        receive_list.addActionListener(new java.awt.event.ActionListener() {
+        receiveList.setText("Receive List");
+        receiveList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                receive_listActionPerformed(evt);
+                receiveListActionPerformed(evt);
             }
         });
-        jMenu1.add(receive_list);
+        jMenu1.add(receiveList);
 
-        order_transaction.setText("Order Transaction");
-        order_transaction.addActionListener(new java.awt.event.ActionListener() {
+        orderTransaction.setText("Order Transaction");
+        orderTransaction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                order_transactionActionPerformed(evt);
+                orderTransactionActionPerformed(evt);
             }
         });
-        jMenu1.add(order_transaction);
+        jMenu1.add(orderTransaction);
 
-        jMenuItem1.setText("Notes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        note.setText("Note");
+        note.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                noteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(note);
 
-        jMenuItem4.setText("Add Cash / Spend");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        cashNSpend.setText("Add Cash / Spend");
+        cashNSpend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                cashNSpendActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenu1.add(cashNSpend);
 
-        jMenuItem2.setText("Daily Data");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        dailyData.setText("Daily Data");
+        dailyData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                dailyDataActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(dailyData);
 
         menuBar.add(jMenu1);
 
@@ -479,416 +482,354 @@ static{
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-try{
-      Date date=new Date();
-       String d=date.getDate()+"-"+Transactions.Cal.month(date.getMonth()+1)+"-"+(date.getYear()+1900)+"_"+date.getHours()+"-"+date.getMinutes();
-          Process runTime=Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_"+d+".dmp");
+        try {
+            Date date = new Date();
+            String d = date.getDate() + "-" + Transactions.Cal.month(date.getMonth() + 1) + "-" + (date.getYear() + 1900) + "_" + date.getHours() + "-" + date.getMinutes();
+            Process runTime = Runtime.getRuntime().exec("expdp system/bansal schemas=dairy dumpfile=DAIRY_DBase_" + d + ".dmp");
 
-
-        System.exit(0);
-}catch(Exception e){e.printStackTrace();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }//GEN-LAST:event_exitActionPerformed
 
-    private void groupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupsActionPerformed
-try{
-        Group g=new Group(d);
-        g.setVisible(true);
-      g.setSize(470, 400);
+    private void groupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupActionPerformed
+        Group group = new Group(desktopPane);
+        group.setVisible(true);
+        group.setSize(470, 400);
+        group.setIconifiable(true);
 
-g.setIconifiable(true);
-}catch(Exception e){
-    e.printStackTrace();
-}
 // TODO add your handling code here:
-    }//GEN-LAST:event_groupsActionPerformed
+    }//GEN-LAST:event_groupActionPerformed
 
     private void accountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountsActionPerformed
-try{
-        Account g=new Account(d);
-        g.setVisible(true);
-      g.setSize(700, 600);
-      g.setIconifiable(true);
-
-
-}catch(Exception e){
-    e.printStackTrace();
-}
-
+        Account account = new Account(desktopPane);
+        account.setVisible(true);
+        account.setSize(700, 600);
+        account.setIconifiable(true);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_accountsActionPerformed
 
-    private void group_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_group_reportActionPerformed
-Reports.groups a=new Reports.groups(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+    private void groupRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_groupRepActionPerformed
+        Reports.groups groupReport = new Reports.groups(desktopPane);
+        groupReport.setVisible(true);
+        groupReport.setSize(500, 500);
+        groupReport.setIconifiable(true);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_group_reportActionPerformed
+    }//GEN-LAST:event_groupRepActionPerformed
 
-    private void account_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_account_reportActionPerformed
-Reports.accounts a=new Reports.accounts(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-
+    private void accountRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountRepActionPerformed
+        Reports.accounts accountReport = new Reports.accounts(desktopPane);
+        accountReport.setVisible(true);
+        accountReport.setSize(500, 500);
+        accountReport.setIconifiable(true);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_account_reportActionPerformed
+    }//GEN-LAST:event_accountRepActionPerformed
 
     private void monthlyTransactionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyTransactionMenuActionPerformed
 
 // TODO add your handling code here:
     }//GEN-LAST:event_monthlyTransactionMenuActionPerformed
 
-    private void sale_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_monthlyActionPerformed
+    private void saleMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleMonActionPerformed
 
-Transactions.Sale.saleM a=new Transactions.Sale.saleM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+        Transactions.Sale.saleM saleMon = new Transactions.Sale.saleM(desktopPane);
+        saleMon.setVisible(true);
+        saleMon.setSize(500, 500);
+        saleMon.setIconifiable(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_sale_monthlyActionPerformed
+    }//GEN-LAST:event_saleMonActionPerformed
 
-    private void purchase_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_monthlyActionPerformed
+    private void purMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purMonActionPerformed
 
-        Transactions.Purchase.PurchaseM a=new Transactions.Purchase.PurchaseM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_purchase_monthlyActionPerformed
-
-    private void sale_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_dailyActionPerformed
-Transactions.Sale.saleD a=new Transactions.Sale.saleD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_sale_dailyActionPerformed
-
-    private void arrange_accountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrange_accountsActionPerformed
-      Add.ArrangeAccounts a=new Add.ArrangeAccounts(d);
-a.setVisible(true);
-a.setSize(600, 500);
-a.setResizable(false);
-  // TODO add your handling code here:
-    }//GEN-LAST:event_arrange_accountsActionPerformed
-
-    private void sale_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_reportActionPerformed
-
-SaleReport sale_full_report=new SaleReport(d);
-sale_full_report.setVisible(true);
-sale_full_report.setSize(650, 500);
-
-
+        Transactions.Purchase.PurchaseM purchaseMon = new Transactions.Purchase.PurchaseM(desktopPane);
+        purchaseMon.setVisible(true);
+        purchaseMon.setSize(500, 500);
+        purchaseMon.setIconifiable(true);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_sale_reportActionPerformed
+    }//GEN-LAST:event_purMonActionPerformed
 
-    private void change_rateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_rateActionPerformed
-try{
-    AddNChangeRate rate=new AddNChangeRate(d);
+    private void saleDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleDalActionPerformed
+        Transactions.Sale.saleD saleDal = new Transactions.Sale.saleD(desktopPane);
+        saleDal.setVisible(true);
+        saleDal.setSize(500, 500);
+        saleDal.setIconifiable(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_saleDalActionPerformed
 
-
-rate.setVisible(true);
-rate.setSize(700, 500);
-}catch(Exception e){
-    e.printStackTrace();
-
-}
-// TODO add your handling code here:
-    }//GEN-LAST:event_change_rateActionPerformed
-
-    private void purchase_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_dailyActionPerformed
-Transactions.Purchase.PurchaseD a=new Transactions.Purchase.PurchaseD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+    private void arrangeAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrangeAccountActionPerformed
+        Add.ArrangeAccounts arrangeAccount = new Add.ArrangeAccounts(desktopPane);
+        arrangeAccount.setVisible(true);
+        arrangeAccount.setSize(600, 500);
+        arrangeAccount.setResizable(false);
         // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_dailyActionPerformed
+    }//GEN-LAST:event_arrangeAccountActionPerformed
 
-    private void purchase_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_reportActionPerformed
-PurchaseReport purchase_full_report=new PurchaseReport(d);
-purchase_full_report.setVisible(true);
-purchase_full_report.setSize(500, 500);
+    private void saleRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleRepActionPerformed
+
+        SaleReport saleReport = new SaleReport(desktopPane);
+        saleReport.setVisible(true);
+        saleReport.setSize(650, 500);
+
 // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_reportActionPerformed
+    }//GEN-LAST:event_saleRepActionPerformed
 
-    private void sale_fat_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_fat_reportsActionPerformed
+    private void changeRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeRateActionPerformed
+        AddNChangeRate changeRate = new AddNChangeRate(desktopPane);
+        changeRate.setVisible(true);
+        changeRate.setSize(700, 500);
 
-        try{
-            Reports.SaleFatBill sale_fat_report=new Reports.SaleFatBill(d);
-
-sale_fat_report.setVisible(true);
-sale_fat_report.setSize(700, 500);
-        }catch(Exception e){e.printStackTrace();}
 // TODO add your handling code here:
-    }//GEN-LAST:event_sale_fat_reportsActionPerformed
+    }//GEN-LAST:event_changeRateActionPerformed
 
-    private void sale_fat_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_fat_monthlyActionPerformed
-Transactions.SaleFAT.saleFATM a=new Transactions.SaleFAT.saleFATM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+    private void purchaseDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseDalActionPerformed
+        Transactions.Purchase.PurchaseD purchaseDal = new Transactions.Purchase.PurchaseD(desktopPane);
+        purchaseDal.setVisible(true);
+        purchaseDal.setSize(500, 500);
+        purchaseDal.setIconifiable(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_sale_fat_monthlyActionPerformed
+    }//GEN-LAST:event_purchaseDalActionPerformed
 
-    private void purchase_fat_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_fat_monthlyActionPerformed
-Transactions.PurFAT.PurFATM a=new Transactions.PurFAT.PurFATM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+    private void purchaseRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseRepActionPerformed
+        PurchaseReport purchaseReport = new PurchaseReport(desktopPane);
+        purchaseReport.setVisible(true);
+        purchaseReport.setSize(500, 500);
 // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_fat_monthlyActionPerformed
+    }//GEN-LAST:event_purchaseRepActionPerformed
 
-    private void sale_fat_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_fat_dailyActionPerformed
-    Transactions.SaleFAT.saleFATD a=new Transactions.SaleFAT.saleFATD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-// TODO add your handling code here:
-    }//GEN-LAST:event_sale_fat_dailyActionPerformed
+    private void saleFatRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleFatRepActionPerformed
 
-    private void purchase_fat_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_fat_dailyActionPerformed
-    Transactions.PurFAT.PurFATD a=new Transactions.PurFAT.PurFATD(d);
-    a.setVisible(true);
-    a.setSize(500, 500);
-    a.setIconifiable(true);
+        Reports.SaleFatBill saleFatRep = new Reports.SaleFatBill(desktopPane);
+        saleFatRep.setVisible(true);
+        saleFatRep.setSize(700, 500);
+
+    }//GEN-LAST:event_saleFatRepActionPerformed
+
+    private void saleFatMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleFatMonActionPerformed
+        Transactions.SaleFAT.saleFATM saleFatMon = new Transactions.SaleFAT.saleFATM(desktopPane);
+        saleFatMon.setVisible(true);
+        saleFatMon.setSize(500, 500);
+        saleFatMon.setIconifiable(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_fat_dailyActionPerformed
+    }//GEN-LAST:event_saleFatMonActionPerformed
 
-    private void purchase_fat_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_fat_reportsActionPerformed
-
-        try{
-            Reports.PurchaseFatBill sale_fat_report=new Reports.PurchaseFatBill(d);
-
-sale_fat_report.setVisible(true);
-sale_fat_report.setSize(700, 500);
-        }catch(Exception e){e.printStackTrace();}    // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_fat_reportsActionPerformed
-
-    private void sale_snf_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_snf_monthlyActionPerformed
-
-        Transactions.SaleSNF.saleSNFM a=new Transactions.SaleSNF.saleSNFM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-
-
-
+    private void purFatMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purFatMonActionPerformed
+        Transactions.PurFAT.PurFATM purFatMon = new Transactions.PurFAT.PurFATM(desktopPane);
+        purFatMon.setVisible(true);
+        purFatMon.setSize(500, 500);
+        purFatMon.setIconifiable(true);
 // TODO add your handling code here:
-    }//GEN-LAST:event_sale_snf_monthlyActionPerformed
+    }//GEN-LAST:event_purFatMonActionPerformed
 
-    private void sale_snf_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_snf_dailyActionPerformed
-Transactions.SaleSNF.saleSNFD a=new Transactions.SaleSNF.saleSNFD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
-
+    private void saleFatDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleFatDalActionPerformed
+        Transactions.SaleFAT.saleFATD saleFatDal = new Transactions.SaleFAT.saleFATD(desktopPane);
+        saleFatDal.setVisible(true);
+        saleFatDal.setSize(500, 500);
+        saleFatDal.setIconifiable(true);
 // TODO add your handling code here:
-    }//GEN-LAST:event_sale_snf_dailyActionPerformed
+    }//GEN-LAST:event_saleFatDalActionPerformed
 
-    private void purchase_snf_monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_snf_monthlyActionPerformed
- Transactions.PurSNF.PurSNFM a=new Transactions.PurSNF.PurSNFM(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);
+    private void purchaseFatDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseFatDalActionPerformed
+        Transactions.PurFAT.PurFATD purFatDal = new Transactions.PurFAT.PurFATD(desktopPane);
+        purFatDal.setVisible(true);
+        purFatDal.setSize(500, 500);
+        purFatDal.setIconifiable(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_snf_monthlyActionPerformed
+    }//GEN-LAST:event_purchaseFatDalActionPerformed
 
-    private void purchase_snf_dailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_snf_dailyActionPerformed
-Transactions.PurSNF.PurSNFD a=new Transactions.PurSNF.PurSNFD(d);
-a.setVisible(true);
-a.setSize(500, 500);
-a.setIconifiable(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_snf_dailyActionPerformed
+    private void purchaseFatRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseFatRepActionPerformed
 
-    private void sale_snf_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sale_snf_reportActionPerformed
-  try{
-            Reports.SaleSnfBill sale_fat_report=new Reports.SaleSnfBill(d);
-
-sale_fat_report.setVisible(true);
-sale_fat_report.setSize(700, 500);
-        }catch(Exception e){e.printStackTrace();}
+        Reports.PurchaseFatBill purchaseFatReport = new Reports.PurchaseFatBill(desktopPane);
+        purchaseFatReport.setVisible(true);
+        purchaseFatReport.setSize(700, 500);
         // TODO add your handling code here:
-    }//GEN-LAST:event_sale_snf_reportActionPerformed
+    }//GEN-LAST:event_purchaseFatRepActionPerformed
 
-    private void purchase_snf_reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_snf_reportActionPerformed
-try{
-            Reports.PurchaseSnfBill sale_fat_report=new Reports.PurchaseSnfBill(d);
+    private void saleSNFMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleSNFMonActionPerformed
 
-sale_fat_report.setVisible(true);
-sale_fat_report.setSize(700, 500);
-        }catch(Exception e){e.printStackTrace();}
+        Transactions.SaleSNF.saleSNFM saleSNFMon = new Transactions.SaleSNF.saleSNFM(desktopPane);
+        saleSNFMon.setVisible(true);
+        saleSNFMon.setSize(500, 500);
+        saleSNFMon.setIconifiable(true);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_saleSNFMonActionPerformed
+
+    private void saleSNFDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleSNFDalActionPerformed
+        Transactions.SaleSNF.saleSNFD saleSNFDal = new Transactions.SaleSNF.saleSNFD(desktopPane);
+        saleSNFDal.setVisible(true);
+        saleSNFDal.setSize(500, 500);
+        saleSNFDal.setIconifiable(true);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_saleSNFDalActionPerformed
+
+    private void purSNFMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purSNFMonActionPerformed
+        Transactions.PurSNF.PurSNFM purSNFMon = new Transactions.PurSNF.PurSNFM(desktopPane);
+        purSNFMon.setVisible(true);
+        purSNFMon.setSize(500, 500);
+        purSNFMon.setIconifiable(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_purchase_snf_reportActionPerformed
+    }//GEN-LAST:event_purSNFMonActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-try{
-Notes notes=new Notes(d);
-notes.setVisible(true);
-notes.setSize(700, 600);
-}catch(Exception e){e.printStackTrace();}
+    private void purchaseSNFDalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseSNFDalActionPerformed
+        Transactions.PurSNF.PurSNFD purchaseSNFDal = new Transactions.PurSNF.PurSNFD(desktopPane);
+        purchaseSNFDal.setVisible(true);
+        purchaseSNFDal.setSize(500, 500);
+        purchaseSNFDal.setIconifiable(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_purchaseSNFDalActionPerformed
+
+    private void saleSNFRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleSNFRepActionPerformed
+        Reports.SaleSnfBill saleSNFReport = new Reports.SaleSnfBill(desktopPane);
+        saleSNFReport.setVisible(true);
+        saleSNFReport.setSize(700, 500);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saleSNFRepActionPerformed
+
+    private void purchaseSNFRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseSNFRepActionPerformed
+        Reports.PurchaseSnfBill purchaseSNFReport = new Reports.PurchaseSnfBill(desktopPane);
+        purchaseSNFReport.setVisible(true);
+        purchaseSNFReport.setSize(700, 500);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_purchaseSNFRepActionPerformed
+
+    private void noteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteActionPerformed
+        Notes note = new Notes(desktopPane);
+        note.setVisible(true);
+        note.setSize(700, 600);
 // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_noteActionPerformed
 
-    private void add_order_accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_order_accountActionPerformed
+    private void orderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderActionPerformed
 
-        try{
-Add.Order order=new Add.Order(d);
-order.setVisible(true);
-order.setSize(700, 600);
-}catch(Exception e){e.printStackTrace();}
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_add_order_accountActionPerformed
-
-    private void order_transactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_order_transactionActionPerformed
-
-        try{
-Misc.Order.order_transactions order=new Misc.Order.order_transactions(d);
-order.setVisible(true);
-order.setSize(700, 600);
-}catch(Exception e){e.printStackTrace();}
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_order_transactionActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-try{
-    Add.Employee employee=new Add.Employee(d);
-employee.setSize(500, 450);
-employee.setVisible(true);
-}catch(Exception e){
-    e.printStackTrace();
-}
-// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void receive_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receive_listActionPerformed
-try{
-Reports.Receive_List data=new Reports.Receive_List(d);
-data.setSize(600, 600);
-data.setVisible(true);
-
-}catch(Exception e){e.printStackTrace();}
+        Add.Order order = new Add.Order(desktopPane);
+        order.setVisible(true);
+        order.setSize(700, 600);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_receive_listActionPerformed
+    }//GEN-LAST:event_orderActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-try{
-    Misc.DailyData.DailyData report=new Misc.DailyData.DailyData(d);
+    private void orderTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderTransactionActionPerformed
 
-  report.setSize(600, 600);
-report.setVisible(true);}catch(Exception e){e.printStackTrace();
-}// TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        Misc.Order.order_transactions orderTransaction = new Misc.Order.order_transactions(desktopPane);
+        orderTransaction.setVisible(true);
+        orderTransaction.setSize(700, 600);
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-  try{Misc.Cash.Cash c1=new Misc.Cash.Cash(d);
-  c1.setSize(500, 470);
-  c1.setVisible(true);
-  }catch(Exception e){e.printStackTrace();
-
-  }
 // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_orderTransactionActionPerformed
+
+    private void employeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeActionPerformed
+        Add.Employee employee = new Add.Employee(desktopPane);
+        employee.setSize(500, 450);
+        employee.setVisible(true);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_employeeActionPerformed
+
+    private void receiveListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiveListActionPerformed
+        Reports.Receive_List receiveList = new Reports.Receive_List(desktopPane);
+        receiveList.setSize(600, 600);
+        receiveList.setVisible(true);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_receiveListActionPerformed
+
+    private void dailyDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyDataActionPerformed
+        Misc.DailyData.DailyData dailyData = new Misc.DailyData.DailyData(desktopPane);
+        dailyData.setSize(600, 600);
+        dailyData.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_dailyDataActionPerformed
+
+    private void cashNSpendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashNSpendActionPerformed
+        Misc.Cash.Cash cash = new Misc.Cash.Cash(desktopPane);
+        cash.setSize(500, 470);
+        cash.setVisible(true);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_cashNSpendActionPerformed
 
     private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
-
 
 // TODO add your handling code here:
     }//GEN-LAST:event_settingActionPerformed
 
     private void entriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entriesActionPerformed
-  try{Setting.Entries.Entries c1=new Setting.Entries.Entries(d);
-  c1.setSize(500, 400);
-  c1.setVisible(true);
-  }catch(Exception e){e.printStackTrace();
-
-  }
-
+        Setting.Entries.Entries entry = new Setting.Entries.Entries(desktopPane);
+        entry.setSize(500, 400);
+        entry.setVisible(true);
 
 // TODO add your handling code here:
     }//GEN-LAST:event_entriesActionPerformed
 
-    private void add_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_balanceActionPerformed
+    private void ChangebalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangebalanceActionPerformed
 
-  try{Add.AddNChangeBalance c1=new Add.AddNChangeBalance(d);
-  c1.setSize(800, 500);
-  c1.setVisible(true);
-  }catch(Exception e){e.printStackTrace();
-
-  }
-
+        Add.AddNChangeBalance changeBalance = new Add.AddNChangeBalance(desktopPane);
+        changeBalance.setSize(800, 500);
+        changeBalance.setVisible(true);
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_add_balanceActionPerformed
+    }//GEN-LAST:event_ChangebalanceActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
 
-
-        Main a=new Main();
-        a.setVisible(true);
-        a.setTitle("Bansal Dairy");
-        a.setSize((int)width, (int)height);
-        a.setResizable(false);
-
+        Main main = new Main();
+        main.setVisible(true);
+        main.setTitle(constant.Constant.FIRM_NAME);
+        main.setSize((int) width, (int) height);
+        main.setResizable(false);
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem account_report;
+    private javax.swing.JMenuItem Changebalance;
+    private javax.swing.JMenuItem accountRep;
     private javax.swing.JMenuItem accounts;
     private javax.swing.JMenu addMenu;
-    private javax.swing.JMenuItem add_balance;
-    private javax.swing.JMenuItem add_order_account;
-    private javax.swing.JMenuItem arrange_accounts;
+    private javax.swing.JMenuItem arrangeAccount;
     private static javax.swing.JLabel back_ground;
-    private javax.swing.JMenuItem change_rate;
+    private javax.swing.JMenuItem cashNSpend;
+    private javax.swing.JMenuItem changeRate;
+    private javax.swing.JMenuItem dailyData;
     private javax.swing.JMenu dailyTransactionMenu;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenuItem employee;
     private javax.swing.JMenuItem entries;
     private javax.swing.JMenuItem exit;
-    private javax.swing.JMenuItem group_report;
-    private javax.swing.JMenuItem groups;
+    private javax.swing.JMenuItem group;
+    private javax.swing.JMenuItem groupRep;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu monthlyTransactionMenu;
-    private javax.swing.JMenuItem order_transaction;
-    private javax.swing.JMenuItem purchase_daily;
-    private javax.swing.JMenuItem purchase_fat_daily;
-    private javax.swing.JMenuItem purchase_fat_monthly;
-    private javax.swing.JMenuItem purchase_fat_reports;
-    private javax.swing.JMenuItem purchase_monthly;
-    private javax.swing.JMenuItem purchase_report;
-    private javax.swing.JMenuItem purchase_snf_daily;
-    private javax.swing.JMenuItem purchase_snf_monthly;
-    private javax.swing.JMenuItem purchase_snf_report;
-    private javax.swing.JMenuItem receive_list;
+    private javax.swing.JMenuItem note;
+    private javax.swing.JMenuItem order;
+    private javax.swing.JMenuItem orderTransaction;
+    private javax.swing.JMenuItem purFatMon;
+    private javax.swing.JMenuItem purMon;
+    private javax.swing.JMenuItem purSNFMon;
+    private javax.swing.JMenuItem purchaseDal;
+    private javax.swing.JMenuItem purchaseFatDal;
+    private javax.swing.JMenuItem purchaseFatRep;
+    private javax.swing.JMenuItem purchaseRep;
+    private javax.swing.JMenuItem purchaseSNFDal;
+    private javax.swing.JMenuItem purchaseSNFRep;
+    private javax.swing.JMenuItem receiveList;
     private javax.swing.JMenu reportMenu;
-    private javax.swing.JMenuItem sale_daily;
-    private javax.swing.JMenuItem sale_fat_daily;
-    private javax.swing.JMenuItem sale_fat_monthly;
-    private javax.swing.JMenuItem sale_fat_reports;
-    private javax.swing.JMenuItem sale_monthly;
-    private javax.swing.JMenuItem sale_report;
-    private javax.swing.JMenuItem sale_snf_daily;
-    private javax.swing.JMenuItem sale_snf_monthly;
-    private javax.swing.JMenuItem sale_snf_report;
+    private javax.swing.JMenuItem saleDal;
+    private javax.swing.JMenuItem saleFatDal;
+    private javax.swing.JMenuItem saleFatMon;
+    private javax.swing.JMenuItem saleFatRep;
+    private javax.swing.JMenuItem saleMon;
+    private javax.swing.JMenuItem saleRep;
+    private javax.swing.JMenuItem saleSNFDal;
+    private javax.swing.JMenuItem saleSNFMon;
+    private javax.swing.JMenuItem saleSNFRep;
     private javax.swing.JMenu setting;
     // End of variables declaration//GEN-END:variables
 

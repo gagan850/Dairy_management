@@ -39,7 +39,7 @@ public class AddNChangeBalance
      * Creates new form SaleFatSnf
      */
     public AddNChangeBalance(JDesktopPane desktopPane)
-            throws Exception {
+            {
         initComponents();
         this.setTitle(MessageFormat.format(MessageEnum.ADD_N_CHAANGE.getMessage(), constant.Constant.BALANCE));
         fillGroupCacheNUI();

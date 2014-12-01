@@ -27,7 +27,7 @@ static int no_of_accounts=0;
     /**
      * Creates new form SaleFatSnf
      */
-    public PurchaseFatBill(JDesktopPane d) throws Exception {    
+    public PurchaseFatBill(JDesktopPane d) {    
     try{
        
         initComponents();
