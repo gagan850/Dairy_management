@@ -6,7 +6,6 @@
 package dairy_manage;
 
 import Add.*;
-import Enum.*;
 import Misc.Note.Notes;
 import Transactions.Purchase.PurchaseReport;
 import Transactions.Sale.SaleReport;
@@ -79,13 +78,13 @@ public class Main
             addMenu = new javax.swing.JMenu();
             //bImage = (BufferedImage)(new ImageIcon(ImageEnum.GROUPS.getImageName())).getImage();
             group = new javax.swing.JMenuItem();
-            accounts = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ACCOUNTS.getImageName()))
+            accounts = new javax.swing.JMenuItem()
             ;
-            arrangeAccount = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.ARRANGE_ACCOUNTS.getImageName()));
+            arrangeAccount = new javax.swing.JMenuItem();
             changeRate = new javax.swing.JMenuItem();
             Changebalance = new javax.swing.JMenuItem();
             order = new javax.swing.JMenuItem();
-            employee = new javax.swing.JMenuItem(new ImageIcon(ImageEnum.EMPLOYEE.getImageName()));
+            employee = new javax.swing.JMenuItem();
             exit = new javax.swing.JMenuItem();
             monthlyTransactionMenu = new javax.swing.JMenu();
             saleMon = new javax.swing.JMenuItem();
